@@ -8,13 +8,13 @@ ingest_PDO(end.year = NULL, header.info = TRUE,
   header.info.name = "header_pdo")
 }
 \arguments{
+\item{end.year}{The last year of data wanted.}
+
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}
 
 \item{header.info.name}{A character indicating the object name for the
 metadata data.frame, defaults to "header_pdo".}
-
-\item{end_year}{The last year of data wanted.}
 }
 \value{
 A data frame.  If header.info = TRUE a data.frame is created in the

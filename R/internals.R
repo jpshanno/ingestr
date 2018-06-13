@@ -1,10 +1,12 @@
 #' Checks Function Inputs for the Correct Class
 #'
+#' This function is supplied as a generic form of all_character, all_numeric, all_
+#'
 #' @param parameters A character vector of function parameters that have matching classes
 #' @param class.check One of "character", "numeric", "logical", "list"
 #'   specifying what class \code{parameters} should be
 #'
-#' @return Returns an error if
+#' @return Returns an error if the provided parameters do not match the specified class
 #'
 #' @examples
 #'
