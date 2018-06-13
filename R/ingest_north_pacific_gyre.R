@@ -5,7 +5,6 @@
 #'name as an identifying column to track provenance and relate data and metadata
 #'read from files.}
 #'
-#'@param
 #'@param header.info A logical indicating if header information is written to a
 #'  separate data frame.
 #'@param header.info.name A character indicating the object name for the
