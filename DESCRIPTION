@@ -1,6 +1,6 @@
 Package: ingestr
 Type: Package
-Title: An R package for Reading Environmental Data from Raw Formats into Dataframes. 
+Title: An R package for Reading Environmental Data from Raw Formats into Dataframes
 Version: 0.1.0
 Authors@R: c(
   person("Joe", "Shannon", email = "jpshanno@mtu.edu", role = c("aut", "cre")),
