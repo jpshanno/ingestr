@@ -48,7 +48,7 @@ read_iButton <- function(file, data = TRUE, metadata = FALSE){
       readr::read_csv(file,
                       n_max = 13,
                       col_names = FALSE,
-                      col_types = readr::cols_only(X1 = "c")) magrittr::%>%
+                      col_types = readr::cols_only(X1 = "c"))
 
     importedMetadata <-
       purrr::map2_dfc(.x = stringr::str_extract(importedMetadata[["X1"]],
