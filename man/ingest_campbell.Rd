@@ -4,17 +4,15 @@
 \alias{ingest_campbell}
 \title{Ingest Campbell Scientific Logger Data}
 \usage{
-ingest_campbell(file, units = TRUE, measurement = TRUE,
+ingest_campbell(file.name, add.units = TRUE, add.measurement = TRUE,
   header.info = TRUE, header.info.name = "header_campbell")
 }
 \arguments{
-\item{file}{Character indicating the .dat Campbell Scientific File}
-
-\item{units}{Logical indicating if units specified in the data file should be
+\item{add.units}{Logical indicating if add.units specified in the data file should be
 appended to the end of the variable names specificed in the data file,
 defaults to TRUE}
 
-\item{measurement}{Logical indicating if measurement type (Avg, Smp,
+\item{add.measurement}{Logical indicating if add.measurement type (Avg, Smp,
 etc)specified in the data file should be appended to the start of the
 variable names specificed in the data file, defaults to TRUE}
 
@@ -23,6 +21,8 @@ separate data frame}
 
 \item{header.info.name}{A character indicating the object name for the
 metadata data.frame, defaults to "header_campbell"}
+
+\item{file}{Character indicating the .dat Campbell Scientific File}
 }
 \value{
 This function returns a dataframe containing logger data. If
@@ -38,8 +38,8 @@ provenance and relate data and metadata read from files.}
 \examples{
 campbell_file <- system.file("extdata", "campbell_scientific_tao5.dat", package = "ingestr")
 cs_data <- ingest_campbell(file = campbell_file,
-                           units = TRUE,
-                           measurement = TRUE,
+                           add.units = TRUE,
+                           add.measurement = TRUE,
                            header.info = TRUE,
                            header.info.name = "header_cs_data")
 }

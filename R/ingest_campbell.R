@@ -6,10 +6,10 @@
 #' provenance and relate data and metadata read from files.}
 #'
 #' @param file Character indicating the .dat Campbell Scientific File
-#' @param units Logical indicating if units specified in the data file should be
+#' @param add.units Logical indicating if add.units specified in the data file should be
 #'   appended to the end of the variable names specificed in the data file,
 #'   defaults to TRUE
-#' @param measurement Logical indicating if measurement type (Avg, Smp,
+#' @param add.measurement Logical indicating if add.measurement type (Avg, Smp,
 #'   etc)specified in the data file should be appended to the start of the
 #'   variable names specificed in the data file, defaults to TRUE
 #' @param header.info A logical indicating if header information is written to a
@@ -26,17 +26,24 @@
 #' @examples
 #' campbell_file <- system.file("extdata", "campbell_scientific_tao5.dat", package = "ingestr")
 #' cs_data <- ingest_campbell(file = campbell_file,
-#'                            units = TRUE,
-#'                            measurement = TRUE,
+#'                            add.units = TRUE,
+#'                            add.measurement = TRUE,
 #'                            header.info = TRUE,
 #'                            header.info.name = "header_cs_data")
 
 ingest_campbell <-
-  function(file,
-           units = TRUE,
-           measurement = TRUE,
+  function(file.name,
+           add.units = TRUE,
+           add.measurement = TRUE,
            header.info = TRUE,
            header.info.name = "header_campbell"){
+
+    all_logical(c("add.units",
+                  "add.measurement",
+                  "header.info"))
+
+    all_character(c("file.name",
+                    "header.info.name"))
 
     column.names <-
         as.data.frame(
@@ -56,9 +63,9 @@ ingest_campbell <-
         c("variable", "units", "type")
 
       column.names$names <-
-        switch(sum(units, measurement) + 1,
+        switch(sum(add.units, add.measurement) + 1,
                column.names$variable,
-               ifelse(rep(units, length(column.names$units)),
+               ifelse(rep(add.units, length(column.names$units)),
                       paste0(column.names$variable,
                              ifelse(is.na(column.names$units),
                                     "",

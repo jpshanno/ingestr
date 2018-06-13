@@ -1,6 +1,7 @@
 # ingestr
 
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr)
+[![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
 
 R package for reading environmental data from raw formats into dataframes. 
 

@@ -3,3 +3,4 @@
 ^data-raw$
 ^CONTRIBUTING\.md$
 ^\.travis\.yml$
+^codecov\.yml$
