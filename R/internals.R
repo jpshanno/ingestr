@@ -26,7 +26,8 @@ check_inputs <-
                   class.check,
                   ": ",
                   paste(parameters,
-                        collapse = ", ")))
+                        collapse = ", ")),
+           call. = FALSE)
     }
   }
 
