@@ -57,9 +57,3 @@ These are cleanup utilities that make sense to include in the data ingestion ste
 Any function we make should record the source file as part of the data.
 
 If data cleaning is performed, a separate data frame is output with three columns: the original filename, the line of text or data from the original file that was cleaned or removed, and the reason.
-
-# Unit Tests and example data
-
-Code should have unit test coverage.  When adding code for a sensor, for example, unit tests for that sensor's parsing code and at least one representative dataset should be included.
-
-If someone is contributing code, they should read our readme.md, and contributing.md, to know how to contribute.
