@@ -25,8 +25,8 @@ CREATED BY : SWS Diver-Office 7.0.2.0
   Altitude                =0         m
 [Channel 2]
   Identification          =TEMPERATURE
-  Reference level         =-20.000   캜
-  Range                   =100.000   캜
+  Reference level         =-20.000   째C
+  Range                   =100.000   째C
 
 
 [Series settings]
@@ -45,11 +45,11 @@ CREATED BY : SWS Diver-Office 7.0.2.0
   Altitude                =0         m
 [Channel 2 from data header]
   Identification          =TEMPERATURE
-  Reference level         =-20.000   캜
-  Range                   =100.000   캜
+  Reference level         =-20.000   째C
+  Range                   =100.000   째C
 
 
-Date/time,Pressure[cm],Temperature[캜]
+Date/time,Pressure[cm],Temperature[째C]
 2015/08/18 08:15:48,1042.250,28.183
 2015/08/18 08:27:48,1042.425,27.183
 2015/08/18 08:39:48,1042.075,26.493
