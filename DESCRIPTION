@@ -4,10 +4,13 @@ Title: An R package for Reading Environmental Data from Raw Formats into Datafra
 Version: 0.1.0
 Authors@R: c(
   person("Joe", "Shannon", email = "jpshanno@mtu.edu", role = c("aut", "cre")),
-  person("Rachel", "Blake", email = "rachel.e.blake@gmail.com", role = c("aut", "cre")),
-  person("Tim", "Whiteaker", email = "whiteaker@utexas.edu", role = c("aut", "cre")))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+  person("Rachael", "Blake", email = "rachel.e.blake@gmail.com", role = c("aut")),
+  person("Tim", "Whiteaker", email = "whiteaker@utexas.edu", role = c("aut")))
+Description: This is an alpha work in progress initiated at the inagural IMCR Hackathon. 
+  The end product of this effort will be an R package on CRAN. The package will 
+  primarily deal with reading data from files, though there will be some utilities 
+  for initial cleanup of files such as removing blank rows and columns at the end 
+  of a CSV file.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -24,3 +27,4 @@ Imports:
   XML
 Suggests:
   parallel
+RoxygenNote: 6.0.1
