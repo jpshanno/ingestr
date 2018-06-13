@@ -11,9 +11,9 @@
 #'
 #'@param end_year The last year of data wanted.
 #'@param header.info A logical indicating if header information is written to a
-#'  separate data frame
+#'  separate data frame.
 #'@param header.info.name A character indicating the object name for the
-#'  metadata data.frame, defaults to "header_campbell"
+#'  metadata data.frame, defaults to "header_pdo".
 #'
 #'
 #'@return A data frame.  If header.info = TRUE a data.frame is created in the
@@ -25,9 +25,9 @@
 
 # Ingest Function ---------------------------
 
-ingest_PDO <- function(end_year = NULL,
+ingest_PDO <- function(end.year = NULL,
                        header.info = TRUE,
-                       header.info.name = "header_PDO") {
+                       header.info.name = "header_pdo") {
               path <- "http://jisao.washington.edu/pdo/PDO.latest"   # URL to the data
               pdo_raw <- xml2::read_html(path)                       # read in the data
               pdo_pre1 <- rvest::html_node(pdo_raw, "p")             # make data text
@@ -35,9 +35,9 @@ ingest_PDO <- function(end_year = NULL,
 
               start_year <- 1900   # define year range
               if(is.null(end_year)){
-                 end_year <- as.numeric(format(Sys.Date(), "%Y"))
+                 end.year <- as.numeric(format(Sys.Date(), "%Y"))
                 }
-              count_rows <- as.numeric(end_year+1) - start_year  # get the number of rows
+              count_rows <- as.numeric(end.year+1) - start_year  # get the number of rows
 
               pdo_cols <- scan(textConnection(pdo_pre2), skip=31, nlines=1, what=character())# Get header row
               pdo_df <- utils::read.table(file=textConnection(pdo_pre2), skip=32, stringsAsFactors=F,
@@ -46,6 +46,7 @@ ingest_PDO <- function(end_year = NULL,
               pdo_df$YEAR <- substr(pdo_df$YEAR, 1, 4)  # removes asterisks from years 2002-present
               pdo_df$input_source <- path
 
+              # creates header object
               if(header.info){
                  head_count_rows <- 33+count_rows
 
