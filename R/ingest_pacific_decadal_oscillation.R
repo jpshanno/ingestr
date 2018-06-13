@@ -1,12 +1,21 @@
 #' Ingest Pacific Decadal Oscillation data
 #'
+#'\code{ingest_PDO} ingests data from the updated standardized values for the PDO index,
+#'derived as the leading PC of monthly SST anomalies in the North Pacific Ocean,
+#'poleward of 20N. The monthly mean global average SST anomalies
+#'are removed to separate this pattern of variability from any
+#'"global warming" signal that may be present in the data.  If you have any questions
+#'about this time series, contact Nathan Mantua at: nate.mantua\@noaa.gov
+#' \strong{All ingest functions use the source file name as an identifying
+#' column to track provenance and relate data and metadata read from files.}
+#'
 #' @param end_year The last year of data wanted.
 #'
 #' @return A data frame
 #' @export
 
 
-# Function ---------------------------
+# Ingest Function ---------------------------
 
 ingest_PDO <- function(end_year = NULL) {
               path <- "http://jisao.washington.edu/pdo/PDO.latest"   # URL to the data
@@ -21,16 +30,40 @@ ingest_PDO <- function(end_year = NULL) {
               count_rows <- as.numeric(end_year+1) - start_year  # get the number of rows
 
               pdo_cols <- scan(textConnection(pdo_pre2), skip=31, nlines=1, what=character())# Get header row
-              pdo_df <- read.table(file=textConnection(pdo_pre2), skip=32, stringsAsFactors=F,
-                                   sep="", nrow = count_rows,
-                                   header=FALSE, col.names=pdo_cols, strip.white=TRUE, fill=TRUE) #
+              pdo_df <- utils::read.table(file=textConnection(pdo_pre2), skip=32, stringsAsFactors=F,
+                                          sep="", nrow = count_rows,
+                                          header=FALSE, col.names=pdo_cols, strip.white=TRUE, fill=TRUE) #
               pdo_df$YEAR <- substr(pdo_df$YEAR, 1, 4)  # removes asterisks from years 2002-present
+              pdo_df$input_source <- path
+
+              return(pdo_df)
 
               }
 
 
+# Header Function ---------------------------
 
+header_PDO <- function(){
+              path <- "http://jisao.washington.edu/pdo/PDO.latest"   # URL to the data
+              pdo_raw <- xml2::read_html(path)                       # read in the data
+              pdo_pre1 <- rvest::html_node(pdo_raw, "p")             # make data text
+              pdo_pre2 <- rvest::html_text(pdo_pre1)
 
+              start_year <- 1900   # define year range
+              if(is.null(end_year)){
+                 end_year <- as.numeric(format(Sys.Date(), "%Y"))
+                }
+              count_rows <- as.numeric(end_year+1) - start_year  # get the number of rows
+              head_count_rows <- 33+count_rows
 
+              head_pdo <- scan(textConnection(pdo_pre2), nlines=31, what=character(), sep="\n")
+              footer_pdo <- scan(textConnection(pdo_pre2), skip=head_count_rows, nlines=31,
+                                 what=character(), sep="\n")
+
+              header_pdo <- c(head_pdo, footer_pdo)
+
+              return(header_pdo)
+
+              }
 
 
