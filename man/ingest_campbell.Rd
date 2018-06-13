@@ -8,6 +8,8 @@ ingest_campbell(file.name, add.units = TRUE, add.measurement = TRUE,
   header.info = TRUE, header.info.name = "header_campbell")
 }
 \arguments{
+\item{file.name}{Character indicating the .dat Campbell Scientific File}
+
 \item{add.units}{Logical indicating if add.units specified in the data file should be
 appended to the end of the variable names specificed in the data file,
 defaults to TRUE}
@@ -21,8 +23,6 @@ separate data frame}
 
 \item{header.info.name}{A character indicating the object name for the
 metadata data.frame, defaults to "header_campbell"}
-
-\item{file}{Character indicating the .dat Campbell Scientific File}
 }
 \value{
 This function returns a dataframe containing logger data. If
