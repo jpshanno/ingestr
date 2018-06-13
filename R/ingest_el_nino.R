@@ -7,14 +7,20 @@
 #' column to track provenance and relate data and metadata read from files.}
 #'
 #' @param end_year The last year of data wanted.
+#' @param header.info A logical indicating if header information is written to a
+#'  separate data frame
+#' @param header.info.name A character indicating the object name for the
+#'  metadata data.frame, defaults to "header_campbell"
 #'
-#' @return A data frame
+#' @return A data frame.
 #' @export
 
 
 # Function ---------------------------
 
-ingest_ENSO <- function(end_year = NULL) {
+ingest_ENSO <- function(end_year = NULL,
+                        header.info = TRUE,
+                        header.info.name = "header_ENSO") {
                path <- "http://www.esrl.noaa.gov/psd/enso/mei/table.html"   # URL of data
                enso_pre <- XML::xpathSApply(XML::htmlParse(content(GET(path))),
                                             "//html/body/pre", XML::xmlValue)  # read the data
@@ -30,6 +36,23 @@ ingest_ENSO <- function(end_year = NULL) {
                                  what=character())
                enso <- read.csv(file=textConnection(enso_pre), skip=11, nrow = count_rows,
                                 stringsAsFactors=F, sep="\t", header=FALSE, col.names=enso_cols)
+
+               if(header.info){
+                  head_count_rows <- 11+count_rows
+
+                  head_enso <- scan(textConnection(enso_pre), nlines=10, what=character(), sep="\n")
+                  footer_enso <- scan(textConnection(enso_pre), skip=head_count_rows,
+                                      what=character(), sep="\n")
+
+                  header_enso <- c(head_enso, footer_enso)
+
+                  assign(x = header.info.name,
+                         value = header_enso,
+                         envir = parent.frame())
+
+                  }
+
+               return(enso)
 
                }
 
