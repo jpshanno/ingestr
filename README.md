@@ -2,7 +2,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr)
 
-An R package for reading environmental data from raw formats into dataframes. 
+R package for reading environmental data from raw formats into dataframes. 
 
 This is an alpha work in progress initiated at the inagural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral).  The end product of this effort will be an R package on CRAN.  The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file.
 
