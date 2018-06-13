@@ -65,7 +65,7 @@ ingest_campbell <-
       column.names$names <-
         switch(sum(add.units, add.measurement) + 1,
                column.names$variable,
-               ifelse(rep(add.units, length(column.names$units)),
+               ifelse(rep(units, length(column.names$units)),
                       paste0(column.names$variable,
                              ifelse(is.na(column.names$units),
                                     "",
