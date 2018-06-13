@@ -13,5 +13,12 @@ ingest_PDO(end_year = NULL)
 A data frame
 }
 \description{
-Ingest Pacific Decadal Oscillation data
+\code{ingest_PDO} ingests data from the updated standardized values for the PDO index,
+derived as the leading PC of monthly SST anomalies in the North Pacific Ocean,
+poleward of 20N. The monthly mean global average SST anomalies
+are removed to separate this pattern of variability from any
+"global warming" signal that may be present in the data.  If you have any questions
+about this time series, contact Nathan Mantua at: nate.mantua\@noaa.gov
+\strong{All ingest functions use the source file name as an identifying
+column to track provenance and relate data and metadata read from files.}
 }
