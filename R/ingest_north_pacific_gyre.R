@@ -21,13 +21,13 @@
 
 # Function ---------------------------
 
-URL_npgo <- "http://www.o3d.org/npgo/npgo.php"
-npgo_pre <- xpathSApply(xmlParse(content(GET(URL_npgo))),"/html/body/pre", xmlValue)
-npgo_cols <- scan(textConnection(npgo_pre), skip=25, nlines=1, what=character())# Get header row
-
-npgo_df <- read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
-                    header=FALSE, col.names=npgo_cols, strip.white=TRUE)
-
+# URL_npgo <- "http://www.o3d.org/npgo/npgo.php"
+# npgo_pre <- xpathSApply(xmlParse(content(GET(URL_npgo))),"/html/body/pre", xmlValue)
+# npgo_cols <- scan(textConnection(npgo_pre), skip=25, nlines=1, what=character())# Get header row
+#
+# npgo_df <- read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
+#                     header=FALSE, col.names=npgo_cols, strip.white=TRUE)
+#
 
 ingest_NPGO <- function(
                         header.info = TRUE,
