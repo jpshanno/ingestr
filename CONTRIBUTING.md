@@ -1,7 +1,9 @@
 # Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+email, or any other method with the owners of this repository before making a change.
+
+Contributors should follow our [code style and practices guide](https://github.com/jpshanno/ingestr/wiki/Coding-Practices). Suggested changes to the style guide should be discussed with the owners of the repository.  
 
 Please note we have a code of conduct; please follow it in all your interactions with the project.
 
