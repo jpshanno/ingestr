@@ -1,3 +1,13 @@
+#' Checks Function Inputs for the Correct Class
+#'
+#' @param parameters A character vector of function parameters that have matching classes
+#' @param class.check One of "character", "numeric", "logical", "list"
+#'   specifying what class \code{parameters} should be
+#'
+#' @return Returns an error if
+#'
+#' @examples
+#'
 check_inputs <-
   function(parameters,
            class.check){
