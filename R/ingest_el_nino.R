@@ -8,9 +8,9 @@
 #'
 #' @param end_year The last year of data wanted.
 #' @param header.info A logical indicating if header information is written to a
-#'  separate data frame
+#'  separate data frame.
 #' @param header.info.name A character indicating the object name for the
-#'  metadata data.frame, defaults to "header_campbell"
+#'  metadata data.frame, defaults to "header_enso".
 #'
 #' @return A data frame.
 #' @export
@@ -18,18 +18,18 @@
 
 # Function ---------------------------
 
-ingest_ENSO <- function(end_year = NULL,
+ingest_ENSO <- function(end.year = NULL,
                         header.info = TRUE,
-                        header.info.name = "header_ENSO") {
+                        header.info.name = "header_enso") {
                path <- "http://www.esrl.noaa.gov/psd/enso/mei/table.html"   # URL of data
                enso_pre <- XML::xpathSApply(XML::htmlParse(content(GET(path))),
                                             "//html/body/pre", XML::xmlValue)  # read the data
 
                start_year <- 1950   # define year range
-               if(is.null(end_year)){
+               if(is.null(end.year)){
                  end_year <- as.numeric(format(Sys.Date(), "%Y"))
                }
-               count_rows <- as.numeric(end_year+1) - start_year  # get the number of rows
+               count_rows <- as.numeric(end.year+1) - start_year  # get the number of rows
 
 
                enso_cols <- scan(textConnection(enso_pre), skip=10, nlines=1,    # get header row
@@ -37,6 +37,7 @@ ingest_ENSO <- function(end_year = NULL,
                enso <- read.csv(file=textConnection(enso_pre), skip=11, nrow = count_rows,
                                 stringsAsFactors=F, sep="\t", header=FALSE, col.names=enso_cols)
 
+               # creates header object
                if(header.info){
                   head_count_rows <- 11+count_rows
 
