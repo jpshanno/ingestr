@@ -6,7 +6,7 @@
 #' \strong{All ingest functions use the source file name as an identifying
 #' column to track provenance and relate data and metadata read from files.}
 #'
-#' @param end_year The last year of data wanted.
+#' @param end.year The last year of data wanted.
 #' @param header.info A logical indicating if header information is written to a
 #'  separate data frame.
 #' @param header.info.name A character indicating the object name for the
@@ -27,7 +27,7 @@ ingest_ENSO <- function(end.year = NULL,
 
                start_year <- 1950   # define year range
                if(is.null(end.year)){
-                 end_year <- as.numeric(format(Sys.Date(), "%Y"))
+                 end.year <- as.numeric(format(Sys.Date(), "%Y"))
                }
                count_rows <- as.numeric(end.year+1) - start_year  # get the number of rows
 
