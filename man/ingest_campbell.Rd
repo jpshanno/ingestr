@@ -37,7 +37,7 @@ provenance and relate data and metadata read from files.}
 }
 \examples{
 campbell_file <- system.file("extdata", "campbell_scientific_tao5.dat", package = "ingestr")
-cs_data <- ingest_campbell(file = campbell_file,
+cs_data <- ingest_campbell(file.name = campbell_file,
                            add.units = TRUE,
                            add.measurement = TRUE,
                            header.info = TRUE,
