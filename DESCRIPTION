@@ -21,10 +21,13 @@ Imports:
   lubridate,
   purrr,
   readr,
+  rvest,
   stringr,
+  tibble,
   tidyr,
   units,
-  XML
+  XML,
+  xml2
 Suggests:
   parallel
 RoxygenNote: 6.0.1
