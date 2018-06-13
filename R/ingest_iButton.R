@@ -1,4 +1,4 @@
-#' Read iButton Read in iButton data and parameters
+#' Read in iButton data and parameters
 #'
 #' @param file Character indicating the raw iButton csv file from 1 Wire
 #' @param data Logical indicating if the data from the iButton file should be
@@ -9,7 +9,7 @@
 #' @return If data and metadata are both TRUE then a list of data frames with
 #'   items 'data' and 'metadata'. Else a single dataframe of data or metadata
 #' @export
-read_iButton <- function(file, data = TRUE, metadata = FALSE){
+ingest_iButton <- function(file, data = TRUE, metadata = FALSE){
 
   if(!is.character(file)){
     stop("file must be a string")}
@@ -48,7 +48,7 @@ read_iButton <- function(file, data = TRUE, metadata = FALSE){
       readr::read_csv(file,
                       n_max = 13,
                       col_names = FALSE,
-                      col_types = readr::cols_only(X1 = "c")) magrittr::%>%
+                      col_types = readr::cols_only(X1 = "c"))
 
     importedMetadata <-
       purrr::map2_dfc(.x = stringr::str_extract(importedMetadata[["X1"]],
