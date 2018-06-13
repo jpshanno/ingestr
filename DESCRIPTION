@@ -1,11 +1,10 @@
 Package: ingestr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Reading Environmental Data into Data Frames
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Joe Shannon, Rachel Blake, Tim Whiteaker
+Maintainer: The package maintainer jpshanno@mtu.edu>
+Description: This is an alpha work in progress initiated at the inagural IMCR Hackathon. The end product of this effort will be an R package on CRAN. The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file.
+License: MIT License
 Encoding: UTF-8
 LazyData: true
