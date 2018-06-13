@@ -1,8 +1,6 @@
 #' Ingest Pacific Decadal Oscillation data
 #'
-#' @param path points to the web location of
-#' @param units
-#' @param measurement
+#' @param end_year The last year of data wanted.
 #'
 #' @return A data frame
 #' @export
