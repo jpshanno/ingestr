@@ -4,14 +4,32 @@
 \alias{ingest_PDO}
 \title{Ingest Pacific Decadal Oscillation data}
 \usage{
-ingest_PDO(end_year = NULL)
+ingest_PDO(end.year = NULL, header.info = TRUE,
+  header.info.name = "header_pdo")
 }
 \arguments{
+\item{header.info}{A logical indicating if header information is written to a
+separate data frame.}
+
+\item{header.info.name}{A character indicating the object name for the
+metadata data.frame, defaults to "header_pdo".}
+
 \item{end_year}{The last year of data wanted.}
 }
 \value{
-A data frame
+A data frame.  If header.info = TRUE a data.frame is created in the
+ parent environment of the function.
 }
 \description{
-Ingest Pacific Decadal Oscillation data
+\code{ingest_PDO} ingests data from the updated standardized values for the
+PDO index, derived as the leading PC of monthly SST anomalies in the North
+Pacific Ocean, poleward of 20N. The monthly mean global average SST anomalies
+are removed to separate this pattern of variability from any "global warming"
+signal that may be present in the data.  If you have any questions about this
+time series, contact Nathan Mantua at: nate.mantua\@noaa.gov \strong{All
+ingest functions use the source file name as an identifying column to track
+provenance and relate data and metadata read from files.}
+}
+\examples{
+
 }
