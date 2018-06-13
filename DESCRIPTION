@@ -1,11 +1,26 @@
 Package: ingestr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: An R package for Reading Environmental Data from Raw Formats into Dataframes. 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: c(
+  person("Joe", "Shannon", email = "jpshanno@mtu.edu", role = c("aut", "cre")),
+  person("Rachel", "Blake", email = "rachel.e.blake@gmail.com", role = c("aut", "cre")),
+  person("Tim", "Whiteaker", email = "whiteaker@utexas.edu", role = c("aut", "cre")))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/jpshanno/ingestr
+BugReports: https://github.com/jpshanno/ingestr/issues
+Imports:
+  dplyr, 
+  lubridate,
+  purrr,
+  readr,
+  stringr,
+  tidyr,
+  units,
+  XML
+Suggests:
+  parallel
