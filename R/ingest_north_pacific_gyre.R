@@ -28,8 +28,7 @@
 #                     header=FALSE, col.names=npgo_cols, strip.white=TRUE)
 #
 
-ingest_NPGO <- function(
-                        header.info = TRUE,
+ingest_NPGO <- function(header.info = TRUE,
                         header.info.name = "header_npgo") {
                path <- "http://www.o3d.org/npgo/npgo.php"
                npgo_pre <- XML::xpathSApply(XML::xmlParse(content(GET(path))),
@@ -38,7 +37,20 @@ ingest_NPGO <- function(
                                  what=character())# Get header row
                npgo_cols <- npgo_cols[2:4] # select column names
 
+               npgo_df <- read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
+                                   header=FALSE, col.names=npgo_cols, strip.white=TRUE)
 
+               # creates header object
+               if(header.info){
+                  header_enso <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
+
+                  assign(x = header.info.name,
+                         value = header_enso,
+                         envir = parent.frame())
+
+                  }
+
+               return(npgo_df)
 
                }
 
