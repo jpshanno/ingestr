@@ -30,5 +30,6 @@ Imports:
   xml2
 Suggests:
   parallel,
-  testthat
+  testthat,
+  covr
 RoxygenNote: 6.0.1
