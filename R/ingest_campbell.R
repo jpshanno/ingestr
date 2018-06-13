@@ -5,7 +5,7 @@
 #' ingest functions use the source file name as an identifying column to track
 #' provenance and relate data and metadata read from files.}
 #'
-#' @param file Character indicating the .dat Campbell Scientific File
+#' @param file.name Character indicating the .dat Campbell Scientific File
 #' @param add.units Logical indicating if add.units specified in the data file should be
 #'   appended to the end of the variable names specificed in the data file,
 #'   defaults to TRUE
@@ -48,24 +48,24 @@ ingest_campbell <-
     column.names <-
         as.data.frame(
           t(
-            utils::read.csv(file,
-                     skip = 1,
-                     nrows = 3,
-                     header = F,
-                     check.names = FALSE,
-                     na.strings = "",
-                     stringsAsFactors = F)
+            utils::read.csv(file.name,
+                            skip = 1,
+                            nrows = 3,
+                            header = F,
+                            check.names = FALSE,
+                            na.strings = "",
+                            stringsAsFactors = F)
           ),
           stringsAsFactors = F
         )
 
-      names(column.names) <-
+    names(column.names) <-
         c("variable", "units", "type")
 
       column.names$names <-
         switch(sum(add.units, add.measurement) + 1,
                column.names$variable,
-               ifelse(rep(add.units, length(column.names$units)),
+               ifelse(rep(units, length(column.names$units)),
                       paste0(column.names$variable,
                              ifelse(is.na(column.names$units),
                                     "",
@@ -82,7 +82,7 @@ ingest_campbell <-
                              "",
                              paste0("_", column.names$units))))
 
-      data <- utils::read.csv(file,
+      data <- utils::read.csv(file.name,
                        skip = 4,
                        header = F,
                        stringsAsFactors = F,
@@ -91,7 +91,7 @@ ingest_campbell <-
 
       if(header.info){
         header_info <-
-          utils::read.csv(campbell_file,
+          utils::read.csv(file.name,
                           nrow = 1,
                           header = FALSE,
                           col.names = c("file_type",

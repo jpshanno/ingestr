@@ -8,13 +8,13 @@ ingest_ENSO(end.year = NULL, header.info = TRUE,
   header.info.name = "header_enso")
 }
 \arguments{
+\item{end.year}{The last year of data wanted.}
+
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}
 
 \item{header.info.name}{A character indicating the object name for the
 metadata data.frame, defaults to "header_enso".}
-
-\item{end_year}{The last year of data wanted.}
 }
 \value{
 A data frame.
