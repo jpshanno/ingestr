@@ -15,6 +15,10 @@
 #'
 #' @return A data frame.
 #' @export
+#' df_enso <- ingest_ENSO()  # reads in all the data from start date to present
+#' df_enso1 <- ingest_ENSO(end.year=2000)  # reads in the data from start date to the year 2000
+#' header_enso  # prints the header (and if applicable footer) information
+#'
 
 
 # Function ---------------------------
@@ -54,7 +58,6 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
                   head1_enso <- c(head_enso, footer_enso)
 
                   header_enso <-  data.frame(input_source = path, table_header = paste(head1_enso, collapse = " "))
-
 
                   assign(x = header.info.name,
                          value = utils::str(header_enso),

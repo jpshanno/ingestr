@@ -16,6 +16,8 @@
 #'   parent environment of the function.
 #' @export
 #' @examples
+#' df_npgo <- ingest_NPGO()  # reads in all the data
+#' header_npgo  # prints the header (and if applicable footer) information
 #'
 
 
