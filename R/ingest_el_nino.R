@@ -24,7 +24,7 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
                all_character(c("path", "header.info.name"))
                all_logical(c("header.info"))
 
-               enso_pre <- XML::xpathSApply(XML::htmlParse(content(GET(path))),
+               enso_pre <- XML::xpathSApply(XML::htmlParse(httr::content(httr::GET(path))),
                                             "//html/body/pre", XML::xmlValue)  # read the data
 
                start_year <- 1950   # define year range
@@ -36,8 +36,9 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
 
                enso_cols <- scan(textConnection(enso_pre), skip=10, nlines=1,    # get header row
                                  what=character())
-               enso <- read.csv(file=textConnection(enso_pre), skip=11, nrow = count_rows,
-                                stringsAsFactors=F, sep="\t", header=FALSE, col.names=enso_cols)
+               enso <- utils::read.csv(file=textConnection(enso_pre), skip=11, nrow = count_rows,
+                                       stringsAsFactors=F, sep="\t", header=FALSE, col.names=enso_cols)
+               enso$input_source <- path
 
                # creates header object
                if(header.info){
@@ -47,10 +48,13 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
                   footer_enso <- scan(textConnection(enso_pre), skip=head_count_rows,
                                       what=character(), sep="\n")
 
-                  header_enso <- c(head_enso, footer_enso)
+                  head1_enso <- c(head_enso, footer_enso)
+
+                  header_enso <-  data.frame(input_source = path, table_header = paste(head1_enso, collapse = " "))
+
 
                   assign(x = header.info.name,
-                         value = header_enso,
+                         value = utils::str(header_enso),
                          envir = parent.frame())
 
                   }

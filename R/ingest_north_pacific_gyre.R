@@ -25,14 +25,15 @@ ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of da
                all_character(c("path", "header.info.name"))
                all_logical(c("header.info"))
 
-               npgo_pre <- XML::xpathSApply(XML::xmlParse(content(GET(path))),
+               npgo_pre <- XML::xpathSApply(XML::xmlParse(httr::content(httr::GET(path))),
                                             "/html/body/pre", XML::xmlValue) # read the data
                npgo_cols <- scan(textConnection(npgo_pre), skip=25, nlines=1,
                                  what=character())# Get header row
                npgo_cols <- npgo_cols[2:4] # select column names
 
-               npgo_df <- read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
-                                   header=FALSE, col.names=npgo_cols, strip.white=TRUE)
+               npgo_df <- utils::read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
+                                          header=FALSE, col.names=npgo_cols, strip.white=TRUE)
+               npgo_df$input_source <- path
 
                # creates header object
                if(header.info){
