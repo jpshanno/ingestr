@@ -30,8 +30,13 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
                all_character(c("path", "header.info.name"))
                all_logical(c("header.info"))
 
-               enso_pre <- XML::xpathSApply(XML::htmlParse(httr::content(httr::GET(path))),
-                                            "//html/body/pre", XML::xmlValue)  # read the data
+               if (startsWith(tolower(trimws(path)), "http")) {
+                 raw_html <- httr::content(httr::GET(path))
+               } else {
+                 raw_html <- xml2::read_html(path)
+               }
+               enso_pre <- XML::xpathSApply(XML::htmlParse(raw_html),
+                                            "//html/body/pre", XML::xmlValue)
 
                start_year <- 1950   # define year range
                if(is.null(end.year)){

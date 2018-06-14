@@ -28,8 +28,16 @@ ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of da
                all_character(c("path", "header.info.name"))
                all_logical(c("header.info"))
 
-               npgo_pre <- XML::xpathSApply(XML::xmlParse(httr::content(httr::GET(path))),
-                                            "/html/body/pre", XML::xmlValue) # read the data
+               #npgo_pre <- XML::xpathSApply(XML::xmlParse(httr::content(httr::GET(path))),
+              #                              "/html/body/pre", XML::xmlValue) # read the data
+               if (startsWith(tolower(trimws(path)), "http")) {
+                 raw_html <- httr::content(httr::GET(path))
+               } else {
+                 raw_html <- xml2::read_html(path)
+               }
+               npgo_pre <- XML::xpathSApply(XML::htmlParse(raw_html),
+                                            "//html/body/pre", XML::xmlValue)
+
                npgo_cols <- scan(textConnection(npgo_pre), skip=25, nlines=1,
                                  what=character())# Get header row
                npgo_cols <- npgo_cols[2:4] # select column names
