@@ -27,3 +27,8 @@ test_that("all_list checks for lists", {
   all_list("valid_var")
   expect_error(all_list(c("invalid_var", "valid_var")))
 })
+
+test_that("only allowed classes are allowed", {
+  a_var <- 1
+  expect_error(check_inputs("a_var", "integer"))
+})
