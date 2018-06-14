@@ -86,7 +86,7 @@ Sensor data stored in folders will be available for batch import using `ingest_`
 ```{r eval = FALSE}
 temperature_data <- 
   ingest_directory(dir = "temp_records",
-                   fun = injest_campbell,
+                   fun = ingest_campbell,
                    pattern = ".dat",
                    recursive = FALSE,
                    use.parallel = FALSE,
@@ -109,10 +109,8 @@ While ingestr is focused on getting data into R and running preliminary checks, 
 The packages are the start of a larger ecosystem including [EMLassemblyline](https://github.com/EDIorg/EMLassemblyline) for environmental data management to create a convenient, reproducible workflow moving from raw data to archived datasets with rich EML metadata.
 
 
-
 ```{r eval=FALSE, include=FALSE}
 
-# ingestr
 
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr)
 [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
@@ -128,8 +126,7 @@ We're just getting started, so expect things to break!
 Scientific data files are produced in many formats by many means. Here's what's on our radar.
 
 * Sensors
-    * [Campbell Scientific](https://www.campbellsci.com/blog/tool-to-import-data-to-r)
-    * Solinst
+       * Solinst
     * iButton
     * EGM4 - todo
     * Hobo - todo

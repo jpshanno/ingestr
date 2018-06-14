@@ -133,7 +133,7 @@ Sensor data stored in folders will be available for batch import using `ingest_`
 ``` r
 temperature_data <- 
   ingest_directory(dir = "temp_records",
-                   fun = injest_campbell,
+                   fun = ingest_campbell,
                    pattern = ".dat",
                    recursive = FALSE,
                    use.parallel = FALSE,
