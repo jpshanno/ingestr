@@ -40,10 +40,12 @@ ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of da
 
                # creates header object
                if(header.info){
-                  header_npgo <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
+                  head1_npgo <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
+
+                  header_npgo <-  data.frame(input_source = path, table_header = paste(head1_npgo, collapse = " "))
 
                   assign(x = header.info.name,
-                         value = header_npgo,
+                         value = utils::str(header_npgo),
                          envir = parent.frame())
 
                   }
