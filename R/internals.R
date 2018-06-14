@@ -36,7 +36,11 @@ check_inputs <-
         "list" = is.list
       )
 
-    if(!all(sapply(lapply(parameters, get, envir = parent.frame(2)), class.function))){
+    if(!all(sapply(lapply(parameters, get, envir = parent.frame(2)),
+                   function(x){
+                     ifelse(is.null(x),
+                            TRUE,
+                            class.function(x))}))){
       stop(paste0("The following arguments must be supplied as ",
                   class.check,
                   ": ",
