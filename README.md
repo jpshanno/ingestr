@@ -9,7 +9,7 @@ ingestr
 
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jpshanno/ingestr?branch=master&svg=true)](https://ci.appveyor.com/project/jpshanno/ingestr) [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
 
-This is project was initiated at the inagural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by the [Environmental Data Institute](https://environmentaldatainitiative.org/). The end product of this effort will be an R package on CRAN. The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction.
+This is project was initiated at the inaugural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by the [Environmental Data Institute](https://environmentaldatainitiative.org/). The end product of this effort will be an R package on CRAN. The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction.
 
 The guiding principles of ingestr are that
 
@@ -143,16 +143,16 @@ temperature_data <-
 ### Incorporate File Naming Conventions as Data
 
 Filenames generally include information about the data collected: site, sensor, measurement type, date collected, etc. We are working on a generalized approach (probably just a function or two) that would split the filename into data columns using a template would be very useful.
-For example if a set of file names read as "site-variable-year" (152-soil\_moisture-2017.csv, 152-soil\_temperature-2017.csv, 140-soil\_moisture\_2017.csv, etc), then the function would take an argument supplying the template as column headers: "site-variable-year" with either delimiters or the length of each variable to enable splitting. These functions will likely build off of the great work done on `tidyr::separate()` and we suggest using that until we have incoporated a solution.
+For example if a set of file names read as "site-variable-year" (152-soil\_moisture-2017.csv, 152-soil\_temperature-2017.csv, 140-soil\_moisture\_2017.csv, etc), then the function would take an argument supplying the template as column headers: "site-variable-year" with either delimiters or the length of each variable to enable splitting. These functions will likely build off of the great work done on `tidyr::separate()` and we suggest using that until we have incorporated a solution.
 
 Preliminary Clean-up Utilities
 ------------------------------
 
-Basic data cleaning utilities will be included in ingestr. These will include identifying duplicate rows, empty rows, empty columns, and columns that contain suspicious entries (i.e. "."). These utilities will be able to flag or correct the problems depending upon user preference. In keeping with our commitment to data provenance and reproduciblity all cleaning utilties will provide a record of identified and corrected issues which can be saved by the user and stored with the final dataset.
+Basic data cleaning utilities will be included in ingestr. These will include identifying duplicate rows, empty rows, empty columns, and columns that contain suspicious entries (i.e. "."). These utilities will be able to flag or correct the problems depending upon user preference. In keeping with our commitment to data provenance and reproduciblity all cleaning utilities will provide a record of identified and corrected issues which can be saved by the user and stored with the final dataset.
 
 QAQCR (quacker)
 ---------------
 
-While ingestr is focused on getting data into R and running preliminary checks, another group at the IMCR Hackathon focused on quality assurance checks for envrinmental data. [qaqcr](https://github.com/IMCR-Hackathon/qaqc_tools) provides a simple, standard way to apply the quality control checks that are applicable to your data.
+While ingestr is focused on getting data into R and running preliminary checks, another group at the IMCR Hackathon focused on quality assurance checks for environmental data. [qaqcr](https://github.com/IMCR-Hackathon/qaqc_tools) provides a simple, standard way to apply the quality control checks that are applicable to your data.
 
-The packages are the start of a larger ecosystem including [EMLassemblyline](https://github.com/EDIorg/EMLassemblyline) for environmental data management to create a convienient, reproducible workflow moving from raw data to archived datasets with rich EML metadata.
+The packages are the start of a larger ecosystem including [EMLassemblyline](https://github.com/EDIorg/EMLassemblyline) for environmental data management to create a convenient, reproducible workflow moving from raw data to archived datasets with rich EML metadata.
