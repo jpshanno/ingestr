@@ -4,8 +4,8 @@
 \alias{ingest_ENSO}
 \title{Ingest Multivariate El Nino Southern Oscillation Index  data}
 \usage{
-ingest_ENSO(end.year = NULL, header.info = TRUE,
-  header.info.name = "header_enso")
+ingest_ENSO(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
+  end.year = NULL, header.info = TRUE, header.info.name = "header_enso")
 }
 \arguments{
 \item{end.year}{The last year of data wanted.}

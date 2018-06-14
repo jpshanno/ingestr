@@ -18,10 +18,14 @@
 
 # Function ---------------------------
 
-ingest_ENSO <- function(end.year = NULL,
+ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",   # URL of data
+                        end.year = NULL,
                         header.info = TRUE,
                         header.info.name = "header_enso") {
-               path <- "http://www.esrl.noaa.gov/psd/enso/mei/table.html"   # URL of data
+
+               all_character(c("path", "header.info.name"))
+               all_logical(c("header.info"))
+
                enso_pre <- XML::xpathSApply(XML::htmlParse(content(GET(path))),
                                             "//html/body/pre", XML::xmlValue)  # read the data
 

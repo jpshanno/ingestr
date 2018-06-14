@@ -4,14 +4,15 @@
 \alias{ingest_NPGO}
 \title{Ingest North Pacific Gyre Oscillation data}
 \usage{
-ingest_NPGO(header.info = TRUE, header.info.name = "header_npgo")
+ingest_NPGO(path = "http://www.o3d.org/npgo/npgo.php", header.info = TRUE,
+  header.info.name = "header_npgo")
 }
 \arguments{
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}
 
 \item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_xxx"}
+metadata data.frame, defaults to "header_npgo".}
 }
 \value{
 A data frame.  If header.info = TRUE a data.frame is created in the
