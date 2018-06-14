@@ -4,8 +4,8 @@
 \alias{ingest_PDO}
 \title{Ingest Pacific Decadal Oscillation data}
 \usage{
-ingest_PDO(end.year = NULL, header.info = TRUE,
-  header.info.name = "header_pdo")
+ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",
+  end.year = NULL, header.info = TRUE, header.info.name = "header_pdo")
 }
 \arguments{
 \item{end.year}{The last year of data wanted.}

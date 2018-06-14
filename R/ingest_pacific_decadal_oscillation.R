@@ -25,7 +25,7 @@
 
 # Ingest Function ---------------------------
 
-ingest_PDO <- function(path <- "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
+ingest_PDO <- function(path = "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
                        end.year = NULL,
                        header.info = TRUE,
                        header.info.name = "header_pdo") {

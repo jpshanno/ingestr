@@ -13,10 +13,10 @@ check_inputs(parameters, class.check)
 specifying what class \code{parameters} should be}
 }
 \value{
-Returns an error if
+Returns an error if the provided parameters do not match the specified class
 }
 \description{
-Checks Function Inputs for the Correct Class
+This function is supplied as a generic form of all_character, all_numeric, all_
 }
 \examples{
 
