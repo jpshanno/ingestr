@@ -4,7 +4,7 @@
 \alias{ingest_campbell}
 \title{Ingest Campbell Scientific Logger Data}
 \usage{
-ingest_campbell(file.name, add.units = TRUE, add.measurement = TRUE,
+ingest_campbell(file.name, add.units = TRUE, add.measurements = TRUE,
   header.info = TRUE, header.info.name = "header_campbell")
 }
 \arguments{
@@ -14,7 +14,7 @@ ingest_campbell(file.name, add.units = TRUE, add.measurement = TRUE,
 appended to the end of the variable names specificed in the data file,
 defaults to TRUE}
 
-\item{add.measurement}{Logical indicating if add.measurement type (Avg, Smp,
+\item{add.measurements}{Logical indicating if add.measurements type (Avg, Smp,
 etc)specified in the data file should be appended to the start of the
 variable names specificed in the data file, defaults to TRUE}
 
@@ -35,11 +35,14 @@ are stored in the TAO5 file format with a .dat exentension. \strong{All
 ingest functions use the source file name as an identifying column to track
 provenance and relate data and metadata read from files.}
 }
+\details{
+The TIMESTAMP column will be returned as an POSIXct column.
+}
 \examples{
 campbell_file <- system.file("extdata", "campbell_scientific_tao5.dat", package = "ingestr")
-cs_data <- ingest_campbell(file = campbell_file,
+cs_data <- ingest_campbell(file.name = campbell_file,
                            add.units = TRUE,
-                           add.measurement = TRUE,
+                           add.measurements = TRUE,
                            header.info = TRUE,
                            header.info.name = "header_cs_data")
 }

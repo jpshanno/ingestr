@@ -1,20 +1,21 @@
-#'Ingest North Pacific Gyre Oscillation data
+#' Ingest North Pacific Gyre Oscillation data
 #'
-#'\code{ingest_} ingests data from http://www.o3d.org/npgo/ for the North
-#'Pacific Gyre Oscillation. \strong{All ingest functions use the source file
-#'name as an identifying column to track provenance and relate data and metadata
-#'read from files.}
+#' \code{ingest_} ingests data from http://www.o3d.org/npgo/ for the North
+#' Pacific Gyre Oscillation. \strong{All ingest functions use the source file
+#' name as an identifying column to track provenance and relate data and metadata
+#' read from files.}
 #'
-#'@param header.info A logical indicating if header information is written to a
-#'  separate data frame.
-#'@param header.info.name A character indicating the object name for the
-#'  metadata data.frame, defaults to "header_npgo".
+#' @param path Character indicating the URI to the HTML representation of the data.
+#' @param header.info A logical indicating if header information is written to a
+#'   separate data frame.
+#' @param header.info.name A character indicating the object name for the
+#'   metadata data.frame, defaults to "header_npgo".
 #'
 #'
-#'@return A data frame.  If header.info = TRUE a data.frame is created in the
-#'  parent environment of the function.
-#'@export
-#'@examples
+#' @return A data frame.  If header.info = TRUE a data.frame is created in the
+#'   parent environment of the function.
+#' @export
+#' @examples
 #'
 
 

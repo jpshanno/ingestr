@@ -6,11 +6,12 @@
 #' \strong{All ingest functions use the source file name as an identifying
 #' column to track provenance and relate data and metadata read from files.}
 #'
+#' @param path Character indicating the URI to the HTML representation of the data.
 #' @param end.year The last year of data wanted.
 #' @param header.info A logical indicating if header information is written to a
-#'  separate data frame.
+#'   separate data frame.
 #' @param header.info.name A character indicating the object name for the
-#'  metadata data.frame, defaults to "header_enso".
+#'   metadata data.frame, defaults to "header_enso".
 #'
 #' @return A data frame.
 #' @export

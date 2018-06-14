@@ -2,21 +2,36 @@
 % Please edit documentation in R/internals.R
 \name{check_inputs}
 \alias{check_inputs}
+\alias{all_character}
+\alias{all_numeric}
+\alias{all_logical}
+\alias{all_list}
 \title{Checks Function Inputs for the Correct Class}
 \usage{
 check_inputs(parameters, class.check)
+
+all_character(parameters)
+
+all_numeric(parameters)
+
+all_logical(parameters)
+
+all_list(parameters)
 }
 \arguments{
-\item{parameters}{A character vector of function parameters that have matching classes}
+\item{parameters}{A character vector of function parameters that have
+matching classes}
 
 \item{class.check}{One of "character", "numeric", "logical", "list"
 specifying what class \code{parameters} should be}
 }
 \value{
-Returns an error if the provided parameters do not match the specified class
+Returns an error if the provided parameters do not match the
+  specified class
 }
 \description{
-This function is supplied as a generic form of all_character, all_numeric, all_
+This function is supplied as a generic form of all_character, all_numeric,
+all_logical, and all_list
 }
 \examples{
 
