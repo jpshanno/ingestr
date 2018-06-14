@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-<img src="inst/img/logo.png" align="right">  
+<img src="inst/img/logo_ingestr.png" align="right">  
 
 # ingestr
 
@@ -68,7 +68,7 @@ str(campbell_data)
 ### Formatted Non-Sensor Data Sources
 Some environmental data is published online as html elements.  This data can be difficult to read directly from the websites where they are hosted into R.  To facilitate access, we have created functions that parse the html so that this data can be directly downloaded in R.  To track the provenance of these data, the column input_source is populated by the URL location from which the data were downloaded.  
 
-```{r example}
+```{r example2}
 library(ingestr)
 
 PDO_Data <- ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",  
