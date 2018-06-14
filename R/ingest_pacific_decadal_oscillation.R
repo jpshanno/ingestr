@@ -25,7 +25,7 @@
 
 # Ingest Function ---------------------------
 
-ingest_PDO <- function(path <- "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
+ingest_PDO <- function(path = "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
                        end.year = NULL,
                        header.info = TRUE,
                        header.info.name = "header_pdo") {
@@ -58,10 +58,12 @@ ingest_PDO <- function(path <- "http://jisao.washington.edu/pdo/PDO.latest",   #
                  footer_pdo <- scan(textConnection(pdo_pre2), skip=head_count_rows, nlines=31,
                                     what=character(), sep="\n")
 
-                 header_pdo <- c(head_pdo, footer_pdo)
+                 head1_pdo <- c(head_pdo, footer_pdo)
+
+                 header_pdo <-  data.frame(input_source = path, table_header = paste(head1_pdo, collapse = " "))
 
                  assign(x = header.info.name,
-                        value = header_pdo,
+                        value = utils::str(header_pdo),
                         envir = parent.frame())
 
                  }
