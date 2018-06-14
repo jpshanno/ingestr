@@ -8,7 +8,7 @@
 #'@param header.info A logical indicating if header information is written to a
 #'  separate data frame.
 #'@param header.info.name A character indicating the object name for the
-#'  metadata data.frame, defaults to "header_xxx"
+#'  metadata data.frame, defaults to "header_npgo".
 #'
 #'
 #'@return A data frame.  If header.info = TRUE a data.frame is created in the
@@ -20,17 +20,13 @@
 
 # Function ---------------------------
 
-# URL_npgo <- "http://www.o3d.org/npgo/npgo.php"
-# npgo_pre <- xpathSApply(xmlParse(content(GET(URL_npgo))),"/html/body/pre", xmlValue)
-# npgo_cols <- scan(textConnection(npgo_pre), skip=25, nlines=1, what=character())# Get header row
-#
-# npgo_df <- read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
-#                     header=FALSE, col.names=npgo_cols, strip.white=TRUE)
-#
-
-ingest_NPGO <- function(header.info = TRUE,
+ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of data
+                        header.info = TRUE,
                         header.info.name = "header_npgo") {
-               path <- "http://www.o3d.org/npgo/npgo.php"
+
+               all_character(c("path", "header.info.name"))
+               all_logical(c("header.info"))
+
                npgo_pre <- XML::xpathSApply(XML::xmlParse(content(GET(path))),
                                             "/html/body/pre", XML::xmlValue) # read the data
                npgo_cols <- scan(textConnection(npgo_pre), skip=25, nlines=1,
@@ -42,10 +38,10 @@ ingest_NPGO <- function(header.info = TRUE,
 
                # creates header object
                if(header.info){
-                  header_enso <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
+                  header_npgo <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
 
                   assign(x = header.info.name,
-                         value = header_enso,
+                         value = header_npgo,
                          envir = parent.frame())
 
                   }
@@ -53,4 +49,7 @@ ingest_NPGO <- function(header.info = TRUE,
                return(npgo_df)
 
                }
+
+
+
 

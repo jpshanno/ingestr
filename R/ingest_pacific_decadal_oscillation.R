@@ -25,10 +25,14 @@
 
 # Ingest Function ---------------------------
 
-ingest_PDO <- function(end.year = NULL,
+ingest_PDO <- function(path <- "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
+                       end.year = NULL,
                        header.info = TRUE,
                        header.info.name = "header_pdo") {
-              path <- "http://jisao.washington.edu/pdo/PDO.latest"   # URL to the data
+
+              all_character(c("path", "header.info.name"))
+              all_logical(c("header.info"))
+
               pdo_raw <- xml2::read_html(path)                       # read in the data
               pdo_pre1 <- rvest::html_node(pdo_raw, "p")             # make data text
               pdo_pre2 <- rvest::html_text(pdo_pre1)
