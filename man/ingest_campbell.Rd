@@ -2,27 +2,27 @@
 % Please edit documentation in R/ingest_campbell.R
 \name{ingest_campbell}
 \alias{ingest_campbell}
-\title{Ingest Campbell Scientific Logger Data}
+\title{Ingest Campbell Scientific Logger Data.}
 \usage{
 ingest_campbell(file.name, add.units = TRUE, add.measurements = TRUE,
   header.info = TRUE, header.info.name = "header_campbell")
 }
 \arguments{
-\item{file.name}{Character indicating the .dat Campbell Scientific File}
+\item{file.name}{Character indicating the .dat Campbell Scientific File.}
 
 \item{add.units}{Logical indicating if add.units specified in the data file should be
 appended to the end of the variable names specificed in the data file,
-defaults to TRUE}
+defaults to TRUE.}
 
 \item{add.measurements}{Logical indicating if add.measurements type (Avg, Smp,
-etc)specified in the data file should be appended to the start of the
-variable names specificed in the data file, defaults to TRUE}
+etc) specified in the data file should be appended to the start of the
+variable names specificed in the data file, defaults to TRUE.}
 
 \item{header.info}{A logical indicating if header information is written to a
-separate data frame}
+separate data frame.}
 
 \item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_campbell"}
+metadata data.frame, defaults to "header_campbell".}
 }
 \value{
 This function returns a dataframe containing logger data. If

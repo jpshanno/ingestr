@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_pacific_decadal_oscillation.R
 \name{ingest_PDO}
 \alias{ingest_PDO}
-\title{Ingest Pacific Decadal Oscillation data}
+\title{Ingest Pacific Decadal Oscillation data.}
 \usage{
 ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",
   end.year = NULL, header.info = TRUE, header.info.name = "header_pdo")
@@ -10,7 +10,7 @@ ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",
 \arguments{
 \item{path}{Character indicating the URI to the HTML representation of the data.}
 
-\item{end.year}{The last year of data wanted.}
+\item{end.year}{Four digit integer indicating the last year of data wanted.}
 
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}

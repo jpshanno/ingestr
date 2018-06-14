@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_el_nino.R
 \name{ingest_ENSO}
 \alias{ingest_ENSO}
-\title{Ingest Multivariate El Nino Southern Oscillation Index  data}
+\title{Ingest Multivariate El Nino Southern Oscillation Index data.}
 \usage{
 ingest_ENSO(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
   end.year = NULL, header.info = TRUE, header.info.name = "header_enso")
@@ -10,7 +10,7 @@ ingest_ENSO(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
 \arguments{
 \item{path}{Character indicating the URI to the HTML representation of the data.}
 
-\item{end.year}{The last year of data wanted.}
+\item{end.year}{Four digit integer indicating the last year of data wanted.}
 
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}
