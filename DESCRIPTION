@@ -17,7 +17,9 @@ LazyData: true
 URL: https://github.com/jpshanno/ingestr
 BugReports: https://github.com/jpshanno/ingestr/issues
 Imports:
-  dplyr, 
+  units,
+  dplyr,
+  httr,
   lubridate,
   purrr,
   readr,
@@ -25,7 +27,6 @@ Imports:
   stringr,
   tibble,
   tidyr,
-  units,
   XML,
   xml2
 Suggests:

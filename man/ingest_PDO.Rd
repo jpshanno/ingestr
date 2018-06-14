@@ -2,13 +2,15 @@
 % Please edit documentation in R/ingest_pacific_decadal_oscillation.R
 \name{ingest_PDO}
 \alias{ingest_PDO}
-\title{Ingest Pacific Decadal Oscillation data}
+\title{Ingest Pacific Decadal Oscillation data.}
 \usage{
 ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",
   end.year = NULL, header.info = TRUE, header.info.name = "header_pdo")
 }
 \arguments{
-\item{end.year}{The last year of data wanted.}
+\item{path}{Character indicating the URI to the HTML representation of the data.}
+
+\item{end.year}{Four digit integer indicating the last year of data wanted.}
 
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}
@@ -18,7 +20,7 @@ metadata data.frame, defaults to "header_pdo".}
 }
 \value{
 A data frame.  If header.info = TRUE a data.frame is created in the
- parent environment of the function.
+  parent environment of the function.
 }
 \description{
 \code{ingest_PDO} ingests data from the updated standardized values for the
@@ -29,7 +31,4 @@ signal that may be present in the data.  If you have any questions about this
 time series, contact Nathan Mantua at: nate.mantua\@noaa.gov \strong{All
 ingest functions use the source file name as an identifying column to track
 provenance and relate data and metadata read from files.}
-}
-\examples{
-
 }

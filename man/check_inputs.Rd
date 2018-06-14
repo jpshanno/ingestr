@@ -6,7 +6,7 @@
 \alias{all_numeric}
 \alias{all_logical}
 \alias{all_list}
-\title{Checks Function Inputs for the Correct Class}
+\title{Checks Function Inputs for the Correct Class.}
 \usage{
 check_inputs(parameters, class.check)
 
@@ -20,19 +20,16 @@ all_list(parameters)
 }
 \arguments{
 \item{parameters}{A character vector of function parameters that have
-matching classes}
+matching classes.}
 
 \item{class.check}{One of "character", "numeric", "logical", "list"
-specifying what class \code{parameters} should be}
+specifying what class \code{parameters} should be.}
 }
 \value{
 Returns an error if the provided parameters do not match the
-  specified class
+  specified class.
 }
 \description{
 This function is supplied as a generic form of all_character, all_numeric,
-all_logical, and all_list
-}
-\examples{
-
+all_logical, and all_list.
 }
