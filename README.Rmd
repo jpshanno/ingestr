@@ -14,18 +14,18 @@ knitr::opts_chunk$set(
 
 <p align="center">
 <img src="inst/img/logo.png" />
-</p>
-
-# ingestr
+<h1 align = "center">
+ingestr
+</h1>
+**An R package for reading environmental data from raw formats into data.frames.**
+</p>  
 
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr)
 [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
 
-**An R package for reading environmental data from raw formats into dataframes.**
+This is project was initiated at the inagural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by the [Environmental Data Institute](https://environmentaldatainitiative.org/). The end product of this effort will be an R package on CRAN.  The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction. 
 
-This is project was initiated at the inagural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral).  The end product of this effort will be an R package on CRAN.  The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file.
-
-The guiding principles of the project are that
+The guiding principles of ingestr are that
 
 1. All sources of environmental-related data should be easy to read directly
 2. Reading in data should provide a standard output
@@ -43,7 +43,7 @@ devtools::install_github("jpshanno/ingestr")
 ```
 
 ## Ingesting Data
-
+### Sensor and Instrument Data
 Many sensors provide their output as delimited files with header information contained above the recorded data. Each ingestr function to read in data starts with `ingest_` to make autocomplete easier.  
 Running any ingest function will read in the data and format the data into a clean R data.frame. Column names are taken directly from the data file, and users have the option to read the header information into a separate data frame in the environment where the function was called. A message and the data.frame structure will be printed to alert the user that the data.frame was created.  
 All data and header data that are read in will have the data source appended as a column to the data.
@@ -64,10 +64,21 @@ campbell_data <-
 
 str(campbell_data)
 ```
+### Formatted Non-Sensor Data Sources
 
 ### Batch Ingests
 
-Sensor data stored in folders will be available for batch import using `ingest_` functions. Import functions will check for duplicate file contents and warn this users, and will allow parllel batch reading.
+Sensor data stored in folders will be available for batch import using `ingest_` functions. Import functions will check for duplicate file contents and warn this users, and will allow parallel batch reading.
+
+```{r eval = FALSE}
+temperature_data <- 
+  ingest_directory(dir = "temp_records",
+                   fun = injest_campbell,
+                   pattern = ".dat",
+                   recursive = FALSE,
+                   use.parallel = FALSE,
+                   check.duplicates = "warn")
+```
 
 ### Incorporate File Naming Conventions as Data
 
@@ -76,7 +87,14 @@ For example if a set of file names read as "site-variable-year" (152-soil_moistu
 
 ## Preliminary Clean-up Utilities
 
-## QAQCR
+Basic data cleaning utilities will be included in ingestr. These will include identifying duplicate rows, empty rows, empty columns, and columns that contain suspicious entries (i.e. "."). These utilities will be able to flag or correct the problems depending upon user preference. In keeping with our commitment to data provenance and reproduciblity all cleaning utilties will provide a record of identified and corrected issues which can be saved by the user and stored with the final dataset.
+
+## QAQCR (quacker)
+
+While ingestr is focused on getting data into R and running preliminary checks, another group at the IMCR Hackathon focused on quality assurance checks for envrinmental data. [qaqcr](https://github.com/IMCR-Hackathon/qaqc_tools) provides a simple, standard way to apply the quality control checks that are applicable to your data.
+
+The packages are the start of a larger ecosystem including [EMLassemblyline](https://github.com/EDIorg/EMLassemblyline) for environmental data management to create a convienient, reproducible workflow moving from raw data to archived datasets with rich EML metadata.
+
 
 
 ```{r eval=FALSE, include=FALSE}
