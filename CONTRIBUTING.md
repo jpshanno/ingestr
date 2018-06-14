@@ -5,7 +5,7 @@ email, or any other method with the owners of this repository before making a ch
 
 Contributors should follow our [code style and practices guide](https://github.com/jpshanno/ingestr/wiki/Coding-Practices) and new ingest functions should use our [ingest function template](https://github.com/jpshanno/ingestr/wiki/Example-Ingest-Script). Suggested changes to the style guide should be discussed with the owners of the repository.  
 
-Code should have unit test coverage. When adding code for a sensor, for example, unit tests for that sensor's parsing code and at least one representative dataset should be included in the inst/extdata folder.
+Code should have unit test coverage. When adding code for a sensor, for example, unit tests for that sensor's parsing code and at least one representative dataset should be included in the inst/example_data folder.
 
 Please note we have a code of conduct; please follow it in all your interactions with the project.
 
@@ -19,6 +19,12 @@ Please note we have a code of conduct; please follow it in all your interactions
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
+## When Making Commits
+
+If your commits will include R scripts, please run `devtools::check` to check for common problems, run unit tests, and build Rd files.  There should be no errors, warnings, or notes in the R CMD check results.
+
+README.md is created from README.Rmd. To make edits to the readme, first edit README.Rmd and then knit that into README.md.  For example, with README.Rmd open in RStudio, click the drop down arrow next to **Knit** and click **Knit to github_document**.  You can ignore the pandoc error at the end of the output in the R Markdown window.
+   
 ## Code of Conduct
 
 ### Our Pledge
