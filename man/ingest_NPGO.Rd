@@ -26,3 +26,8 @@ Pacific Gyre Oscillation. \strong{All ingest functions use the source file
 name as an identifying column to track provenance and relate data and metadata
 read from files.}
 }
+\examples{
+df_npgo <- ingest_NPGO()  # reads in all the data
+header_npgo  # prints the header (and if applicable footer) information
+
+}

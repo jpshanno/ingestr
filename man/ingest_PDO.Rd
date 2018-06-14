@@ -32,3 +32,9 @@ time series, contact Nathan Mantua at: nate.mantua\@noaa.gov \strong{All
 ingest functions use the source file name as an identifying column to track
 provenance and relate data and metadata read from files.}
 }
+\examples{
+df_pdo <- ingest_PDO()  # reads in all the data from start date to present
+df_pdo1 <- ingest_PDO(end.year=2000)  # reads in the data from start date to the year 2000
+header_pdo  # prints the header (and if applicable footer) information
+
+}
