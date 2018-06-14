@@ -26,7 +26,7 @@
 #' @export
 #'
 #' @examples
-#' campbell_file <- system.file("Example_Data", "campbell_scientific_tao5.dat", package = "ingestr")
+#' campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
 #' cs_data <- ingest_campbell(file.name = campbell_file)
 
 ingest_campbell <-
@@ -76,8 +76,8 @@ ingest_campbell <-
       column.names$names <-
         ifelse(is.na(column.names$measurements),
                column.names$names,
-               paste(column.names$names,
-                     column.names$measurements,
+               paste(column.names$measurements,
+                     column.names$names,
                      sep = "_"))
     }
 

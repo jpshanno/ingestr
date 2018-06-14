@@ -7,3 +7,4 @@
 ^Example_Ingest_File.R$
 ^README\.Rmd$
 ^README-.*\.png$
+^.*\logo.png$

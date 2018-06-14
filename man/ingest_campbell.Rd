@@ -39,10 +39,6 @@ provenance and relate data and metadata read from files.}
 The TIMESTAMP column will be returned as an POSIXct column.
 }
 \examples{
-campbell_file <- system.file("extdata", "campbell_scientific_tao5.dat", package = "ingestr")
-cs_data <- ingest_campbell(file.name = campbell_file,
-                           add.units = TRUE,
-                           add.measurements = TRUE,
-                           header.info = TRUE,
-                           header.info.name = "header_cs_data")
+campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
+cs_data <- ingest_campbell(file.name = campbell_file)
 }
