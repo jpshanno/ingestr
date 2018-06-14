@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<img src="inst/img/logo_ingestr.png" align="right">
+<img src="inst/img/logo_thumbnail.png" align="right">
 
 ingestr
 =======
@@ -90,7 +90,7 @@ str(campbell_data)
 #>  $ Tot_IR01Up_Tot_W.m.2         : num  -7999 -7999 -7999 -208 -7999 ...
 #>  $ Tot_IR01Dn_Tot_W.m.2         : num  -4385 -7999 -7999 -457 1520 ...
 #>  $ Tot_NetTot_Tot_W.m.2         : num  -7999 7999 7999 7999 5115 ...
-#>  $ input_source                 : chr  "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" ...
+#>  $ input_source                 : chr  "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" ...
 ```
 
 ### Formatted Non-Sensor Data Sources

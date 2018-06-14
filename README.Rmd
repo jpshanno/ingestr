@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-<img src="inst/img/logo_ingestr.png" align="right">  
+<img src="inst/img/logo_thumbnail.png" align="right">  
 
 # ingestr
 
