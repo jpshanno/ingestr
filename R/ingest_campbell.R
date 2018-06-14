@@ -26,7 +26,7 @@
 #' @export
 #'
 #' @examples
-#' campbell_file <- system.file("Example_Data", "campbell_scientific_tao5.dat", package = "ingestr")
+#' campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
 #' cs_data <- ingest_campbell(file.name = campbell_file)
 
 ingest_campbell <-
