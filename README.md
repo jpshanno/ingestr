@@ -7,7 +7,7 @@ ingestr
 
 **An R package for reading environmental data from raw formats into data.frames.**
 
-[![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr) [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jpshanno/ingestr?branch=master&svg=true)](https://ci.appveyor.com/project/jpshanno/ingestr) [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
 
 This is project was initiated at the inagural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by the [Environmental Data Institute](https://environmentaldatainitiative.org/). The end product of this effort will be an R package on CRAN. The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction.
 
@@ -90,7 +90,7 @@ str(campbell_data)
 #>  $ Tot_IR01Up_Tot_W.m.2         : num  -7999 -7999 -7999 -208 -7999 ...
 #>  $ Tot_IR01Dn_Tot_W.m.2         : num  -4385 -7999 -7999 -457 1520 ...
 #>  $ Tot_NetTot_Tot_W.m.2         : num  -7999 7999 7999 7999 5115 ...
-#>  $ input_source                 : chr  "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/Rachael/Documents/R/win-library/3.4/ingestr/example_data/campbell_scientific_tao5.dat" ...
+#>  $ input_source                 : chr  "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/R-3.5.0/library/ingestr/example_data/campbell_scientific_tao5.dat" ...
 ```
 
 ### Formatted Non-Sensor Data Sources
