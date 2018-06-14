@@ -1,4 +1,4 @@
-#' Ingest Multivariate El Nino Southern Oscillation Index  data
+#' Ingest Multivariate El Nino Southern Oscillation Index data.
 #'
 #' \code{ingest_ENSO} ingests data from the NOAA Earth System Research
 #' Laboratory Physical Sciences Division Mulivariate El Nino Southern
@@ -7,7 +7,7 @@
 #' column to track provenance and relate data and metadata read from files.}
 #'
 #' @param path Character indicating the URI to the HTML representation of the data.
-#' @param end.year The last year of data wanted.
+#' @param end.year Four digit integer indicating the last year of data wanted.
 #' @param header.info A logical indicating if header information is written to a
 #'   separate data frame.
 #' @param header.info.name A character indicating the object name for the
@@ -19,9 +19,6 @@
 #' df_enso1 <- ingest_ENSO(end.year=2000)  # reads in the data from start date to the year 2000
 #' header_enso  # prints the header (and if applicable footer) information
 #'
-
-
-# Function ---------------------------
 
 ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",   # URL of data
                         end.year = NULL,

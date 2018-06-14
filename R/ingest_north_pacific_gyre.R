@@ -1,4 +1,4 @@
-#' Ingest North Pacific Gyre Oscillation data
+#' Ingest North Pacific Gyre Oscillation data.
 #'
 #' \code{ingest_} ingests data from http://www.o3d.org/npgo/ for the North
 #' Pacific Gyre Oscillation. \strong{All ingest functions use the source file
@@ -15,6 +15,7 @@
 #' @return A data frame.  If header.info = TRUE a data.frame is created in the
 #'   parent environment of the function.
 #' @export
+<<<<<<< HEAD
 #' @examples
 #' df_npgo <- ingest_NPGO()  # reads in all the data
 #' header_npgo  # prints the header (and if applicable footer) information
@@ -22,6 +23,8 @@
 
 
 # Function ---------------------------
+=======
+>>>>>>> c4c3d9e477efff1286525bc6016692faaa80b461
 
 ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of data
                         header.info = TRUE,

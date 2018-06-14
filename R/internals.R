@@ -1,18 +1,15 @@
-#' Checks Function Inputs for the Correct Class
+#' Checks Function Inputs for the Correct Class.
 #'
 #' This function is supplied as a generic form of all_character, all_numeric,
-#' all_logical, and all_list
+#' all_logical, and all_list.
 #'
 #' @param parameters A character vector of function parameters that have
-#'   matching classes
+#'   matching classes.
 #' @param class.check One of "character", "numeric", "logical", "list"
-#'   specifying what class \code{parameters} should be
+#'   specifying what class \code{parameters} should be.
 #'
 #' @return Returns an error if the provided parameters do not match the
-#'   specified class
-#'
-#' @examples
-#'
+#'   specified class.
 check_inputs <-
   function(parameters,
            class.check){

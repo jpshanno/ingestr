@@ -1,4 +1,4 @@
-#' Ingest Campbell Scientific Logger Data
+#' Ingest Campbell Scientific Logger Data.
 #'
 #' \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that
 #' are stored in the TAO5 file format with a .dat exentension. \strong{All
@@ -7,17 +7,17 @@
 #'
 #' The TIMESTAMP column will be returned as an POSIXct column.
 #'
-#' @param file.name Character indicating the .dat Campbell Scientific File
+#' @param file.name Character indicating the .dat Campbell Scientific File.
 #' @param add.units Logical indicating if add.units specified in the data file should be
 #'   appended to the end of the variable names specificed in the data file,
-#'   defaults to TRUE
+#'   defaults to TRUE.
 #' @param add.measurements Logical indicating if add.measurements type (Avg, Smp,
-#'   etc)specified in the data file should be appended to the start of the
-#'   variable names specificed in the data file, defaults to TRUE
+#'   etc) specified in the data file should be appended to the start of the
+#'   variable names specificed in the data file, defaults to TRUE.
 #' @param header.info A logical indicating if header information is written to a
-#'   separate data frame
+#'   separate data frame.
 #' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_campbell"
+#'   metadata data.frame, defaults to "header_campbell".
 #'
 #' @return This function returns a dataframe containing logger data. If
 #'   header.info = TRUE a data.frame is created in the parent environment of the

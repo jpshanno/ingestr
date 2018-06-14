@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_north_pacific_gyre.R
 \name{ingest_NPGO}
 \alias{ingest_NPGO}
-\title{Ingest North Pacific Gyre Oscillation data}
+\title{Ingest North Pacific Gyre Oscillation data.}
 \usage{
 ingest_NPGO(path = "http://www.o3d.org/npgo/npgo.php", header.info = TRUE,
   header.info.name = "header_npgo")
@@ -25,7 +25,4 @@ A data frame.  If header.info = TRUE a data.frame is created in the
 Pacific Gyre Oscillation. \strong{All ingest functions use the source file
 name as an identifying column to track provenance and relate data and metadata
 read from files.}
-}
-\examples{
-
 }
