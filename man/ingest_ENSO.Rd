@@ -8,6 +8,8 @@ ingest_ENSO(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
   end.year = NULL, header.info = TRUE, header.info.name = "header_enso")
 }
 \arguments{
+\item{path}{Character indicating the URI to the HTML representation of the data.}
+
 \item{end.year}{The last year of data wanted.}
 
 \item{header.info}{A logical indicating if header information is written to a

@@ -1,25 +1,26 @@
-#'Ingest Pacific Decadal Oscillation data
+#' Ingest Pacific Decadal Oscillation data
 #'
-#'\code{ingest_PDO} ingests data from the updated standardized values for the
-#'PDO index, derived as the leading PC of monthly SST anomalies in the North
-#'Pacific Ocean, poleward of 20N. The monthly mean global average SST anomalies
-#'are removed to separate this pattern of variability from any "global warming"
-#'signal that may be present in the data.  If you have any questions about this
-#'time series, contact Nathan Mantua at: nate.mantua\@noaa.gov \strong{All
-#'ingest functions use the source file name as an identifying column to track
-#'provenance and relate data and metadata read from files.}
+#' \code{ingest_PDO} ingests data from the updated standardized values for the
+#' PDO index, derived as the leading PC of monthly SST anomalies in the North
+#' Pacific Ocean, poleward of 20N. The monthly mean global average SST anomalies
+#' are removed to separate this pattern of variability from any "global warming"
+#' signal that may be present in the data.  If you have any questions about this
+#' time series, contact Nathan Mantua at: nate.mantua\@noaa.gov \strong{All
+#' ingest functions use the source file name as an identifying column to track
+#' provenance and relate data and metadata read from files.}
 #'
-#'@param end.year The last year of data wanted.
-#'@param header.info A logical indicating if header information is written to a
-#'  separate data frame.
-#'@param header.info.name A character indicating the object name for the
-#'  metadata data.frame, defaults to "header_pdo".
+#' @param path Character indicating the URI to the HTML representation of the data.
+#' @param end.year The last year of data wanted.
+#' @param header.info A logical indicating if header information is written to a
+#'   separate data frame.
+#' @param header.info.name A character indicating the object name for the
+#'   metadata data.frame, defaults to "header_pdo".
 #'
 #'
-#'@return A data frame.  If header.info = TRUE a data.frame is created in the
-#'  parent environment of the function.
-#'@export
-#'@examples
+#' @return A data frame.  If header.info = TRUE a data.frame is created in the
+#'   parent environment of the function.
+#' @export
+#' @examples
 #'
 
 

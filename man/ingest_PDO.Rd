@@ -8,6 +8,8 @@ ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",
   end.year = NULL, header.info = TRUE, header.info.name = "header_pdo")
 }
 \arguments{
+\item{path}{Character indicating the URI to the HTML representation of the data.}
+
 \item{end.year}{The last year of data wanted.}
 
 \item{header.info}{A logical indicating if header information is written to a
@@ -18,7 +20,7 @@ metadata data.frame, defaults to "header_pdo".}
 }
 \value{
 A data frame.  If header.info = TRUE a data.frame is created in the
- parent environment of the function.
+  parent environment of the function.
 }
 \description{
 \code{ingest_PDO} ingests data from the updated standardized values for the
