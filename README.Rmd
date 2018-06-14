@@ -17,9 +17,12 @@ knitr::opts_chunk$set(
 <h1 align = "center">
 ingestr
 </h1>
-**An R package for reading environmental data from raw formats into data.frames.**
-</p>  
+&nbsp;
 
+__An R package for reading environmental data from raw formats into data.frames.__
+
+</p>  
+&nbsp;
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr)
 [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
 
