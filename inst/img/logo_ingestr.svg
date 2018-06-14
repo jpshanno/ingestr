@@ -33,11 +33,6 @@
      id="defs14">
     <pattern
        inkscape:collect="always"
-       xlink:href="#pattern6021"
-       id="pattern6026"
-       patternTransform="translate(587.51469,246.12988)" />
-    <pattern
-       inkscape:collect="always"
        xlink:href="#pattern6014"
        id="pattern6019"
        patternTransform="translate(-2.7045898e-6,-6.4697266e-6)" />
@@ -199,7 +194,7 @@
      cy="250.74736"
      r="17.124311" />
   <path
-     style="fill:url(#pattern6026);fill-opacity:1;stroke-width:1.20143759;stroke:#000000;stroke-opacity:1"
+     style="fill:#f9f9f9;fill-opacity:1;stroke-width:1.20143759;stroke:none;stroke-opacity:1"
      d="m 498.81954,343.71524 a 70.975609,71.341461 0 0 1 -70.97561,71.34146 70.975609,71.341461 0 0 1 -70.97561,-71.34146 70.975609,71.341461 0 0 1 70.97561,-71.34146 70.975609,71.341461 0 0 1 70.97561,71.34146 z"
      id="path4533" />
 </svg>
