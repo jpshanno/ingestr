@@ -42,7 +42,7 @@ devtools::install_github("jpshanno/ingestr")
 ```
 
 ## Ingesting Data
-Each ingestr function to read in data starts with `ingest_` to make autocomplete easier. 
+Each ingestr function to read in data starts with `ingest_` to make autocomplete easier. We are targetting any source of environmental data that returns data in a standard format: native sensor files, delimited outputs, HTML tables, PDF tables, Excel sheets, API returns, ...
 
 Running any ingest function will read in the data and format the data into a clean R data.frame. Column names are taken directly from the data file, and users have the option to read the header information into a separate data frame in the environment where the function was called. A message and the data.frame structure will be printed to alert the user that the data.frame was created.  
 All data and header data that are read in will have the data source appended to the data as a column called input_source.
