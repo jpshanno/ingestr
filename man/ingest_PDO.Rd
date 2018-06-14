@@ -32,6 +32,3 @@ time series, contact Nathan Mantua at: nate.mantua\@noaa.gov \strong{All
 ingest functions use the source file name as an identifying column to track
 provenance and relate data and metadata read from files.}
 }
-\examples{
-
-}

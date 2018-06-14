@@ -26,6 +26,3 @@ Pacific Gyre Oscillation. \strong{All ingest functions use the source file
 name as an identifying column to track provenance and relate data and metadata
 read from files.}
 }
-\examples{
-
-}

@@ -20,8 +20,6 @@
 #' @return A data frame.  If header.info = TRUE a data.frame is created in the
 #'   parent environment of the function.
 #' @export
-#' @examples
-#'
 
 ingest_PDO <- function(path = "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
                        end.year = NULL,

@@ -10,9 +10,6 @@
 #'
 #' @return Returns an error if the provided parameters do not match the
 #'   specified class.
-#'
-#' @examples
-#'
 check_inputs <-
   function(parameters,
            class.check){

@@ -15,8 +15,6 @@
 #' @return A data frame.  If header.info = TRUE a data.frame is created in the
 #'   parent environment of the function.
 #' @export
-#' @examples
-#'
 
 ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of data
                         header.info = TRUE,

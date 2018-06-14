@@ -33,6 +33,3 @@ Returns an error if the provided parameters do not match the
 This function is supplied as a generic form of all_character, all_numeric,
 all_logical, and all_list.
 }
-\examples{
-
-}
