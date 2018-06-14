@@ -4,3 +4,6 @@
 ^CONTRIBUTING\.md$
 ^\.travis\.yml$
 ^codecov\.yml$
+^Example_Ingest_File.R$
+^README\.Rmd$
+^README-.*\.png$
