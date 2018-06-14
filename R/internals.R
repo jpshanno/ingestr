@@ -22,7 +22,7 @@ check_inputs <-
                             "numeric",
                             "logical",
                             "list"))){
-      stop("class.check must be one of is.character, is.numeric, is.logical, is.list")
+      stop("class.check must be one of character, numeric, logical, list")
     }
 
     class.function <-
