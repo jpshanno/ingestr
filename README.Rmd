@@ -81,16 +81,15 @@ str(PDO_Data)
 ```
 
 ### Batch Ingests
-Sensor data stored in folders will be available for batch import using `ingest_` functions. Import functions will check for duplicate file contents and warn this users, and will allow parallel batch reading.
+Sensor data stored in folders is available for batch import using `ingest_` functions, or any other function that reads in data (i.e. `read.csv`, `readr::read_csv`. When a directory is read in file names are checked for duplicates, and imported data is checked for duplicate file contents. The user is warned and can choose to suppress the warning or remove the duplicates. Parallel bath processing is supported for large batch processing (requires the [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) package. 
 
 ```{r eval = FALSE}
 temperature_data <- 
-  ingest_directory(dir = "temp_records",
-                   fun = ingest_campbell,
-                   pattern = ".dat",
-                   recursive = FALSE,
-                   use.parallel = FALSE,
-                   check.duplicates = "warn")
+  ingest_directory(directory = "campbell_loggers",
+                   ingest.function = ingest_campbell,
+                   pattern = ".dat")
+
+temperature_data
 ```
 
 ### Incorporate File Naming Conventions as Data
