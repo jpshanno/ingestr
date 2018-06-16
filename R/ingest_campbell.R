@@ -17,7 +17,7 @@
 #' @param header.info A logical indicating if header information is written to a
 #'   separate data frame.
 #' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_campbell".
+#'   metadata data.frame, defaults to "header_input_source".
 #'
 #' @return This function returns a dataframe containing logger data. If
 #'   header.info = TRUE a data.frame is created in the parent environment of the
@@ -34,7 +34,7 @@ ingest_campbell <-
            add.units = TRUE,
            add.measurements = TRUE,
            header.info = TRUE,
-           header.info.name = "header_campbell"){
+           header.info.name = NULL){
 
     all_logical(c("add.units",
                   "add.measurements",
@@ -119,6 +119,11 @@ ingest_campbell <-
                                         "logger_program_name",
                                         "logger_program_signature",
                                         "logger_table_name"))
+
+        header.info.name <-
+          ifelse(is.null(header.info.name),
+                 paste0("header_", basename(input.source)),
+                 header.info.name)
 
         assign(x = header.info.name,
                value = header_info,

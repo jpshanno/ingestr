@@ -5,7 +5,7 @@
 \title{Ingest Campbell Scientific Logger Data.}
 \usage{
 ingest_campbell(input.source, add.units = TRUE, add.measurements = TRUE,
-  header.info = TRUE, header.info.name = "header_campbell")
+  header.info = TRUE, header.info.name = NULL)
 }
 \arguments{
 \item{input.source}{Character indicating the .dat Campbell Scientific File.}
@@ -22,7 +22,7 @@ variable names specificed in the data file, defaults to TRUE.}
 separate data frame.}
 
 \item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_campbell".}
+metadata data.frame, defaults to "header_input_source".}
 }
 \value{
 This function returns a dataframe containing logger data. If
