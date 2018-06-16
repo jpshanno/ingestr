@@ -6,7 +6,7 @@
 #' \strong{All ingest functions use the source file name as an identifying
 #' column to track provenance and relate data and metadata read from files.}
 #'
-#' @param path Character indicating the URI to the HTML representation of the data.
+#' @param input.source Character indicating the URI to the HTML representation of the data.
 #' @param end.year Four digit integer indicating the last year of data wanted.
 #' @param header.info A logical indicating if header information is written to a
 #'   separate data frame.
@@ -22,18 +22,18 @@
 #' header_enso  # prints the header (and if applicable footer) information
 #'
 
-ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",   # URL of data
+ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",   # URL of data
                         end.year = NULL,
                         header.info = TRUE,
                         header.info.name = "header_enso") {
 
-               all_character(c("path", "header.info.name"))
+               all_character(c("input.source", "header.info.name"))
                all_logical(c("header.info"))
 
-               if (startsWith(tolower(trimws(path)), "http")) {
-                 raw_html <- httr::content(httr::GET(path))
+               if (startsWith(tolower(trimws(input.source)), "http")) {
+                 raw_html <- httr::content(httr::GET(input.source))
                } else {
-                 raw_html <- xml2::read_html(path)
+                 raw_html <- xml2::read_html(input.source)
                }
                enso_pre <- XML::xpathSApply(XML::htmlParse(raw_html),
                                             "//html/body/pre", XML::xmlValue)
@@ -49,7 +49,7 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
                                  what=character())
                enso <- utils::read.csv(file=textConnection(enso_pre), skip=11, nrow = count_rows,
                                        stringsAsFactors=F, sep="\t", header=FALSE, col.names=enso_cols)
-               enso$input_source <- path
+               enso$input_source <- input.source
 
                # creates header object
                if(header.info){
@@ -61,7 +61,7 @@ ingest_ENSO <- function(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html
 
                   head1_enso <- c(head_enso, footer_enso)
 
-                  header_enso <-  data.frame(input_source = path, table_header = paste(head1_enso, collapse = " "))
+                  header_enso <-  data.frame(input_source = input.source, table_header = paste(head1_enso, collapse = " "))
 
                   assign(x = header.info.name,
                          value = utils::str(header_enso),

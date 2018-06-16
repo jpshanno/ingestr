@@ -13,7 +13,7 @@ ingest_directory(directory = getwd(), ingest.function = read.csv,
 contains your data files. Defaults to the working directory.}
 
 \item{ingest.function}{The function to use to read in the files, defaults to
-\code{\link[utils]{read.table}}.}
+\code{\link[utils]{read.table}} but can take any ingestr or standard import function.}
 
 \item{pattern}{A character vector providing the pattern to match filenames as
 in \code{\link[base]{list.files}}. Defaults to all files "*".}

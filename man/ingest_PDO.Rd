@@ -4,11 +4,11 @@
 \alias{ingest_PDO}
 \title{Ingest Pacific Decadal Oscillation data.}
 \usage{
-ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",
+ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",
   end.year = NULL, header.info = TRUE, header.info.name = "header_pdo")
 }
 \arguments{
-\item{path}{Character indicating the URI to the HTML representation of the data.}
+\item{input.source}{Character indicating the URI to the HTML representation of the data.}
 
 \item{end.year}{Four digit integer indicating the last year of data wanted.}
 

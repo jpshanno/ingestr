@@ -4,11 +4,11 @@
 \alias{ingest_campbell}
 \title{Ingest Campbell Scientific Logger Data.}
 \usage{
-ingest_campbell(file.name, add.units = TRUE, add.measurements = TRUE,
+ingest_campbell(input.source, add.units = TRUE, add.measurements = TRUE,
   header.info = TRUE, header.info.name = "header_campbell")
 }
 \arguments{
-\item{file.name}{Character indicating the .dat Campbell Scientific File.}
+\item{input.source}{Character indicating the .dat Campbell Scientific File.}
 
 \item{add.units}{Logical indicating if add.units specified in the data file should be
 appended to the end of the variable names specificed in the data file,
@@ -40,5 +40,5 @@ The TIMESTAMP column will be returned as an POSIXct column.
 }
 \examples{
 campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
-cs_data <- ingest_campbell(file.name = campbell_file)
+cs_data <- ingest_campbell(input.source = campbell_file)
 }

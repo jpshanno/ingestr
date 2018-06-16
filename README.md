@@ -49,7 +49,7 @@ campbell_file <-
               package = "ingestr")
 
 campbell_data <- 
-  ingest_campbell(file.name = campbell_file,
+  ingest_campbell(input.source = campbell_file,
                   add.units = TRUE,
                   add.measurements = TRUE,
                   header.info = TRUE,
@@ -100,7 +100,7 @@ Some environmental data is published online as html elements. This data can be d
 ``` r
 library(ingestr)
 
-PDO_Data <- ingest_PDO(path = "http://jisao.washington.edu/pdo/PDO.latest",  
+PDO_Data <- ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",  
                        end.year = NULL,
                        header.info = TRUE,
                        header.info.name = "header_pdo")

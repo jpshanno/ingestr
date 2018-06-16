@@ -7,7 +7,7 @@
 #'
 #' The TIMESTAMP column will be returned as an POSIXct column.
 #'
-#' @param file.name Character indicating the .dat Campbell Scientific File.
+#' @param input.source Character indicating the .dat Campbell Scientific File.
 #' @param add.units Logical indicating if add.units specified in the data file should be
 #'   appended to the end of the variable names specificed in the data file,
 #'   defaults to TRUE.
@@ -27,10 +27,10 @@
 #'
 #' @examples
 #' campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
-#' cs_data <- ingest_campbell(file.name = campbell_file)
+#' cs_data <- ingest_campbell(input.source = campbell_file)
 
 ingest_campbell <-
-  function(file.name,
+  function(input.source,
            add.units = TRUE,
            add.measurements = TRUE,
            header.info = TRUE,
@@ -40,13 +40,13 @@ ingest_campbell <-
                   "add.measurements",
                   "header.info"))
 
-    all_character(c("file.name",
+    all_character(c("input.source",
                     "header.info.name"))
 
     column.names <-
         as.data.frame(
           t(
-            utils::read.csv(file.name,
+            utils::read.csv(input.source,
                             skip = 1,
                             nrows = 3,
                             header = F,
@@ -81,7 +81,7 @@ ingest_campbell <-
                      sep = "_"))
     }
 
-      data <- utils::read.csv(file.name,
+      data <- utils::read.csv(input.source,
                        skip = 4,
                        header = F,
                        stringsAsFactors = F,
@@ -89,7 +89,7 @@ ingest_campbell <-
                        col.names = column.names$names)
 
       data$input_source <-
-        file.name
+        input.source
 
       data$TIMESTAMP_TS <-
         as.POSIXct(data$TIMESTAMP_TS,
@@ -107,7 +107,7 @@ ingest_campbell <-
 
       if(header.info){
         header_info <-
-          utils::read.csv(file.name,
+          utils::read.csv(input.source,
                           nrow = 1,
                           header = FALSE,
                           stringsAsFactors = FALSE,

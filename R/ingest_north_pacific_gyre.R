@@ -5,7 +5,7 @@
 #' name as an identifying column to track provenance and relate data and metadata
 #' read from files.}
 #'
-#' @param path Character indicating the URI to the HTML representation of the data.
+#' @param input.source Character indicating the URI to the HTML representation of the data.
 #' @param header.info A logical indicating if header information is written to a
 #'   separate data frame.
 #' @param header.info.name A character indicating the object name for the
@@ -21,19 +21,19 @@
 #'
 
 
-ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of data
+ingest_NPGO <- function(input.source = "http://www.o3d.org/npgo/npgo.php",   # URL of data
                         header.info = TRUE,
                         header.info.name = "header_npgo") {
 
-               all_character(c("path", "header.info.name"))
+               all_character(c("input.source", "header.info.name"))
                all_logical(c("header.info"))
 
-               #npgo_pre <- XML::xpathSApply(XML::xmlParse(httr::content(httr::GET(path))),
+               #npgo_pre <- XML::xpathSApply(XML::xmlParse(httr::content(httr::GET(input.source))),
               #                              "/html/body/pre", XML::xmlValue) # read the data
-               if (startsWith(tolower(trimws(path)), "http")) {
-                 raw_html <- httr::content(httr::GET(path))
+               if (startsWith(tolower(trimws(input.source)), "http")) {
+                 raw_html <- httr::content(httr::GET(input.source))
                } else {
-                 raw_html <- xml2::read_html(path)
+                 raw_html <- xml2::read_html(input.source)
                }
                npgo_pre <- XML::xpathSApply(XML::htmlParse(raw_html),
                                             "//html/body/pre", XML::xmlValue)
@@ -44,13 +44,13 @@ ingest_NPGO <- function(path = "http://www.o3d.org/npgo/npgo.php",   # URL of da
 
                npgo_df <- utils::read.csv(file=textConnection(npgo_pre), skip=26, stringsAsFactors=F, sep="",
                                           header=FALSE, col.names=npgo_cols, strip.white=TRUE)
-               npgo_df$input_source <- path
+               npgo_df$input_source <- input.source
 
                # creates header object
                if(header.info){
                   head1_npgo <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
 
-                  header_npgo <-  data.frame(input_source = path, table_header = paste(head1_npgo, collapse = " "))
+                  header_npgo <-  data.frame(input_source = input.source, table_header = paste(head1_npgo, collapse = " "))
 
                   assign(x = header.info.name,
                          value = utils::str(header_npgo),

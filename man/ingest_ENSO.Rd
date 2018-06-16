@@ -4,11 +4,12 @@
 \alias{ingest_ENSO}
 \title{Ingest Multivariate El Nino Southern Oscillation Index data.}
 \usage{
-ingest_ENSO(path = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
+
+  ingest_ENSO(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
   end.year = NULL, header.info = TRUE, header.info.name = "header_enso")
 }
 \arguments{
-\item{path}{Character indicating the URI to the HTML representation of the data.}
+\item{input.source}{Character indicating the URI to the HTML representation of the data.}
 
 \item{end.year}{Four digit integer indicating the last year of data wanted.}
 

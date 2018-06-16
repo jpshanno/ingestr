@@ -4,11 +4,11 @@
 \alias{ingest_NPGO}
 \title{Ingest North Pacific Gyre Oscillation data.}
 \usage{
-ingest_NPGO(path = "http://www.o3d.org/npgo/npgo.php", header.info = TRUE,
-  header.info.name = "header_npgo")
+ingest_NPGO(input.source = "http://www.o3d.org/npgo/npgo.php",
+  header.info = TRUE, header.info.name = "header_npgo")
 }
 \arguments{
-\item{path}{Character indicating the URI to the HTML representation of the data.}
+\item{input.source}{Character indicating the URI to the HTML representation of the data.}
 
 \item{header.info}{A logical indicating if header information is written to a
 separate data frame.}

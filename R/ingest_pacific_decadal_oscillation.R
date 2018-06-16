@@ -9,7 +9,7 @@
 #' ingest functions use the source file name as an identifying column to track
 #' provenance and relate data and metadata read from files.}
 #'
-#' @param path Character indicating the URI to the HTML representation of the data.
+#' @param input.source Character indicating the URI to the HTML representation of the data.
 #' @param end.year Four digit integer indicating the last year of data wanted.
 #' @param header.info A logical indicating if header information is written to a
 #'   separate data frame.
@@ -27,15 +27,15 @@
 #'
 
 
-ingest_PDO <- function(path = "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
+ingest_PDO <- function(input.source = "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
                        end.year = NULL,
                        header.info = TRUE,
                        header.info.name = "header_pdo") {
 
-              all_character(c("path", "header.info.name"))
+              all_character(c("input.source", "header.info.name"))
               all_logical(c("header.info"))
 
-              pdo_raw <- xml2::read_html(path)                       # read in the data
+              pdo_raw <- xml2::read_html(input.source)                       # read in the data
               pdo_pre1 <- rvest::html_node(pdo_raw, "p")             # make data text
               pdo_pre2 <- rvest::html_text(pdo_pre1)
 
@@ -50,7 +50,7 @@ ingest_PDO <- function(path = "http://jisao.washington.edu/pdo/PDO.latest",   # 
                                           sep="", nrow = count_rows,
                                           header=FALSE, col.names=pdo_cols, strip.white=TRUE, fill=TRUE) #
               pdo_df$YEAR <- substr(pdo_df$YEAR, 1, 4)  # removes asterisks from years 2002-present
-              pdo_df$input_source <- path
+              pdo_df$input_source <- input.source
 
               # creates header object
               if(header.info){
@@ -62,7 +62,7 @@ ingest_PDO <- function(path = "http://jisao.washington.edu/pdo/PDO.latest",   # 
 
                  head1_pdo <- c(head_pdo, footer_pdo)
 
-                 header_pdo <-  data.frame(input_source = path, table_header = paste(head1_pdo, collapse = " "))
+                 header_pdo <-  data.frame(input_source = input.source, table_header = paste(head1_pdo, collapse = " "))
 
                  assign(x = header.info.name,
                         value = utils::str(header_pdo),
