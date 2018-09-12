@@ -2,7 +2,7 @@
 #'
 #' \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that
 #' are stored in the TAO5 file format with a .dat exentension. \strong{All
-#' ingest functions use the source file name as an identifying column to track
+#' ingest functions use the source file's base name as an identifying column to track
 #' provenance and relate data and metadata read from files.}
 #'
 #' The TIMESTAMP column will be returned as an POSIXct column.
@@ -15,13 +15,11 @@
 #'   etc) specified in the data file should be appended to the start of the
 #'   variable names specificed in the data file, defaults to TRUE.
 #' @param header.info A logical indicating if header information is written to a
-#'   separate data frame.
-#' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_input_source".
+#'   temporary file that can be restored using ingest_header(input.source).
 #'
 #' @return This function returns a dataframe containing logger data. If
-#'   header.info = TRUE a data.frame is created in the parent environment of the
-#'   function.
+#'   header.info = TRUE a temporary file is created for the header data. See
+#'   \code{\link{ingest_header}} for more information.
 #'
 #' @export
 #'
@@ -119,20 +117,20 @@ ingest_campbell <-
                                         "logger_program_name",
                                         "logger_program_signature",
                                         "logger_table_name"))
+        
+        header_info$input_source <- 
+          input.source
+        
+        header_path <- 
+          file.path(tempdir(), 
+                    sanitize_filename(unique(data$input_source)))
 
-        header.info.name <-
-          ifelse(is.null(header.info.name),
-                 paste0("header_", basename(input.source)),
-                 header.info.name)
-
-        assign(x = header.info.name,
-               value = header_info,
-               envir = parent.frame())
-
-        message(paste("The metadata were returned as the data.frame",
-                      header.info.name))
-
-        utils::str(header_info)
+        saveRDS(header_info,
+                file = header_path)
+        
+        message("Header info for ", 
+                input.source, 
+                " has been save to a temporary file. Run ingest_header(input.source) to load the header data.")
       }
 
       return(data)

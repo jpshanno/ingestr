@@ -74,3 +74,16 @@ all_list <-
     check_inputs(parameters,
                  "list")
   }
+
+
+#' Sanitize filenames for temporary header files
+#'
+#' @param filename 
+#'
+#' @return Returns a character string with problematic characters replaced by '_'
+#'
+#' @examples
+sanitize_filename <- 
+  function(filename){
+    gsub("[~:\\.\\/[:space:]]{1,}", "_", filename)
+  }
