@@ -62,14 +62,19 @@ ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/ta
                   head1_enso <- c(head_enso, footer_enso)
 
                   header_enso <-  data.frame(input_source = input.source, table_header = paste(head1_enso, collapse = " "))
-
-                  assign(x = header.info.name,
-                         value = utils::str(header_enso),
-                         envir = parent.frame())
+                  
+                  header.info.name <-
+                    ifelse(is.null(header.info.name),
+                           "header",
+                           header.info.name)
+                  
+                  return(setNames(list(enso,
+                                       header_enso),
+                                  c("data", header.info.name))
 
                   }
 
-               return(enso)
+               return(list(data = enso))
 
                }
 

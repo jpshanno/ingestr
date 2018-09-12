@@ -14,10 +14,10 @@
 #' @param add.measurements Logical indicating if add.measurements type (Avg, Smp,
 #'   etc) specified in the data file should be appended to the start of the
 #'   variable names specificed in the data file, defaults to TRUE.
-#' @param header.info A logical indicating if header information is written to a
-#'   separate data frame.
+#' @param header.info A logical indicating if header information is written as
+#'   the second object in a list of data frames.
 #' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_input_source".
+#'   metadata dataframe, defaults to "header_input_source".
 #'
 #' @return This function returns a dataframe containing logger data. If
 #'   header.info = TRUE a data.frame is created in the parent environment of the
@@ -122,18 +122,13 @@ ingest_campbell <-
 
         header.info.name <-
           ifelse(is.null(header.info.name),
-                 paste0("header_", basename(input.source)),
+                 "header",
                  header.info.name)
-
-        assign(x = header.info.name,
-               value = header_info,
-               envir = parent.frame())
-
-        message(paste("The metadata were returned as the data.frame",
-                      header.info.name))
-
-        utils::str(header_info)
+        
+        return(setNames(list(data,
+                             header_info),
+                        c("data", header.info.name))
       }
 
-      return(data)
+      return(list(data = data))
     }
