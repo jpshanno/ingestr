@@ -4,8 +4,8 @@
 \alias{ingest_campbell}
 \title{Ingest Campbell Scientific Logger Data.}
 \usage{
-ingest_campbell(input.source, add.units = TRUE, add.measurements = TRUE,
-  header.info = TRUE, header.info.name = NULL)
+ingest_campbell(input.source, add.units = TRUE,
+  add.measurements = TRUE, header.info = TRUE)
 }
 \arguments{
 \item{input.source}{Character indicating the .dat Campbell Scientific File.}
@@ -19,20 +19,17 @@ etc) specified in the data file should be appended to the start of the
 variable names specificed in the data file, defaults to TRUE.}
 
 \item{header.info}{A logical indicating if header information is written to a
-separate data frame.}
-
-\item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_input_source".}
+temporary file that can be restored using ingest_header(input.source).}
 }
 \value{
 This function returns a dataframe containing logger data. If
-  header.info = TRUE a data.frame is created in the parent environment of the
-  function.
+  header.info = TRUE a temporary file is created for the header data. See
+  \code{\link{ingest_header}} for more information.
 }
 \description{
 \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that
 are stored in the TAO5 file format with a .dat exentension. \strong{All
-ingest functions use the source file name as an identifying column to track
+ingest functions use the source file's base name as an identifying column to track
 provenance and relate data and metadata read from files.}
 }
 \details{

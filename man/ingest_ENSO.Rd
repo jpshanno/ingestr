@@ -6,7 +6,8 @@
 \usage{
 
   ingest_ENSO(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
-  end.year = NULL, header.info = TRUE, header.info.name = "header_enso")
+  end.year = NULL, header.info = TRUE,
+  header.info.name = "header_enso")
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}

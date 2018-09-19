@@ -31,20 +31,22 @@ ingest_campbell <-
   function(input.source,
            add.units = TRUE,
            add.measurements = TRUE,
-           header.info = TRUE,
-           header.info.name = NULL){
+           header.info = TRUE){
 
     all_logical(c("add.units",
                   "add.measurements",
                   "header.info"))
 
-    all_character(c("input.source",
-                    "header.info.name"))
+    all_character(c("input.source"))
+
+
+    input_source <-
+      normalizePath(input.source)
 
     column.names <-
         as.data.frame(
           t(
-            utils::read.csv(input.source,
+            utils::read.csv(input_source,
                             skip = 1,
                             nrows = 3,
                             header = F,
@@ -79,7 +81,7 @@ ingest_campbell <-
                      sep = "_"))
     }
 
-      data <- utils::read.csv(input.source,
+      data <- utils::read.csv(input_source,
                        skip = 4,
                        header = F,
                        stringsAsFactors = F,
@@ -87,7 +89,7 @@ ingest_campbell <-
                        col.names = column.names$names)
 
       data$input_source <-
-        input.source
+        input_source
 
       data$TIMESTAMP_TS <-
         as.POSIXct(data$TIMESTAMP_TS,
@@ -105,7 +107,7 @@ ingest_campbell <-
 
       if(header.info){
         header_info <-
-          utils::read.csv(input.source,
+          utils::read.csv(input_source,
                           nrow = 1,
                           header = FALSE,
                           stringsAsFactors = FALSE,
@@ -117,21 +119,23 @@ ingest_campbell <-
                                         "logger_program_name",
                                         "logger_program_signature",
                                         "logger_table_name"))
-        
-        header_info$input_source <- 
-          input.source
-        
-        header_path <- 
-          file.path(tempdir(), 
-                    sanitize_filename(unique(data$input_source)))
+
+        header_info$input_source <-
+          input_source
+
+        header_path <-
+          file.path(tempdir(),
+                    hash_filename(input_source))
 
         saveRDS(header_info,
                 file = header_path)
-        
-        message("Header info for ", 
-                input.source, 
-                " has been save to a temporary file. Run ingest_header(input.source) to load the header data.")
-      }
+
+        message("Header info for ",
+                input.source,
+                " has been saved to a temporary file. Run ingest_header(",
+                input.source,
+                ") to load the header data.")
+     }
 
       return(data)
     }

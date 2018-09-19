@@ -5,11 +5,11 @@
 #' same R session. \strong{All ingest functions use the source file's base name
 #' as an identifying column to track provenance and relate data and metadata
 #' read from files.}
-#' 
+#'
 #' All \code{ingest_*} functions for data files that include header data write
 #' that data to a temporary file. This header data can then be loaded and
 #' manipulated by the user using \code{ingest_header}.
-#' 
+#'
 #' @param input.source Charcter indicating the source file, must match the
 #'   input.source used to originally ingest the data
 #'
@@ -19,26 +19,29 @@
 #' @export
 #'
 #' @examples
-ingest_header <- 
+#' campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
+#' cs_data <- ingest_campbell(input.source = campbell_file)
+#' cs_header <- ingest_header(input.source = campbell_file)
+ingest_header <-
   function(input.source){
-  
+
     all_character("input.source")
-    
-    clean_input <- 
-      sanitize_filename(input.source)
-    
+
+    input_source <-
+      hash_filename(input.source)
+
     # Check if the header data has already been loaded this session
     # and load the data.
-    if(any(grepl(clean_input,
+    if(any(grepl(input_source,
                  list.files(tempdir())))){
-      header <- 
-        readRDS(file.path(tempdir(), 
-                          clean_input))
+      header <-
+        readRDS(file.path(tempdir(),
+                          input_source))
       message('Header data was loaded from cached results created when ',
               input.source,
               ' was ingested previously in this R session.')
       return(header)
-      # This currently just stops the function and displays an errors. 
+      # This currently just stops the function and displays an errors.
       # Ideally it would have the option to read header data from the specified file,
       # which would require an ingest.function argument to specify the right ingestr
       # to use. Additionally including a 'header.only' argument in the ingestrs would

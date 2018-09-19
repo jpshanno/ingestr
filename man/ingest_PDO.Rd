@@ -5,7 +5,8 @@
 \title{Ingest Pacific Decadal Oscillation data.}
 \usage{
 ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",
-  end.year = NULL, header.info = TRUE, header.info.name = "header_pdo")
+  end.year = NULL, header.info = TRUE,
+  header.info.name = "header_pdo")
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}

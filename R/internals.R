@@ -78,12 +78,19 @@ all_list <-
 
 #' Sanitize filenames for temporary header files
 #'
-#' @param filename 
+#' @param filename A file name sting
 #'
 #' @return Returns a character string with problematic characters replaced by '_'
 #'
 #' @examples
-sanitize_filename <- 
+hash_filename <-
   function(filename){
-    gsub("[~:\\.\\/[:space:]]{1,}", "_", filename)
+    # Using httr::sha1_hash because it is already imported by ingestr
+    hashed <-
+      httr::sha1_hash('ingestr',
+                      normalizePath(filename))
+    sanitized <-
+      gsub("[^[:alnum:]]", "_", hashed)
+
+    return(sanitized)
   }
