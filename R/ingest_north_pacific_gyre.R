@@ -46,7 +46,8 @@ ingest_NPGO <- function(input.source = "http://www.o3d.org/npgo/npgo.php",   # U
                if(export.header){
                   head1_npgo <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
 
-                  table_header = paste(head1_npgo, collapse = " ")
+                  table_header = data.frame(header_text = paste(head1_npgo, collapse = " "),
+                                            stringsAsFactors = FALSE)
 
                   export_header(table_header,
                                 input.source)

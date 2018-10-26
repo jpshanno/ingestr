@@ -59,7 +59,8 @@ ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/ta
 
                   head1_enso <- c(head_enso, footer_enso)
 
-                  table_header <- paste(head1_enso, collapse = " ")
+                  table_header <- data.frame(header_text = paste(head1_enso, collapse = " "),
+                                             stringsAsFactors = FALSE)
 
                   export_header(table_header,
                                 input.source)

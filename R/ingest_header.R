@@ -61,12 +61,18 @@ hash_filename <-
   function(filename){
     # Using httr::sha1_hash because it is already imported by ingestr
 
+    is_url <-
+      grepl("^http",
+            filename)
+
     filename <-
-      normalizePath(filename)
+      ifelse(is_url,
+             gsub("[^[:alnum:]]", "_", filename),
+             normalizePath(filename))
 
     hashed <-
       httr::sha1_hash('ingestr',
-                      normalizePath(filename),
+                      filename,
                       method = "HMAC-SHA1")
     sanitized <-
       gsub("[^[:alnum:]]", "_", hashed)

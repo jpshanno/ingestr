@@ -39,12 +39,21 @@ You can install ingestr from github with:
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("jpshanno/ingestr")
+
+# or from source
+ingestr_source <- tempfile(fileext = ".zip")
+download.file("https://github.com/jpshanno/ingestr/archive/master.zip",
+              ingestr_source)
+install.packages(ingestr_source, 
+                 repos = NULL,
+                 type = "source")
+
 ```
 
 ## Ingesting Data
 Each ingestr function to read in data starts with `ingest_` to make autocomplete easier. We are targetting any source of environmental data that returns data in a standard format: native sensor files, delimited outputs, HTML tables, PDF tables, Excel sheets, API returns, ...
 
-Running any ingest function will read in the data and format the data into a clean R data.frame. Column names are taken directly from the data file, and users have the option to read the header information into a separate data frame in the environment where the function was called. A message and the data.frame structure will be printed to alert the user that the data.frame was created.  
+Running any ingest function will read in the data and format the data into a clean R data.frame. Column names are taken directly from the data file, and users have the option to read the header information into a temporary file that can then be loaded using `ingest_header()`.  
 All data and header data that are read in will have the data source appended to the data as a column called input_source.
 
 ### Sensor and Instrument Data
@@ -58,26 +67,34 @@ campbell_file <-
 
 campbell_data <- 
   ingest_campbell(input.source = campbell_file,
+                  export.header = TRUE,
                   add.units = TRUE,
-                  add.measurements = TRUE,
-                  header.info = TRUE,
-                  header.info.name = "header_campbell")
+                  add.measurements = TRUE)
 
 str(campbell_data)
+
+campbell_header <- 
+  ingest_header(input.source = campbell_file)
+
+str(campbell_header)
 ```
 
 ### Formatted Non-Sensor Data Sources
 Some environmental data is published online as html elements.  This data can be difficult to read directly from the websites where they are hosted into R.  To facilitate access, we have created functions that parse the html so that this data can be directly downloaded in R.  To track the provenance of these data, the column input_source is populated by the URL location from which the data were downloaded.  
 
 ```{r example2}
-library(ingestr)
 
-PDO_Data <- ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",  
-                       end.year = NULL,
-                       header.info = TRUE,
-                       header.info.name = "header_pdo")
+PDO_data <- 
+  ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",  
+             end.year = NULL,
+             export.header = TRUE)
 
-str(PDO_Data)
+str(PDO_data)
+
+PDO_header <- 
+  ingest_header(input.source = "http://jisao.washington.edu/pdo/PDO.latest")
+
+str(PDO_header)
 ```
 
 ### Batch Ingests
