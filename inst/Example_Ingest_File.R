@@ -10,14 +10,11 @@
 #'
 #' @param input.source
 #' @param header. info A logical indicating if header information is written to a separate data frame
-#' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame. Defaults to "header_input.source"
 #' @param *parmeter.name The parameter description should include accepted class (numeric,
 #'      logical, etc.) and refer to the Details section if more explanation is required*
 #'
-#' @return *Specify what this function returns. Ingest functions should return a data.frame. Provide
-#'      any description of the data that may be necessary.* If header.info = TRUE a data.frame is
-#'      created in the parent environment of the function.
+#' @return A dataframe. If export.header = TRUE a temporary file is created for
+#'   the header data. See \code{\link{ingest_header}} for more information.
 #'
 #' @export
 #'
@@ -27,20 +24,19 @@
 
 ingest_*data_description* <-
   function(header.info = TRUE,
-           header.info.name = NULL,
-           *additional parametres*){
+           *additional parameters*){
 
     # Check parameter inputs
       *ingestr contains non-exported functions found in internals.R that can be
       used to check the class of values supplied to parameter arguments. These
       functions include all_charcter(), all_logical(), all_numeric(), and
-      all_list(). Examples of these functions can be seen in injest_campbell.R
-      and injest_pdo.R.
+      all_list(). Examples of these functions can be seen in ingest_campbell.R
+      and ingest_pdo.R.
 
     # Read in data and format to a data frame
 
-      data <- *Read in the data using whatever tools are necessary (delmited, xml,
-               etc.) and format to a single dataframe retainng exisiting column names.
+      data <- *Read in the data using whatever tools are necessary (delmited, xml, httr
+               etc.) and format to a single dataframe retaining exisiting column names.
                Any standard columns provided by the manufacturer (e.g. TIMESTAMP) should
                be retained and converted to the correct format (e.g. POSIXct) if it is a
                standard feature of the datafile.*
@@ -56,22 +52,14 @@ ingest_*data_description* <-
                         (delmited, xml, etc.) and format to a single dataframe
                         using supplied manufacturer names where possible.*
 
-        # Export header information to the parent environment
+        # Export header information to a temporary file
 
-        header.info.name <-
-              ifelse(is.null(header.info.name),
-                     paste0("header_", basename(input.source)),
-                     header.info.name)
+        export_header(header_info,
+                      input.source)
 
-        assign(x = header.info.name,
-               value = header_info,
-               envir = parent.frame())
-
-        message(paste("The metadata were returned as the data.frame",
-                header.info.name))
-
-      utils::str(header_info)
       }
+
+    # Return the dataframe
 
     return(data)
   }

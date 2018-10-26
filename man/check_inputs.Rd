@@ -8,22 +8,21 @@
 \alias{all_list}
 \title{Checks Function Inputs for the Correct Class.}
 \usage{
-check_inputs(parameters, class.check)
+check_inputs(class.check, ...)
 
-all_character(parameters)
+all_character(...)
 
-all_numeric(parameters)
+all_numeric(...)
 
-all_logical(parameters)
+all_logical(...)
 
-all_list(parameters)
+all_list(...)
 }
 \arguments{
-\item{parameters}{A character vector of function parameters that have
-matching classes.}
-
 \item{class.check}{One of "character", "numeric", "logical", "list"
-specifying what class \code{parameters} should be.}
+specifying what class \code{...} should be.}
+
+\item{...}{Unquoted names of function arguments to check}
 }
 \value{
 Returns an error if the provided parameters do not match the

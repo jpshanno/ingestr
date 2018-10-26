@@ -3,45 +3,40 @@
 #' This function is supplied as a generic form of all_character, all_numeric,
 #' all_logical, and all_list.
 #'
-#' @param parameters A character vector of function parameters that have
-#'   matching classes.
+#' @param ... Unquoted names of function arguments to check
 #' @param class.check One of "character", "numeric", "logical", "list"
-#'   specifying what class \code{parameters} should be.
+#'   specifying what class \code{...} should be.
 #'
 #' @return Returns an error if the provided parameters do not match the
 #'   specified class.
 check_inputs <-
-  function(parameters,
-           class.check){
-
-    if(!(is.character(parameters) & is.character(class))){
-      "parameters must be supplied as a character vector and class.check must be a character."
-    }
+  function(class.check,
+           ...){
 
     if(!(class.check %in% c("character",
-                            "numeric",
+                            "double",
                             "logical",
                             "list"))){
-      stop("class.check must be one of character, numeric, logical, list")
+      stop("class.check must be one of character, double, logical, list")
     }
 
     class.function <-
       switch (class.check,
         "character" = is.character,
-        "numeric" = is.numeric,
+        "double" = is.double,
         "logical" = is.logical,
         "list" = is.list
       )
 
-    if(!all(sapply(lapply(parameters, get, envir = parent.frame(2)),
-                   function(x){
-                     ifelse(is.null(x),
-                            TRUE,
-                            class.function(x))}))){
+    parameters_match <-
+      all(sapply(list(...),
+                 class.function))
+
+    if(!parameters_match){
       stop(paste0("The following arguments must be supplied as ",
                   class.check,
                   ": ",
-                  paste(parameters,
+                  paste(as.character(as.list(match.call(check_inputs))[-c(1:2)]),
                         collapse = ", ")),
            call. = FALSE)
     }
@@ -49,48 +44,29 @@ check_inputs <-
 
 #' @rdname check_inputs
 all_character <-
-  function(parameters){
-    check_inputs(parameters,
-                 "character")
+  function(...){
+    check_inputs("character",
+                 ...)
   }
 
 #' @rdname check_inputs
 all_numeric <-
-  function(parameters){
-    check_inputs(parameters,
-                 "numeric")
+  function(...){
+    check_inputs("double",
+                 ...)
   }
+
 
 #' @rdname check_inputs
 all_logical <-
-  function(parameters){
-    check_inputs(parameters,
-                 "logical")
+  function(...){
+    check_inputs("logical",
+                 ...)
   }
 
 #' @rdname check_inputs
 all_list <-
-  function(parameters){
-    check_inputs(parameters,
-                 "list")
-  }
-
-
-#' Sanitize filenames for temporary header files
-#'
-#' @param filename A file name sting
-#'
-#' @return Returns a character string with problematic characters replaced by '_'
-#'
-#' @examples
-hash_filename <-
-  function(filename){
-    # Using httr::sha1_hash because it is already imported by ingestr
-    hashed <-
-      httr::sha1_hash('ingestr',
-                      normalizePath(filename))
-    sanitized <-
-      gsub("[^[:alnum:]]", "_", hashed)
-
-    return(sanitized)
+  function(...){
+    check_inputs("list",
+                 ...)
   }

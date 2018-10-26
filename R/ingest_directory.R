@@ -49,7 +49,7 @@
 #' @export
 
 ingest_directory <- function(directory = getwd(),
-                             ingest.function = read.csv,
+                             ingest.function = utils::read.csv,
                              pattern = "*",
                              collapse = TRUE,
                              recursive = FALSE,

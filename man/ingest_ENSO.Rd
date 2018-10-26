@@ -6,22 +6,19 @@
 \usage{
 
   ingest_ENSO(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
-  end.year = NULL, header.info = TRUE,
-  header.info.name = "header_enso")
+  end.year = NULL, export.header = TRUE)
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}
 
 \item{end.year}{Four digit integer indicating the last year of data wanted.}
 
-\item{header.info}{A logical indicating if header information is written to a
+\item{export.header}{A logical indicating if header information is written to a
 separate data frame.}
-
-\item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_enso".}
 }
 \value{
-A data frame.
+A data frame. If export.header = TRUE a temporary file is created for
+  the header data. See \code{\link{ingest_header}} for more information.
 }
 \description{
 \code{ingest_ENSO} ingests data from the NOAA Earth System Research
@@ -33,6 +30,5 @@ column to track provenance and relate data and metadata read from files.}
 \examples{
 df_enso <- ingest_ENSO()  # reads in all the data from start date to present
 df_enso1 <- ingest_ENSO(end.year=2000)  # reads in the data from start date to the year 2000
-header_enso  # prints the header (and if applicable footer) information
 
 }

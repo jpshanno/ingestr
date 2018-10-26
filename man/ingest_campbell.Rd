@@ -4,11 +4,14 @@
 \alias{ingest_campbell}
 \title{Ingest Campbell Scientific Logger Data.}
 \usage{
-ingest_campbell(input.source, add.units = TRUE,
-  add.measurements = TRUE, header.info = TRUE)
+ingest_campbell(input.source, export.header = TRUE, add.units = TRUE,
+  add.measurements = TRUE)
 }
 \arguments{
 \item{input.source}{Character indicating the .dat Campbell Scientific File.}
+
+\item{export.header}{A logical indicating if header information is written to a
+temporary file that can be restored using ingest_header(input.source).}
 
 \item{add.units}{Logical indicating if add.units specified in the data file should be
 appended to the end of the variable names specificed in the data file,
@@ -17,14 +20,10 @@ defaults to TRUE.}
 \item{add.measurements}{Logical indicating if add.measurements type (Avg, Smp,
 etc) specified in the data file should be appended to the start of the
 variable names specificed in the data file, defaults to TRUE.}
-
-\item{header.info}{A logical indicating if header information is written to a
-temporary file that can be restored using ingest_header(input.source).}
 }
 \value{
-This function returns a dataframe containing logger data. If
-  header.info = TRUE a temporary file is created for the header data. See
-  \code{\link{ingest_header}} for more information.
+A dataframe. If export.header = TRUE a temporary file is created for
+  the header data. See \code{\link{ingest_header}} for more information.
 }
 \description{
 \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that

@@ -5,23 +5,19 @@
 \title{Ingest Pacific Decadal Oscillation data.}
 \usage{
 ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",
-  end.year = NULL, header.info = TRUE,
-  header.info.name = "header_pdo")
+  end.year = NULL, export.header = TRUE)
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}
 
 \item{end.year}{Four digit integer indicating the last year of data wanted.}
 
-\item{header.info}{A logical indicating if header information is written to a
+\item{export.header}{A logical indicating if header information is written to a
 separate data frame.}
-
-\item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_pdo".}
 }
 \value{
-A data frame.  If header.info = TRUE a data.frame is created in the
-  parent environment of the function.
+A data frame.  If export.header = TRUE a temporary file is created for
+  the header data. See \code{\link{ingest_header}} for more information.
 }
 \description{
 \code{ingest_PDO} ingests data from the updated standardized values for the
@@ -36,6 +32,5 @@ provenance and relate data and metadata read from files.}
 \examples{
 df_pdo <- ingest_PDO()  # reads in all the data from start date to present
 df_pdo1 <- ingest_PDO(end.year=2000)  # reads in the data from start date to the year 2000
-header_pdo  # prints the header (and if applicable footer) information
 
 }

@@ -5,20 +5,17 @@
 \title{Ingest North Pacific Gyre Oscillation data.}
 \usage{
 ingest_NPGO(input.source = "http://www.o3d.org/npgo/npgo.php",
-  header.info = TRUE, header.info.name = "header_npgo")
+  export.header = TRUE)
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}
 
-\item{header.info}{A logical indicating if header information is written to a
+\item{export.header}{A logical indicating if header information is written to a
 separate data frame.}
-
-\item{header.info.name}{A character indicating the object name for the
-metadata data.frame, defaults to "header_npgo".}
 }
 \value{
-A data frame.  If header.info = TRUE a data.frame is created in the
-  parent environment of the function.
+A data frame.  If export.header = TRUE a temporary file is created for
+  the header data. See \code{\link{ingest_header}} for more information.
 }
 \description{
 \code{ingest_} ingests data from http://www.o3d.org/npgo/ for the North
@@ -28,6 +25,5 @@ read from files.}
 }
 \examples{
 df_npgo <- ingest_NPGO()  # reads in all the data
-header_npgo  # prints the header (and if applicable footer) information
 
 }

@@ -14,12 +14,11 @@
 #' @param add.measurements Logical indicating if add.measurements type (Avg, Smp,
 #'   etc) specified in the data file should be appended to the start of the
 #'   variable names specificed in the data file, defaults to TRUE.
-#' @param header.info A logical indicating if header information is written to a
+#' @param export.header A logical indicating if header information is written to a
 #'   temporary file that can be restored using ingest_header(input.source).
 #'
-#' @return This function returns a dataframe containing logger data. If
-#'   header.info = TRUE a temporary file is created for the header data. See
-#'   \code{\link{ingest_header}} for more information.
+#' @return A dataframe. If export.header = TRUE a temporary file is created for
+#'   the header data. See \code{\link{ingest_header}} for more information.
 #'
 #' @export
 #'
@@ -29,16 +28,15 @@
 
 ingest_campbell <-
   function(input.source,
+           export.header = TRUE,
            add.units = TRUE,
-           add.measurements = TRUE,
-           header.info = TRUE){
+           add.measurements = TRUE){
 
-    all_logical(c("add.units",
-                  "add.measurements",
-                  "header.info"))
+    all_logical(add.units,
+                add.measurements,
+                export.header)
 
-    all_character(c("input.source"))
-
+    all_character(input.source)
 
     input_source <-
       normalizePath(input.source)
@@ -89,7 +87,7 @@ ingest_campbell <-
                        col.names = column.names$names)
 
       data$input_source <-
-        input_source
+        input.source
 
       data$TIMESTAMP_TS <-
         as.POSIXct(data$TIMESTAMP_TS,
@@ -105,7 +103,7 @@ ingest_campbell <-
              "RECORD",
              names(data))
 
-      if(header.info){
+      if(export.header){
         header_info <-
           utils::read.csv(input_source,
                           nrow = 1,
@@ -120,21 +118,9 @@ ingest_campbell <-
                                         "logger_program_signature",
                                         "logger_table_name"))
 
-        header_info$input_source <-
-          input_source
+        export_header(header_info,
+                      input.source)
 
-        header_path <-
-          file.path(tempdir(),
-                    hash_filename(input_source))
-
-        saveRDS(header_info,
-                file = header_path)
-
-        message("Header info for ",
-                input.source,
-                " has been saved to a temporary file. Run ingest_header(",
-                input.source,
-                ") to load the header data.")
      }
 
       return(data)

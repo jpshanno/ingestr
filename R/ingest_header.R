@@ -50,3 +50,55 @@ ingest_header <-
         stop('Header data was not located. Run ingest_*(input.source) to create the header data temporary file.')
     }
   }
+
+#' Sanitize filenames for temporary header files
+#'
+#' @param filename A file name sting
+#'
+#' @return Returns a character string with problematic characters replaced by '_'
+#'
+hash_filename <-
+  function(filename){
+    # Using httr::sha1_hash because it is already imported by ingestr
+
+    filename <-
+      normalizePath(filename)
+
+    hashed <-
+      httr::sha1_hash('ingestr',
+                      normalizePath(filename),
+                      method = "HMAC-SHA1")
+    sanitized <-
+      gsub("[^[:alnum:]]", "_", hashed)
+
+    return(sanitized)
+  }
+
+
+#' Export header dataframe to a temporary file
+#'
+#' @param header.info A dataframe containing file header information
+#' @param input.source A character string of the input file
+#'
+#' @return Returns nothing, saves header dataframe to a temporary file.
+#'
+export_header <-
+  function(header.info,
+           input.source){
+
+    header.info$input_source <-
+      input.source
+
+    header_path <-
+      file.path(tempdir(),
+                hash_filename(input.source))
+
+    saveRDS(header.info,
+            file = header_path)
+
+    message("Header info for ",
+            input.source,
+            " has been saved to a temporary file. Run ingest_header('",
+            input.source,
+            "') to load the header data.")
+  }

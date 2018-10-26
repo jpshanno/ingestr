@@ -6,27 +6,23 @@
 #' read from files.}
 #'
 #' @param input.source Character indicating the URI to the HTML representation of the data.
-#' @param header.info A logical indicating if header information is written to a
+#' @param export.header A logical indicating if header information is written to a
 #'   separate data frame.
-#' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_npgo".
 #'
 #'
-#' @return A data frame.  If header.info = TRUE a data.frame is created in the
-#'   parent environment of the function.
+#' @return A data frame.  If export.header = TRUE a temporary file is created for
+#'   the header data. See \code{\link{ingest_header}} for more information.
 #' @export
 #' @examples
 #' df_npgo <- ingest_NPGO()  # reads in all the data
-#' header_npgo  # prints the header (and if applicable footer) information
 #'
 
 
 ingest_NPGO <- function(input.source = "http://www.o3d.org/npgo/npgo.php",   # URL of data
-                        header.info = TRUE,
-                        header.info.name = "header_npgo") {
+                        export.header = TRUE) {
 
-               all_character(c("input.source", "header.info.name"))
-               all_logical(c("header.info"))
+               all_character(input.source)
+               all_logical(export.header)
 
                #npgo_pre <- XML::xpathSApply(XML::xmlParse(httr::content(httr::GET(input.source))),
               #                              "/html/body/pre", XML::xmlValue) # read the data
@@ -47,15 +43,13 @@ ingest_NPGO <- function(input.source = "http://www.o3d.org/npgo/npgo.php",   # U
                npgo_df$input_source <- input.source
 
                # creates header object
-               if(header.info){
+               if(export.header){
                   head1_npgo <- scan(textConnection(npgo_pre), nlines=25, what=character(), sep="\n")
 
-                  header_npgo <-  data.frame(input_source = input.source, table_header = paste(head1_npgo, collapse = " "))
+                  table_header = paste(head1_npgo, collapse = " ")
 
-                  assign(x = header.info.name,
-                         value = utils::str(header_npgo),
-                         envir = parent.frame())
-
+                  export_header(table_header,
+                                input.source)
                   }
 
                return(npgo_df)

@@ -8,27 +8,25 @@
 #'
 #' @param input.source Character indicating the URI to the HTML representation of the data.
 #' @param end.year Four digit integer indicating the last year of data wanted.
-#' @param header.info A logical indicating if header information is written to a
+#' @param export.header A logical indicating if header information is written to a
 #'   separate data frame.
-#' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_enso".
 #'
-#' @return A data frame.
+#' @return A data frame. If export.header = TRUE a temporary file is created for
+#'   the header data. See \code{\link{ingest_header}} for more information.
 #' @export
 #'
 #' @examples
 #' df_enso <- ingest_ENSO()  # reads in all the data from start date to present
 #' df_enso1 <- ingest_ENSO(end.year=2000)  # reads in the data from start date to the year 2000
-#' header_enso  # prints the header (and if applicable footer) information
 #'
 
 ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",   # URL of data
                         end.year = NULL,
-                        header.info = TRUE,
-                        header.info.name = "header_enso") {
+                        export.header = TRUE) {
 
-               all_character(c("input.source", "header.info.name"))
-               all_logical(c("header.info"))
+               all_character(input.source)
+               all_logical(export.header)
+               if(!is.null(end.year)){all_numeric(end.year)}
 
                if (startsWith(tolower(trimws(input.source)), "http")) {
                  raw_html <- httr::content(httr::GET(input.source))
@@ -52,7 +50,7 @@ ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/ta
                enso$input_source <- input.source
 
                # creates header object
-               if(header.info){
+               if(export.header){
                   head_count_rows <- 11+count_rows
 
                   head_enso <- scan(textConnection(enso_pre), nlines=10, what=character(), sep="\n")
@@ -61,11 +59,10 @@ ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/ta
 
                   head1_enso <- c(head_enso, footer_enso)
 
-                  header_enso <-  data.frame(input_source = input.source, table_header = paste(head1_enso, collapse = " "))
+                  table_header <- paste(head1_enso, collapse = " ")
 
-                  assign(x = header.info.name,
-                         value = utils::str(header_enso),
-                         envir = parent.frame())
+                  export_header(table_header,
+                                input.source)
 
                   }
 

@@ -11,29 +11,26 @@
 #'
 #' @param input.source Character indicating the URI to the HTML representation of the data.
 #' @param end.year Four digit integer indicating the last year of data wanted.
-#' @param header.info A logical indicating if header information is written to a
+#' @param export.header A logical indicating if header information is written to a
 #'   separate data frame.
-#' @param header.info.name A character indicating the object name for the
-#'   metadata data.frame, defaults to "header_pdo".
 #'
 #'
-#' @return A data frame.  If header.info = TRUE a data.frame is created in the
-#'   parent environment of the function.
+#' @return A data frame.  If export.header = TRUE a temporary file is created for
+#'   the header data. See \code{\link{ingest_header}} for more information.
 #' @export
 #' @examples
 #' df_pdo <- ingest_PDO()  # reads in all the data from start date to present
 #' df_pdo1 <- ingest_PDO(end.year=2000)  # reads in the data from start date to the year 2000
-#' header_pdo  # prints the header (and if applicable footer) information
 #'
 
 
 ingest_PDO <- function(input.source = "http://jisao.washington.edu/pdo/PDO.latest",   # URL to the data
                        end.year = NULL,
-                       header.info = TRUE,
-                       header.info.name = "header_pdo") {
+                       export.header = TRUE) {
 
-              all_character(c("input.source", "header.info.name"))
-              all_logical(c("header.info"))
+              all_character(input.source)
+              all_logical(export.header)
+              if(!is.null(end.year)){all_numeric(end.year)}
 
               pdo_raw <- xml2::read_html(input.source)                       # read in the data
               pdo_pre1 <- rvest::html_node(pdo_raw, "p")             # make data text
@@ -45,7 +42,8 @@ ingest_PDO <- function(input.source = "http://jisao.washington.edu/pdo/PDO.lates
                 }
               count_rows <- as.numeric(end.year+1) - start_year  # get the number of rows
 
-              pdo_cols <- scan(textConnection(pdo_pre2), skip=31, nlines=1, what=character())# Get header row
+              # skip = 31 was set, but the format of the html must have been changes, it is now skip = 29
+              pdo_cols <- scan(textConnection(pdo_pre2), skip=29, nlines=1, what=character())# Get header row
               pdo_df <- utils::read.table(file=textConnection(pdo_pre2), skip=32, stringsAsFactors=F,
                                           sep="", nrow = count_rows,
                                           header=FALSE, col.names=pdo_cols, strip.white=TRUE, fill=TRUE) #
@@ -53,7 +51,7 @@ ingest_PDO <- function(input.source = "http://jisao.washington.edu/pdo/PDO.lates
               pdo_df$input_source <- input.source
 
               # creates header object
-              if(header.info){
+              if(export.header){
                  head_count_rows <- 33+count_rows
 
                  head_pdo <- scan(textConnection(pdo_pre2), nlines=31, what=character(), sep="\n")
@@ -62,11 +60,10 @@ ingest_PDO <- function(input.source = "http://jisao.washington.edu/pdo/PDO.lates
 
                  head1_pdo <- c(head_pdo, footer_pdo)
 
-                 header_pdo <-  data.frame(input_source = input.source, table_header = paste(head1_pdo, collapse = " "))
+                 table_header = paste(head1_pdo, collapse = " ")
 
-                 assign(x = header.info.name,
-                        value = utils::str(header_pdo),
-                        envir = parent.frame())
+                 export_header(table_header,
+                               input.source)
 
                  }
 

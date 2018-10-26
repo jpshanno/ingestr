@@ -4,9 +4,10 @@
 \alias{ingest_directory}
 \title{Ingest a Directory of Uniform Files}
 \usage{
-ingest_directory(directory = getwd(), ingest.function = read.csv,
-  pattern = "*", collapse = TRUE, recursive = FALSE,
-  use.parallel = FALSE, check.duplicates = "warn", ...)
+ingest_directory(directory = getwd(),
+  ingest.function = utils::read.csv, pattern = "*", collapse = TRUE,
+  recursive = FALSE, use.parallel = FALSE, check.duplicates = "warn",
+  ...)
 }
 \arguments{
 \item{directory}{A character vector with the name of the directory that

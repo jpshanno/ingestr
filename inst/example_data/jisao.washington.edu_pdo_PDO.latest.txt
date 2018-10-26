@@ -19,15 +19,13 @@ For more details, see:
      A Pacific interdecadal climate oscillation with impacts on salmon 
      production. Bulletin of the American Meteorological Society, 78, 
      pp. 1069-1079.
-     (available via the internet at url: 
-         http://www.atmos.washington.edu/~mantua/abst.PDO.html) 
+
 
 Data sources for this index are: 
  UKMO Historical SST data set for 1900-81; 
  Reynold's Optimally Interpolated SST (V1) for January 1982-Dec 2001)
 *** OI SST Version 2 (V2) beginning January 2002 -   
 
-missing value flag is -9999
 
 
 YEAR     JAN    FEB    MAR    APR    MAY    JUN    JUL    AUG    SEP    OCT    NOV    DEC
@@ -150,8 +148,7 @@ YEAR     JAN    FEB    MAR    APR    MAY    JUN    JUL    AUG    SEP    OCT    N
 2015**   2.45   2.30   2.00   1.44   1.20   1.54   1.84   1.56   1.94   1.47   0.86   1.01
 2016**   1.53   1.75   2.40   2.62   2.35   2.03   1.25   0.52   0.45   0.56   1.88   1.17
 2017**   0.77   0.70   0.74   1.12   0.88   0.79   0.10   0.09   0.32   0.05   0.15   0.50
-2018**   0.70   0.37  -0.05
-
+2018**   0.70   0.37  -0.05   0.11   0.11  -0.04   0.11   0.18   0.09
 
 
 ** Derived from OI.v2 SST fields
@@ -159,14 +156,8 @@ A graphic comparing monthly PDO values for 1982-2002 derived from the v1 and v2
 sst products is available at 
 http://jisao.washington.edu/pdo/img/v1v2PDOComp.png
 
-
-URL: ftp://ftp.atmos.washington.edu/mantua/pnw_impacts/INDICES/PDO.latest
-
-and
-
-http://jisao.washington.edu/pdo/PDO.latest.txt
-
 If you have any questions about this time series, contact
 Nathan Mantua at: nate.mantua@noaa.gov
 
-/home/disk/margaret/jisao/pdo/PDO.latest
+This file is /home/disk/margaret/jisao/pdo/PDO.latest.txt
+
