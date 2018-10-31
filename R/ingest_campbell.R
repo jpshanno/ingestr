@@ -1,7 +1,7 @@
 #' Ingest Campbell Scientific Logger Data.
 #'
 #' \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that
-#' are stored in the TAO5 file format with a .dat exentension. \strong{All
+#' are stored in the TAO5 file format with a .dat extension \strong{All
 #' ingest functions use the source file's base name as an identifying column to track
 #' provenance and relate data and metadata read from files.}
 #'
@@ -9,11 +9,11 @@
 #'
 #' @param input.source Character indicating the .dat Campbell Scientific File.
 #' @param add.units Logical indicating if add.units specified in the data file should be
-#'   appended to the end of the variable names specificed in the data file,
+#'   appended to the end of the variable names specified in the data file,
 #'   defaults to TRUE.
 #' @param add.measurements Logical indicating if add.measurements type (Avg, Smp,
 #'   etc) specified in the data file should be appended to the start of the
-#'   variable names specificed in the data file, defaults to TRUE.
+#'   variable names specified in the data file, defaults to TRUE.
 #' @param export.header A logical indicating if header information is written to a
 #'   temporary file that can be restored using ingest_header(input.source).
 #'

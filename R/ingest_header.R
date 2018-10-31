@@ -10,7 +10,7 @@
 #' that data to a temporary file. This header data can then be loaded and
 #' manipulated by the user using \code{ingest_header}.
 #'
-#' @param input.source Charcter indicating the source file, must match the
+#' @param input.source Character indicating the source file, must match the
 #'   input.source used to originally ingest the data
 #'
 #' @return This function returns a dataframe containing the header information

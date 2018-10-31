@@ -7,7 +7,7 @@
 ingest_header(input.source)
 }
 \arguments{
-\item{input.source}{Charcter indicating the source file, must match the
+\item{input.source}{Character indicating the source file, must match the
 input.source used to originally ingest the data}
 }
 \value{

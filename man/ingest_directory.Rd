@@ -30,7 +30,7 @@ information..}
 \code{\link[parallel]{parallel-package}} should be used.}
 
 \item{check.duplicates}{A character argument specifying the action that
-should be taken if files with dupliate contents are detected. One of
+should be taken if files with duplicate contents are detected. One of
 "warn", "remove", or NULL to disable checking. Defaults to "warn".}
 
 \item{...}{Additional arguments to pass to the input method}
@@ -42,8 +42,8 @@ When \code{collapse = T} a single object matching the output class
   of the function. The names of the input sources are used as object names
 }
 \description{
-This function reads in all files from a directory using the choosen import
-function.  Use the 'pattern' argument to specificy a set of files, or a
+This function reads in all files from a directory using the chosen import
+function.  Use the 'pattern' argument to specify a set of files, or a
 single file type. If collapse = TRUE \code{\link[dplyr]{bind}} is used
 to match column names and bind the imported data into a single object.
 \strong{All ingest functions use the source file name as an identifying
@@ -57,7 +57,7 @@ checking for duplicates. A separate data.frame specifying the removed
 input_source, the number of records removed, and the reason for removal.
 
 If using an \code{ingest_*} function and \code{header.info.name} must be set to
-NULL, a charcter vector of length 1 if \code{collapse = TRUE}, or a named character
+NULL, a character vector of length 1 if \code{collapse = TRUE}, or a named character
 vector with length equal to the number of files to be ingested if
 \code{collapse = FALSE}. If \code{header.info.name} is set to NULL then
 header.info.name will be set to "header_base_directory_name" when

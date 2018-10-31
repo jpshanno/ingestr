@@ -8,8 +8,8 @@
 #' *Any relevant details of parameter arguments and returned values and header information should be
 #' specified here.*
 #'
-#' @param input.source
-#' @param header. info A logical indicating if header information is written to a separate data frame
+#' @param input.source A string representing the file to ingest
+#' @param header.info A logical indicating if header information is written to a separate data frame
 #' @param *parmeter.name The parameter description should include accepted class (numeric,
 #'      logical, etc.) and refer to the Details section if more explanation is required*
 #'
@@ -19,17 +19,18 @@
 #' @export
 #'
 #' @examples
-#' *data_description*_file <- system.file("extdata", *Example_File*, package = "ingestr")
-#' ingest_*data_description*(file.name = *data_description*_file)
+#' *data_description*_file <- system.file("example_data", *Example_File*, package = "ingestr")
+#' ingest_*data_description*(input.source = *data_description*_file)
 
 ingest_*data_description* <-
-  function(header.info = TRUE,
+  function(input.source,
+           header.info = TRUE,
            *additional parameters*){
 
     # Check parameter inputs
       *ingestr contains non-exported functions found in internals.R that can be
       used to check the class of values supplied to parameter arguments. These
-      functions include all_charcter(), all_logical(), all_numeric(), and
+      functions include all_character(), all_logical(), all_numeric(), and
       all_list(). Examples of these functions can be seen in ingest_campbell.R
       and ingest_pdo.R.
 
@@ -44,7 +45,7 @@ ingest_*data_description* <-
     # Add source information to data
 
       data$input_source <-
-                 *file.name/path as a charcter. Should be an argument in the injest function*
+                 *input.source/path as a character. Should be an argument in the injest function*
 
     # Read in and format the header data
       if(header.info){

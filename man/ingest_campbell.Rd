@@ -14,12 +14,12 @@ ingest_campbell(input.source, export.header = TRUE, add.units = TRUE,
 temporary file that can be restored using ingest_header(input.source).}
 
 \item{add.units}{Logical indicating if add.units specified in the data file should be
-appended to the end of the variable names specificed in the data file,
+appended to the end of the variable names specified in the data file,
 defaults to TRUE.}
 
 \item{add.measurements}{Logical indicating if add.measurements type (Avg, Smp,
 etc) specified in the data file should be appended to the start of the
-variable names specificed in the data file, defaults to TRUE.}
+variable names specified in the data file, defaults to TRUE.}
 }
 \value{
 A dataframe. If export.header = TRUE a temporary file is created for
@@ -27,7 +27,7 @@ A dataframe. If export.header = TRUE a temporary file is created for
 }
 \description{
 \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that
-are stored in the TAO5 file format with a .dat exentension. \strong{All
+are stored in the TAO5 file format with a .dat extension \strong{All
 ingest functions use the source file's base name as an identifying column to track
 provenance and relate data and metadata read from files.}
 }

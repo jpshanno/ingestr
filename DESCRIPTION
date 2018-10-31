@@ -6,7 +6,7 @@ Authors@R: c(
   person("Joe", "Shannon", email = "jpshanno@mtu.edu", role = c("aut", "cre")),
   person("Rachael", "Blake", email = "rachel.e.blake@gmail.com", role = c("aut")),
   person("Tim", "Whiteaker", email = "whiteaker@utexas.edu", role = c("aut")))
-Description: This is an alpha work in progress initiated at the inagural IMCR Hackathon. 
+Description: This is an alpha work in progress initiated at the inaugural IMCR Hackathon. 
   The end product of this effort will be an R package on CRAN. The package will 
   primarily deal with reading data from files, though there will be some utilities 
   for initial cleanup of files such as removing blank rows and columns at the end 
@@ -30,7 +30,9 @@ Imports:
   XML,
   xml2
 Suggests:
-  parallel,
-  testthat,
-  covr
+    parallel,
+    testthat,
+    covr,
+    spelling
 RoxygenNote: 6.1.0
+Language: en-US
