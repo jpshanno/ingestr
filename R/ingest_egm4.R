@@ -33,17 +33,27 @@ ingest_egm4 <-
       input_source <-
         normalizePath(input.source)
 
-      n_records <-
-        switch(Sys.info()[["sysname"]],
-               Windows = {find_options <- system("where find",
-                                                 intern = TRUE)
-                          find_cmd <- grep("C:\\\\Windows\\\\Sys", find_options, value = TRUE)
-                          cmd_string <-
-                            paste0('type "', input_source, '" | ', find_cmd, ' /c /v ""')
-                          as.numeric(shell(cmd_string, intern = TRUE))
-                          },
-               as.numeric(system(paste0("wc ", input_source, " -l"),
-                             intern = TRUE))) - 5
+        if(grepl("[Ww]indows", Sys.info()[["sysname"]])){
+          find_options <-
+            system("where find",
+                   intern = TRUE)
+          find_cmd <-
+            grep("C:\\\\Windows\\\\Sys",
+                 find_options,
+                 value = TRUE)
+          cmd_string <-
+            paste0('type "',
+                   input_source,
+                   '" | ',
+                   find_cmd,
+                   ' /c /v ""')
+          n_records <-
+            as.numeric(shell(cmd_string, intern = TRUE)) - 5
+        } else {
+          n_records <-
+            as.numeric(system(paste0("wc ", input_source, " -l"),
+                             intern = TRUE)) - 5
+        }
 
       data <-
         utils::read.table(input.source,
