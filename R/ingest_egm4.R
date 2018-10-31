@@ -30,38 +30,37 @@ ingest_egm4 <-
 
     # Read in data and format to a data frame
 
-      input_source <-
-        normalizePath(input.source)
-
-        if(grepl("[Ww]indows", Sys.info()[["sysname"]])){
-          find_options <-
-            system("where find",
-                   intern = TRUE)
-          find_cmd <-
-            grep("C:\\\\Windows\\\\Sys",
-                 find_options,
-                 value = TRUE)
-          cmd_string <-
-            paste0('type "',
-                   input_source,
-                   '" | ',
-                   find_cmd,
-                   ' /c /v ""')
-          n_records <-
-            as.numeric(shell(cmd_string, intern = TRUE)) - 5
-        } else {
-          n_records <-
-            as.numeric(system(paste0("wc ", input_source, " -l"),
-                             intern = TRUE)) - 5
-        }
+      n_records <-
+        length(readLines(input.source)) - 5
+        # if(grepl("[Ww]indows", Sys.info()[["sysname"]])){
+        #   find_options <-
+        #     system("where find",
+        #            intern = TRUE)
+        #   find_cmd <-
+        #     grep("C:\\\\Windows\\\\Sys",
+        #          find_options,
+        #          value = TRUE)
+        #   cmd_string <-
+        #     paste0('type "',
+        #            input_source,
+        #            '" | ',
+        #            find_cmd,
+        #            ' /c /v ""')
+        #   n_records <-
+        #     as.numeric(shell(cmd_string, intern = TRUE)) - 5
+        # } else {
+        #   n_records <-
+        #     as.numeric(system(paste0("wc ", input_source, " -l"),
+        #                      intern = TRUE)) - 5
+        # }
 
       data <-
         utils::read.table(input.source,
-                          header=FALSE,
-                          stringsAsFactors=FALSE,
-                          sep="\t",
-                          skip=4,
-                          nrows=n_records,
+                          header = FALSE,
+                          stringsAsFactors = FALSE,
+                          sep = "\t",
+                          skip = 4,
+                          nrows = n_records,
                           col.names = c("plot_number", "record_number", "day", "month",
                                         "hour", "minute", "co2_ppm", "h20_ppm", "temperature_c",
                                         "A", "B", "C", "D", "E", "F", "G", "H", "pressure_mb", "probe_type"))
