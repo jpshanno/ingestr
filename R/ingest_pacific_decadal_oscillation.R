@@ -60,8 +60,8 @@ ingest_PDO <- function(input.source = "http://jisao.washington.edu/pdo/PDO.lates
 
                  head1_pdo <- c(head_pdo, footer_pdo)
 
-                 table_header = data.frame(header_text = paste(head1_pdo, collapse = " "),
-                                           stringsAsFactors = FALSE)
+                 table_header <- data.frame(header_text = paste(head1_pdo, collapse = " "),
+                                            stringsAsFactors = FALSE)
 
                  export_header(table_header,
                                input.source)
