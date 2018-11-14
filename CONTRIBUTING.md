@@ -26,10 +26,12 @@ You can also test that errors are thrown when headers are missing in data files,
 If your commits will include R scripts, please run `devtools::check` to check for common problems, run unit tests, and build Rd files.  There should be no errors, warnings, or notes in the R CMD check results.
 
 README.md is created from README.Rmd. To make edits to the readme, first edit README.Rmd and then knit that into README.md.  For example, with README.Rmd open in RStudio, click the drop down arrow next to **Knit** and click **Knit to github_document**.  You can ignore the pandoc error at the end of the output in the R Markdown window.
-   
+
+HTML documentation is built using pkgdown. If your commits affect documentation, please run `pkgdown::build_site()`.  See the wiki for information on pkgdown setup.
+
 ## Pull Request Process
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
+1. Ensure any install or build dependencies are removed before the end of the layer when doing a
    build.
 2. Update the README.md with details of changes to the interface.
 3. Increase the version numbers in any examples files and the README.md to the new version that this
