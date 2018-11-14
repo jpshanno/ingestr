@@ -48,7 +48,7 @@ single file type. If collapse = TRUE \code{\link[dplyr]{bind}} is used
 to match column names and bind the imported data into a single object.
 \strong{All ingest functions use the source file name as an identifying
 column to track provenance and relate data and metadata read from files.
-Please check that you have unique file names."}
+Please check that you have unique file names.}
 }
 \details{
 If \code{check.duplicates = "remove"} then only a single set of records will
