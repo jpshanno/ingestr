@@ -24,3 +24,7 @@ test_that("ingest_header reads in a file", {
   expect_s3_class(header,
                   "data.frame")
 })
+
+test_that("Uningested header data returns an error message", {
+  expect_error(ingest_header("nonsense"))
+})
