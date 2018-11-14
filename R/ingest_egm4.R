@@ -17,8 +17,10 @@
 #' @export
 #'
 #' @examples
-#' egm4_file <- system.file("example_data", "egm4.dat", package = "ingestr")
+#' \dontrun{
+#' #' egm4_file <- system.file("example_data", "egm4.dat", package = "ingestr")
 #' ingest_egm4(input.source = egm4_file)
+#' }
 
 ingest_egm4 <-
   function(input.source,

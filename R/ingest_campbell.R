@@ -23,8 +23,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{ 
 #' campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
 #' cs_data <- ingest_campbell(input.source = campbell_file)
+#' }
 
 ingest_campbell <-
   function(input.source,

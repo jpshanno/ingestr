@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+library(ingestr)
 ```
 
 <img src="man/figures/logo_ingestr.svg" align="right" width=150px>  
@@ -58,8 +59,7 @@ All data and header data that are read in will have the data source appended to 
 
 ### Sensor and Instrument Data
 Many sensors provide their output as delimited files with header information contained above the recorded data. 
-```{r example}
-library(ingestr)
+```{r example, eval = FALSE}
 campbell_file <- 
   system.file("example_data",
               "campbell_scientific_tao5.dat",

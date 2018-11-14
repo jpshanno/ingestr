@@ -28,7 +28,9 @@ that data to a temporary file. This header data can then be loaded and
 manipulated by the user using \code{ingest_header}.
 }
 \examples{
+\dontrun{
 campbell_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
 cs_data <- ingest_campbell(input.source = campbell_file)
 cs_header <- ingest_header(input.source = campbell_file)
+}
 }

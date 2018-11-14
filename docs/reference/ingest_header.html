@@ -144,8 +144,11 @@ manipulated by the user using <code>ingest_header</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>campbell_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"example_data"</span>, <span class='st'>"campbell_scientific_tao5.dat"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ingestr"</span>)
-<span class='no'>cs_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ingest_campbell.html'>ingest_campbell</a></span>(<span class='kw'>input.source</span> <span class='kw'>=</span> <span class='no'>campbell_file</span>)</div><div class='output co'>#&gt; <span class='message'>Header info for C:/Users/whiteatl/Documents/ingestr/inst/example_data/campbell_scientific_tao5.dat has been saved to a temporary file. Run ingest_header('C:/Users/whiteatl/Documents/ingestr/inst/example_data/campbell_scientific_tao5.dat') to load the header data.</span></div><div class='input'><span class='no'>cs_header</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_header</span>(<span class='kw'>input.source</span> <span class='kw'>=</span> <span class='no'>campbell_file</span>)</div><div class='output co'>#&gt; <span class='message'>Header data was loaded from cached results created when C:/Users/whiteatl/Documents/ingestr/inst/example_data/campbell_scientific_tao5.dat was ingested previously in this R session.</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>campbell_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"example_data"</span>, <span class='st'>"campbell_scientific_tao5.dat"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ingestr"</span>)
+<span class='no'>cs_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ingest_campbell.html'>ingest_campbell</a></span>(<span class='kw'>input.source</span> <span class='kw'>=</span> <span class='no'>campbell_file</span>)
+<span class='no'>cs_header</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_header</span>(<span class='kw'>input.source</span> <span class='kw'>=</span> <span class='no'>campbell_file</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

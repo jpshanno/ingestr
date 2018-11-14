@@ -113,61 +113,23 @@ All data and header data that are read in will have the data source appended to 
 <h3 class="hasAnchor">
 <a href="#sensor-and-instrument-data" class="anchor"></a>Sensor and Instrument Data</h3>
 <p>Many sensors provide their output as delimited files with header information contained above the recorded data.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(ingestr)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">campbell_file &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">system.file</span>(<span class="st">"example_data"</span>,</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">              <span class="st">"campbell_scientific_tao5.dat"</span>,</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">              <span class="dt">package =</span> <span class="st">"ingestr"</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">campbell_data &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/ingest_campbell.html">ingest_campbell</a></span>(<span class="dt">input.source =</span> campbell_file,</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                  <span class="dt">export.header =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">                  <span class="dt">add.units =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">                  <span class="dt">add.measurements =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; Header info for C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat has been saved to a temporary file. Run ingest_header('C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat') to load the header data.</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">campbell_file &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw">system.file</span>(<span class="st">"example_data"</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">              <span class="st">"campbell_scientific_tao5.dat"</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">              <span class="dt">package =</span> <span class="st">"ingestr"</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">campbell_data &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/ingest_campbell.html">ingest_campbell</a></span>(<span class="dt">input.source =</span> campbell_file,</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">                  <span class="dt">export.header =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">                  <span class="dt">add.units =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">                  <span class="dt">add.measurements =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">str</span>(campbell_data)</a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">str</span>(campbell_data)</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 'data.frame':    1272 obs. of  24 variables:</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  $ TIMESTAMP                    : POSIXct, format: "2014-11-02" "2014-11-03" ...</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  $ RECORD                       : int  0 1 2 3 4 5 6 7 8 9 ...</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  $ Min_BattV_Min_Volts          : num  13.5 13.2 13.2 13.3 13.4 ...</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;  $ Max_PTemp_C_Max_Deg.C        : num  0.989 11.02 12.88 8.61 4.064 ...</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  $ Min_PTemp_C_Min_Deg.C        : num  -3.32 -1.14 1.01 1.84 1.22 ...</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  $ Avg_AirTC_Avg_Deg.C          : num  -2.042 3.432 5.348 3.808 0.677 ...</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;  $ Avg_RH_Avg_.                 : num  75 54.5 66.2 90.9 81.3 ...</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt;  $ Avg_BP_kPa_Avg_kPa           : num  102 102 101 101 101 ...</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  $ Tot_Rain_mm_Tot_mm           : num  0.73 2.482 0.146 2.044 0.438 ...</span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt;  $ Smp_Rain_24hr_mm             : int  0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt;  $ Avg_WS_ms_Avg_meters.second  : num  0.266 0.843 0.579 0.919 0.698 ...</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt;  $ WVc_WS_ms_S_WVT_meters.second: num  0.266 0.843 0.579 0.919 0.698 ...</span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt;  $ WVc_WindDir_D1_WVT_Deg       : num  167 186 176 263 293 ...</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt;  $ WVc_WindDir_SD1_WVT_Deg      : num  31.3 36.9 49.3 46.9 57.8 ...</span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt;  $ Avg_VW_Avg                   : num  0.232 0.226 0.219 0.237 0.237 0.226 0.221 0.229 0.228 0.223 ...</span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt;  $ Avg_T107_C_Avg_Deg.C         : num  4.24 4.24 4.97 5.79 4.64 ...</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt;  $ Avg_PAR_Den_Avg_umol.s.m.2   : num  0.031 122.7 105.3 16.6 34.72 ...</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co">#&gt;  $ Tot_PAR_Tot_Tot_mmol.m.2     : num  5.51e-01 1.06e+04 9.10e+03 1.43e+03 3.00e+03 ...</span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="co">#&gt;  $ Tot_SR01Up_Tot_W.m.2         : num  -542 7999 7999 7999 7999 ...</span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">#&gt;  $ Tot_SR01Dn_Tot_W.m.2         : num  507 7999 7999 2589 5394 ...</span></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">#&gt;  $ Tot_IR01Up_Tot_W.m.2         : num  -7999 -7999 -7999 -208 -7999 ...</span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">#&gt;  $ Tot_IR01Dn_Tot_W.m.2         : num  -4385 -7999 -7999 -457 1520 ...</span></a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co">#&gt;  $ Tot_NetTot_Tot_W.m.2         : num  -7999 7999 7999 7999 5115 ...</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="co">#&gt;  $ input_source                 : chr  "C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat" "C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat" ...</span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41">campbell_header &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="st">  </span><span class="kw"><a href="reference/ingest_header.html">ingest_header</a></span>(<span class="dt">input.source =</span> campbell_file)</a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="co">#&gt; Header data was loaded from cached results created when C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat was ingested previously in this R session.</span></a>
-<a class="sourceLine" id="cb2-44" data-line-number="44"></a>
-<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="kw">str</span>(campbell_header)</a>
-<a class="sourceLine" id="cb2-46" data-line-number="46"><span class="co">#&gt; 'data.frame':    1 obs. of  9 variables:</span></a>
-<a class="sourceLine" id="cb2-47" data-line-number="47"><span class="co">#&gt;  $ file_type               : chr "TOA5"</span></a>
-<a class="sourceLine" id="cb2-48" data-line-number="48"><span class="co">#&gt;  $ logger_name             : chr "FRF_Village"</span></a>
-<a class="sourceLine" id="cb2-49" data-line-number="49"><span class="co">#&gt;  $ logger_model            : chr "CR1000"</span></a>
-<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="co">#&gt;  $ logger_serial_number    : int 63162</span></a>
-<a class="sourceLine" id="cb2-51" data-line-number="51"><span class="co">#&gt;  $ logger_os_version       : chr "CR1000.Std.27"</span></a>
-<a class="sourceLine" id="cb2-52" data-line-number="52"><span class="co">#&gt;  $ logger_program_name     : chr "CPU:Complete Station_Bridget_31Oct2014.cr1"</span></a>
-<a class="sourceLine" id="cb2-53" data-line-number="53"><span class="co">#&gt;  $ logger_program_signature: int 65292</span></a>
-<a class="sourceLine" id="cb2-54" data-line-number="54"><span class="co">#&gt;  $ logger_table_name       : chr "Table_24"</span></a>
-<a class="sourceLine" id="cb2-55" data-line-number="55"><span class="co">#&gt;  $ input_source            : chr "C:/Users/whiteatl/Documents/R/win-library/3.5/ingestr/example_data/campbell_scientific_tao5.dat"</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-14" data-line-number="14">campbell_header &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="reference/ingest_header.html">ingest_header</a></span>(<span class="dt">input.source =</span> campbell_file)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="kw">str</span>(campbell_header)</a></code></pre></div>
 </div>
 <div id="formatted-non-sensor-data-sources" class="section level3">
 <h3 class="hasAnchor">
