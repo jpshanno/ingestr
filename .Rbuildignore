@@ -8,3 +8,4 @@
 ^README-.*\.png$
 ^inst\img$
 ^appveyor\.yml$
+^logo\.png$

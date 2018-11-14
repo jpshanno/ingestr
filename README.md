@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="inst/img/logo_ingestr.svg" align="right" width=150px>
+<img src="man/figures/logo_ingestr.svg" align="right" width=150px>
 
 # ingestr
 
