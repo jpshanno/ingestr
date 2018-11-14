@@ -3,6 +3,10 @@ context("Test ingesting Campbell Scientific Logger data")
 test_file <- system.file("example_data", "campbell_scientific_tao5.dat", package = "ingestr")
 df <- ingestr::ingest_campbell(test_file)
 
+test_that("A dataframe is created", {
+  expect_s3_class(df, "data.frame")
+})
+
 test_that("TIMESTAMP is in columns returned", {
   expect_true("TIMESTAMP" %in% names(df))
 })
