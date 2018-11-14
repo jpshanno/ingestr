@@ -6,7 +6,7 @@
 #' to match column names and bind the imported data into a single object.
 #' \strong{All ingest functions use the source file name as an identifying
 #' column to track provenance and relate data and metadata read from files.
-#' Please check that you have unique file names."}
+#' Please check that you have unique file names.}
 #'
 #' If \code{check.duplicates = "remove"} then only a single set of records will
 #' be retained when files have identical contents. This does not provide rowwise
