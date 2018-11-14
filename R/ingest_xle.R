@@ -31,8 +31,27 @@ ingest_xle <-
     all_logical(header.info,
                 collapse.timestamp)
 
+    # Get Solinst Levelloger version number because encoding varies based on the
+    # software version
+    version_line <-
+      grep("<Created_by>Version",
+           readLines(input.source),
+           value = TRUE)
+
+    version_number <-
+      gsub("[^0-9\\.]",
+           "",
+           version_line)
+
+    encoding <-
+      ifelse(version_number >= "4.4.0",
+             "UTF-8",
+             "iso-8859-1")
+
     # Read in raw XML
-    raw_xml <- xml2::read_xml(input.source)
+    raw_xml <-
+      xml2::read_xml(input.source,
+                     encoding = encoding)
 
     # Extract data from XML and convert to a dataframe
     xml_data <-
