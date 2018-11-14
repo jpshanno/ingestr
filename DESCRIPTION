@@ -14,7 +14,7 @@ Description: This is an alpha work in progress initiated at the inaugural IMCR H
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/jpshanno/ingestr
+URL: https://github.com/jpshanno/ingestr,https://jpshanno.github.io/ingestr/
 BugReports: https://github.com/jpshanno/ingestr/issues
 Imports:
   units,
