@@ -1,4 +1,4 @@
-#' Ingest a Directory of Uniform Files
+#' Ingest a directory of uniform files
 #'
 #' This function reads in all files from a directory using the chosen import
 #' function.  Use the 'pattern' argument to specify a set of files, or a

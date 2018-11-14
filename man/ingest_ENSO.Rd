@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_el_nino.R
 \name{ingest_ENSO}
 \alias{ingest_ENSO}
-\title{Ingest Multivariate El Nino Southern Oscillation Index data.}
+\title{Ingest Multivariate El Nino Southern Oscillation Index data}
 \usage{
 
   ingest_ENSO(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",

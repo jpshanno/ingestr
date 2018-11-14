@@ -1,4 +1,4 @@
-#' Ingest Header Data
+#' Ingest header data
 #'
 #' \code{ingest_header} reads in header information from datasets that were
 #' created using \code{ingest_*}. The dataset must have been ingested within the

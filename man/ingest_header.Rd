@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_header.R
 \name{ingest_header}
 \alias{ingest_header}
-\title{Ingest Header Data}
+\title{Ingest header data}
 \usage{
 ingest_header(input.source)
 }

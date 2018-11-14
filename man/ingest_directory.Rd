@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_directory.R
 \name{ingest_directory}
 \alias{ingest_directory}
-\title{Ingest a Directory of Uniform Files}
+\title{Ingest a directory of uniform files}
 \usage{
 ingest_directory(directory = getwd(),
   ingest.function = utils::read.csv, pattern = "*", collapse = TRUE,

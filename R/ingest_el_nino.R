@@ -1,4 +1,4 @@
-#' Ingest Multivariate El Nino Southern Oscillation Index data.
+#' Ingest Multivariate El Nino Southern Oscillation Index data
 #'
 #' \code{ingest_ENSO} ingests data from the NOAA Earth System Research
 #' Laboratory Physical Sciences Division Mulivariate El Nino Southern

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_xle.R
 \name{ingest_xle}
 \alias{ingest_xle}
-\title{Ingest Solinst Levellogger Data from *.xle Files}
+\title{Ingest Solinst Levellogger data from *.xle files}
 \usage{
 ingest_xle(input.source, header.info = TRUE,
   collapse.timestamp = FALSE)

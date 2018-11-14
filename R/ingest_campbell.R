@@ -1,4 +1,4 @@
-#' Ingest Campbell Scientific Logger Data.
+#' Ingest Campbell Scientific Logger data
 #'
 #' \code{ingest_campbell} ingests data from Campbell Scientific dataloggers that
 #' are stored in the TAO5 file format with a .dat extension \strong{All
