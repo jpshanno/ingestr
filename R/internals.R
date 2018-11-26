@@ -1,4 +1,4 @@
-#' Checks Function Inputs for the Correct Class.
+#' Check function input for the correct class
 #'
 #' This function is supplied as a generic form of all_character, all_numeric,
 #' all_logical, and all_list.

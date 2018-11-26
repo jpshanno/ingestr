@@ -1,4 +1,4 @@
-#' Ingest PP Systems EGM-4 Data
+#' Ingest PP Systems EGM-4 data
 #'
 #' \code{ingest_egm4} ingests data from *include information about the data source
 #' including manufacturer, sensor name, file extension, version information etc* \strong{All

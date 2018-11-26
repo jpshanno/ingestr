@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_north_pacific_gyre.R
 \name{ingest_NPGO}
 \alias{ingest_NPGO}
-\title{Ingest North Pacific Gyre Oscillation data.}
+\title{Ingest North Pacific Gyre Oscillation data}
 \usage{
 ingest_NPGO(input.source = "http://www.o3d.org/npgo/npgo.php",
   export.header = TRUE)

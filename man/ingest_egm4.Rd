@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_egm4.R
 \name{ingest_egm4}
 \alias{ingest_egm4}
-\title{Ingest PP Systems EGM-4 Data}
+\title{Ingest PP Systems EGM-4 data}
 \usage{
 ingest_egm4(input.source, header.info = TRUE)
 }

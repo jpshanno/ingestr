@@ -1,4 +1,4 @@
-#' Ingest Pacific Decadal Oscillation data.
+#' Ingest Pacific Decadal Oscillation data
 #'
 #' \code{ingest_PDO} ingests data from the updated standardized values for the
 #' PDO index, derived as the leading PC of monthly SST anomalies in the North

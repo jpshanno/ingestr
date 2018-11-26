@@ -1,4 +1,4 @@
-#' Ingest Solinst Levellogger Data from *.xle Files
+#' Ingest Solinst Levellogger data from *.xle files
 #'
 #' \code{ingest_xle} ingests data from Solinst levellogers that are stored in
 #' *.xle format. This is the standard format for data offloaded from Solinst

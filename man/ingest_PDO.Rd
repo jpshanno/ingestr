@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_pacific_decadal_oscillation.R
 \name{ingest_PDO}
 \alias{ingest_PDO}
-\title{Ingest Pacific Decadal Oscillation data.}
+\title{Ingest Pacific Decadal Oscillation data}
 \usage{
 ingest_PDO(input.source = "http://jisao.washington.edu/pdo/PDO.latest",
   end.year = NULL, export.header = TRUE)

@@ -6,7 +6,7 @@
 \alias{all_numeric}
 \alias{all_logical}
 \alias{all_list}
-\title{Checks Function Inputs for the Correct Class.}
+\title{Check function input for the correct class}
 \usage{
 check_inputs(class.check, ...)
 

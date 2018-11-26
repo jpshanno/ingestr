@@ -2,7 +2,7 @@
 % Please edit documentation in R/ingest_campbell.R
 \name{ingest_campbell}
 \alias{ingest_campbell}
-\title{Ingest Campbell Scientific Logger Data.}
+\title{Ingest Campbell Scientific Logger data}
 \usage{
 ingest_campbell(input.source, export.header = TRUE, add.units = TRUE,
   add.measurements = TRUE)
