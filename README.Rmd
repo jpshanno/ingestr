@@ -31,7 +31,7 @@ The guiding principles of ingestr are that
 2. Reading in data should provide a standard output
 3. Header information contained within sensor data files should be stored in a standard, easily readable format
 4. Associating imported data with its original source is the first step towards good data provenance records and reproducibility
-5. We don't know about every common sensor and love contributions of code or sensors that need support. See [issues](https://github.com/jpshanno/ingestr/issues) to submit an example data file, and see our [contributing guide](https://github.com/jpshanno/ingestr/blob/master/CONTRIBUTING.md) to contribute code.
+5. We don't know about every common sensor and love contributions of code or sensors that need support. See [issues](https://github.com/jpshanno/ingestr/issues) to submit an example data file, and see our [contributing guide](https://jpshanno.github.io/ingestr/CONTRIBUTING) to contribute code.
 
 ## Installation
 
