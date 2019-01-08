@@ -125,11 +125,11 @@ ingest_spectramax2 <-
                        # These plates could probably be indexed rather than matching the plate name. Plates with the same
                        # name may cause a problem.
                        plate_start <-
-                         plate_end - (as.numeric(unique(header_data[header_data$plate_name == plate_name, "plate_size"])) - 1)
+                         plate_end - (as.numeric(unique(header_info[header_info$plate_name == plate_name, "plate_size"])) - 1)
                        data.frame(input_source = basename(input.source),
                                   plate_name = plate_name,
                                   well = paste0(rep(LETTERS[1:8], each = 12), 1:12),
-                                  read_type = unique(header_data[header_data$plate_name == plate_name, "read_type"]),
+                                  read_type = unique(header_info[header_info$plate_name == plate_name, "read_type"]),
                                   value = as.numeric(raw_text[plate_start:plate_end]),
                                   stringsAsFactors = FALSE)
                      }))
