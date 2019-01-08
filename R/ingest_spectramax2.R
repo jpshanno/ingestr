@@ -81,10 +81,6 @@ ingest_spectramax2 <-
     plate_count <-
       length(plate_end_locations)
 
-    # Add source information to data
-    data$input_source <-
-      input.source
-
     # Extract header information for each plate
     if(header.info){
       header_info <-
@@ -137,6 +133,10 @@ ingest_spectramax2 <-
                                   value = as.numeric(raw_text[plate_start:plate_end]),
                                   stringsAsFactors = FALSE)
                      }))
+
+    # Add source information to data
+    data$input_source <-
+      input.source
 
     # Return the dataframe
 
