@@ -42,10 +42,12 @@ You can install ingestr from github with:
 devtools::install_github("jpshanno/ingestr")
 
 # or from source
-ingestr_source <- tempfile(fileext = ".zip")
+ingestr_source <- file.path(tempdir(), "ingestr-master.zip")
 download.file("https://github.com/jpshanno/ingestr/archive/master.zip",
               ingestr_source)
-install.packages(ingestr_source, 
+unzip(ingestr_source,
+      exdir = dirname(ingestr_source))
+install.packages(sub(".zip$", "", ingestr_source), 
                  repos = NULL,
                  type = "source")
 
