@@ -1,6 +1,6 @@
-#' Ingest SpectraMax2 Plate Reader Data
+#' Ingest SpectraMax M2 Plate Reader Data
 #'
-#' \code{ingest_spectramax2} ingests data from raw exports of SpectraMax2 plate
+#' \code{ingest_spectramaxm2} ingests data from raw exports of SpectraMax M2 plate
 #' reader data. It will read in text files with any number of plates exported in
 #' the PlateFormat. \strong{All ingest functions use the source file name as an
 #' identifying column to track provenance and relate data and metadata read from
@@ -19,7 +19,7 @@
 #' *data_description*_file <- system.file("example_data", *Example_File*, package = "ingestr")
 #' ingest_*data_description*(input.source = *data_description*_file)
 
-ingest_spectramax2 <-
+ingest_spectramaxm2 <-
   function(input.source,
            header.info = TRUE){
 
