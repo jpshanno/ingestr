@@ -34,7 +34,7 @@ ingest_xle <-
     # Get Solinst Levelloger version number because encoding varies based on the
     # software version
     version_line <-
-      grep("<Created_by>Version",
+      grep("<Created_by>.*Version",
            readLines(input.source),
            value = TRUE)
 
