@@ -44,7 +44,7 @@ ingest_xle <-
            version_line)
 
     encoding <-
-      ifelse(version_number >= "4.4.0",
+      ifelse(length(version_number) == 1 && version_number >= "4.4.0",
              "UTF-8",
              "iso-8859-1")
 
