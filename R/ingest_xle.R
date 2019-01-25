@@ -69,7 +69,8 @@ ingest_xle <-
                  sample_time = xml2::xml_text(xml2::xml_find_all(xml_data, "./Log/Time")),
                  sample_millisecond = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ms")),
                  ch1 = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ch1")),
-                 ch2 = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ch2")))
+                 ch2 = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ch2")),
+                 stringsAsFactors = FALSE)
 
     # Get channel names
     channel_1 <-
@@ -135,7 +136,7 @@ ingest_xle <-
                      location = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Location")),
                      lat = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Latitude")),
                      lon = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Longtitude")),
-                     sample_rate_seconds = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Sample_rate")),
+                     sample_rate_seconds = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Sample_rate")) / 100,
                      sample_mode = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Sample_mode")),
                      logger_start = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Start_time")),
                      logger_stop = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Stop_time")),
@@ -177,7 +178,8 @@ ingest_xle <-
 
           ch1_parameters <-
             as.data.frame(ch1_parameter_values,
-                          col.names = ch1_parameter_names)
+                          col.names = ch1_parameter_names,
+                          stringsAsFactors = FALSE)
 
           header_info <-
             cbind(header_info, ch1_parameters)
@@ -201,7 +203,8 @@ ingest_xle <-
 
           ch2_parameters <-
             as.data.frame(ch2_parameter_values,
-                          col.names = ch2_parameter_names)
+                          col.names = ch2_parameter_names,
+                          stringsAsFactors = FALSE)
 
           header_info <-
             cbind(header_info, ch2_parameters)
