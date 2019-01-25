@@ -93,13 +93,13 @@ ingest_xle <-
       gsub("[^[:alnum:]]", "_", ch1_name)
 
     ch1_name <-
-      gsub("__", "_", ch1_name)
+      gsub("_+", "_", ch1_name)
 
     ch2_name <-
       gsub("[^[:alnum:]]", "_", ch2_name)
 
     ch2_name <-
-      gsub("__", "_", ch2_name)
+      gsub("_+", "_", ch2_name)
 
     names(data) <-
       c("sample_date", "sample_time", "sample_millisecond", ch1_name, ch2_name)
@@ -136,7 +136,18 @@ ingest_xle <-
                      sample_rate_seconds = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Sample_rate")),
                      sample_mode = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Sample_mode")),
                      logger_start = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Start_time")),
-                     logger_stop = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Stop_time")))
+                     logger_stop = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Stop_time")),
+                     software_version = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Created_by")),
+                     download_date =  xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Date")),
+                     download_time =  xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Time")))
+
+        # Sanitize header information
+        header_info <-
+          aggregate(header_info,
+                    by = list(header_info$instrument_type),
+                    function(x){
+                      x <- gsub(" +", "_", x)
+                    })
 
         # Add channel 1 parameters to header info
         ch1_parameter_values <-
