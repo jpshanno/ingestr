@@ -144,11 +144,14 @@ ingest_xle <-
 
         # Sanitize header information
         header_info <-
-          aggregate(header_info,
-                    by = list(header_info$instrument_type),
-                    function(x){
-                      x <- gsub(" +", " ", x)
-                    })
+          lapply(header_info,
+                 function(x){
+                   gsub(" +", " ", x)
+                 })
+
+        header_info <-
+          as.data.frame(header_info,
+                        stringsAsFactors = FALSE)
 
         # Add channel 1 parameters to header info
         ch1_parameter_values <-
