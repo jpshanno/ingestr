@@ -138,27 +138,32 @@ ingest_xle <-
                      logger_start = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Start_time")),
                      logger_stop = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Stop_time")),
                      software_version = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Created_by")),
-                     download_date =  xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Date")),
-                     download_time =  xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Time")))
+                     download_time =  paste(xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Date")),
+                                            xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Time")),
+                                            sep = " "))
 
         # Sanitize header information
         header_info <-
           aggregate(header_info,
                     by = list(header_info$instrument_type),
                     function(x){
-                      x <- gsub(" +", "_", x)
+                      x <- gsub(" +", " ", x)
                     })
 
         # Add channel 1 parameters to header info
         ch1_parameter_values <-
           lapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters"))),
-                 paste,
-                 collapse = " ")
+                 function(x){as.numeric(x[[1]])})
+
+        ch1_parameter_units <-
+          vapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters"))),
+                 function(x){gsub("[^[:alnum:]]", "_", x[[2]])},
+                 character(1))
 
         if(length(ch1_parameter_values) > 0){
           ch1_parameter_names <-
             paste(tolower(xml2::xml_name(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters")))),
-                  ch1_name,
+                  ch1_parameter_units,
                   sep = "_")
 
           ch1_parameters <-
@@ -172,13 +177,17 @@ ingest_xle <-
         # Add channel 2 parameters to header info
         ch2_parameter_values <-
           lapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters"))),
-                 paste,
-                 collapse = " ")
+                 function(x){as.numeric(x[[1]])})
+
+        ch2_parameter_units <-
+          vapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters"))),
+                 function(x){gsub("[^[:alnum:]]", "_", x[[2]])},
+                 character(1))
 
         if(length(ch2_parameter_values) > 0){
           ch2_parameter_names <-
             paste(tolower(xml2::xml_name(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters")))),
-                  ch2_name,
+                  ch2_parameter_units,
                   sep = "_")
 
           ch2_parameters <-
