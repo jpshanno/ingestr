@@ -91,16 +91,16 @@ ingest_xle <-
 
     # Sanitize names
     ch1_name <-
-      gsub("[^[:alnum:]]", "_", ch1_name)
+      gsub("[^A-z0-9]", "_", ch1_name)
 
     ch1_name <-
-      gsub("_+", "_", ch1_name)
+      gsub("_{2,}", "_", ch1_name)
 
     ch2_name <-
-      gsub("[^[:alnum:]]", "_", ch2_name)
+      gsub("[^A-z0-9]", "_", ch2_name)
 
     ch2_name <-
-      gsub("_+", "_", ch2_name)
+      gsub("_{2,}", "_", ch2_name)
 
     names(data) <-
       c("sample_date", "sample_time", "sample_millisecond", ch1_name, ch2_name)
@@ -167,7 +167,7 @@ ingest_xle <-
 
         ch1_parameter_units <-
           vapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters"))),
-                 function(x){gsub("[^[:alnum:]]", "_", x[[2]])},
+                 function(x){gsub("[^A-z0-9]", "_", x[[2]])},
                  character(1))
 
         if(length(ch1_parameter_values) > 0){
@@ -192,7 +192,7 @@ ingest_xle <-
 
         ch2_parameter_units <-
           vapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters"))),
-                 function(x){gsub("[^[:alnum:]]", "_", x[[2]])},
+                 function(x){gsub("[^A-z0-9]", "_", x[[2]])},
                  character(1))
 
         if(length(ch2_parameter_values) > 0){
