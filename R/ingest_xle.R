@@ -124,6 +124,8 @@ ingest_xle <-
       if(header.info){
 
         # Get relevant information for the header
+        # These xml2 extractions should be turned into a function or family of
+        # functions
         header_info <-
           data.frame(instrument_type = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Instrument_type")),
                      model_number = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Model_number")),
@@ -131,22 +133,26 @@ ingest_xle <-
                      firmware = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Firmware")),
                      project_id = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Project_ID")),
                      location = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Location")),
-                     lat = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Latitude")),
-                     lon = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Longtitude")),
-                     sample_rate_seconds = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Sample_rate")),
+                     lat = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Latitude")),
+                     lon = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Longtitude")),
+                     sample_rate_seconds = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Sample_rate")),
                      sample_mode = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Sample_mode")),
                      logger_start = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Start_time")),
                      logger_stop = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Stop_time")),
                      software_version = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Created_by")),
                      download_time =  paste(xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Date")),
                                             xml2::xml_text(xml2::xml_find_first(raw_xml, "//File_info/Time")),
-                                            sep = " "))
+                                            sep = " "),
+                     n_records = xml2::xml_double(xml2::xml_find_first(raw_xml, "//Num_log")),
+                     stringsAsFactors = FALSE)
 
         # Sanitize header information
         header_info <-
           lapply(header_info,
                  function(x){
-                   gsub(" +", " ", x)
+                   ifelse(is.character(x),
+                          gsub(" +", " ", x),
+                          x)
                  })
 
         header_info <-
