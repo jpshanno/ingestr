@@ -6,6 +6,9 @@
 #' file name as an identifying column to track provenance and relate data and
 #' metadata read from files. Please check that you have unique file names."}
 #'
+#' By default Solinst .xle files store times in "UTC" and ingest_xle will read
+#' them in as such.
+#'
 #' @param input.source A string representing the file to ingest
 #' @param header.info A logical indicating if header information is written to a separate data frame
 #' @param collapse.timestamp A logical indicating if a single timestamp should
