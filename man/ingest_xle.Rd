@@ -28,8 +28,8 @@ file name as an identifying column to track provenance and relate data and
 metadata read from files. Please check that you have unique file names."}
 }
 \details{
-By default Solinst .xle files store times in "UTC" and ingest_xle will read
-them in as such.
+By default Solinst .xle files do not include a timezone, but time are stored
+in whatever timezone you set the datalogger when launching.
 }
 \examples{
 xle_file <- system.file("example_data", "solinst.xle", package = "ingestr")
