@@ -39,6 +39,7 @@ ingest_xle <-
     version_line <-
       grep("<Created_by>.*Version",
            readLines(input.source),
+           useBytes = TRUE,
            value = TRUE)
 
     version_number <-
