@@ -1,1 +1,17 @@
+# These files are text and should be normalized (convert crlf =&gt; lf)
+*.txt     	text
+*.R  	  	text
+*.Rmd	  	text
+*.md 	  	text
+*.html    	text
+*.css     	text
+*.Rd        	text
+*.Rdata     	text
+*.rdb       	binary
+*.rds		binary
+*.Rdx		binary
+.gitignore	text
+.gitattributes	text
+
+# These files should be excluded from github language determination
 inst/example_data/* linguist-vendored
