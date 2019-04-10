@@ -10,7 +10,7 @@
 #'
 #' If \code{check.duplicates = "remove"} then only a single set of records will
 #' be retained when files have identical contents. This does not provide rowwise
-#' checking for duplicates. A separate data.frame specifying the removed
+#' checking for duplicates. A separate data.frame is created specifying the removed
 #' input_source, the number of records removed, and the reason for removal.
 #'
 #' If using an \code{ingest_*} function and \code{header.info.name} must be set to
@@ -44,7 +44,7 @@
 #' @return  When \code{collapse = T} a single object matching the output class
 #'   of \code{fun} is returned. When \code{collapse = F} a single object is
 #'   returned matching the output class of \code{fun} in the parent environment
-#'   of the function. The names of the input sources are used as object names
+#'   of the function. The names of the input sources are used as object names.
 #'
 #' @export
 
@@ -81,8 +81,8 @@ ingest_directory <- function(directory = getwd(),
 
   # Get file list from directory
   file_list <- list.files(directory,
-                         pattern = pattern,
-                         recursive = recursive)
+                          pattern = pattern,
+                          recursive = recursive)
 
   if(any(duplicated(file_list))){
     duplicated_file_names <-
