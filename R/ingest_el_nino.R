@@ -16,8 +16,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df_enso <- ingest_ENSO()  # reads in all the data from start date to present
 #' df_enso1 <- ingest_ENSO(end.year=2000)  # reads in the data from start date to the year 2000
+#' }
 #'
 
 ingest_ENSO <- function(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",   # URL of data
