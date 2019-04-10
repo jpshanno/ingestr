@@ -3,6 +3,6 @@
 #'
 #' @importFrom magrittr %>%
 #' @name %>%
-#' @rdname %>%
+#' @rdname re-exports
 #' @export
 NULL

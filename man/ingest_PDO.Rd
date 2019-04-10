@@ -30,7 +30,9 @@ ingest functions use the source file name as an identifying column to track
 provenance and relate data and metadata read from files.}
 }
 \examples{
+\dontrun{
 df_pdo <- ingest_PDO()  # reads in all the data from start date to present
 df_pdo1 <- ingest_PDO(end.year=2000)  # reads in the data from start date to the year 2000
+}
 
 }
