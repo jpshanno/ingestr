@@ -28,7 +28,8 @@ Imports:
   tibble,
   tidyr,
   XML,
-  xml2
+  xml2,
+  magrittr
 Suggests:
     parallel,
     testthat,

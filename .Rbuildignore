@@ -11,3 +11,4 @@
 ^inst\img$
 ^appveyor\.yml$
 ^logo\.png$
+^inst/Example_Ingest_File\.R$

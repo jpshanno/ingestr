@@ -28,7 +28,9 @@ Oscillation Index. https://www.esrl.noaa.gov/psd/enso/mei/index.html
 column to track provenance and relate data and metadata read from files.}
 }
 \examples{
+\dontrun{
 df_enso <- ingest_ENSO()  # reads in all the data from start date to present
 df_enso1 <- ingest_ENSO(end.year=2000)  # reads in the data from start date to the year 2000
+}
 
 }
