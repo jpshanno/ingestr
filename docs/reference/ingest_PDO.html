@@ -152,7 +152,10 @@ separate data frame.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df_pdo</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_PDO</span>()  <span class='co'># reads in all the data from start date to present</span></div><div class='output co'>#&gt; <span class='message'>Header info for http://jisao.washington.edu/pdo/PDO.latest has been saved to a temporary file. Run ingest_header('http://jisao.washington.edu/pdo/PDO.latest') to load the header data.</span></div><div class='input'><span class='no'>df_pdo1</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_PDO</span>(<span class='kw'>end.year</span><span class='kw'>=</span><span class='fl'>2000</span>)  <span class='co'># reads in the data from start date to the year 2000</span></div><div class='output co'>#&gt; <span class='message'>Header info for http://jisao.washington.edu/pdo/PDO.latest has been saved to a temporary file. Run ingest_header('http://jisao.washington.edu/pdo/PDO.latest') to load the header data.</span></div><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>df_pdo</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_PDO</span>()  <span class='co'># reads in all the data from start date to present</span>
+<span class='no'>df_pdo1</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_PDO</span>(<span class='kw'>end.year</span><span class='kw'>=</span><span class='fl'>2000</span>)  <span class='co'># reads in the data from start date to the year 2000</span>
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

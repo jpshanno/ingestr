@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ingest Multivariate El Nino Southern Oscillation Index data — ingest_ENSO • ingestr</title>
+<title>re-export magrittr pipe operator — %&gt;% • ingestr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,13 +30,9 @@
 
 
 
-<meta property="og:title" content="Ingest Multivariate El Nino Southern Oscillation Index data — ingest_ENSO" />
+<meta property="og:title" content="re-export magrittr pipe operator — %&gt;%" />
 
-<meta property="og:description" content="ingest_ENSO ingests data from the NOAA Earth System Research
-Laboratory Physical Sciences Division Mulivariate El Nino Southern
-Oscillation Index. https://www.esrl.noaa.gov/psd/enso/mei/index.html
-All ingest functions use the source file name as an identifying
-column to track provenance and relate data and metadata read from files." />
+<meta property="og:description" content="re-export magrittr pipe operator" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,64 +99,24 @@ column to track provenance and relate data and metadata read from files." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Ingest Multivariate El Nino Southern Oscillation Index data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jpshanno/ingestr/blob/master/R/ingest_el_nino.R'><code>R/ingest_el_nino.R</code></a></small>
-    <div class="hidden name"><code>ingest_ENSO.Rd</code></div>
+    <h1>re-export magrittr pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jpshanno/ingestr/blob/master/R/__Imports.R'><code>R/__Imports.R</code></a></small>
+    <div class="hidden name"><code>re-exports.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>ingest_ENSO</code> ingests data from the NOAA Earth System Research
-Laboratory Physical Sciences Division Mulivariate El Nino Southern
-Oscillation Index. https://www.esrl.noaa.gov/psd/enso/mei/index.html
-<strong>All ingest functions use the source file name as an identifying
-column to track provenance and relate data and metadata read from files.</strong></p>
+    <p>re-export magrittr pipe operator</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ingest_ENSO</span>(<span class='kw'>input.source</span> <span class='kw'>=</span> <span class='st'>"http://www.esrl.noaa.gov/psd/enso/mei/table.html"</span>,
-  <span class='kw'>end.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>export.header</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input.source</th>
-      <td><p>Character indicating the URI to the HTML representation of the data.</p></td>
-    </tr>
-    <tr>
-      <th>end.year</th>
-      <td><p>Four digit integer indicating the last year of data wanted.</p></td>
-    </tr>
-    <tr>
-      <th>export.header</th>
-      <td><p>A logical indicating if header information is written to a
-separate data frame.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
 
-    <p>A data frame. If export.header = TRUE a temporary file is created for
-  the header data. See <code><a href='ingest_header.html'>ingest_header</a></code> for more information.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>df_enso</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_ENSO</span>()  <span class='co'># reads in all the data from start date to present</span>
-<span class='no'>df_enso1</span> <span class='kw'>&lt;-</span> <span class='fu'>ingest_ENSO</span>(<span class='kw'>end.year</span><span class='kw'>=</span><span class='fl'>2000</span>)  <span class='co'># reads in the data from start date to the year 2000</span>
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

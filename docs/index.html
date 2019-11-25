@@ -78,7 +78,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ingestr" class="anchor"></a>ingestr</h1></div>
 <p><strong>An R package for reading environmental data from raw formats into data.frames.</strong></p>
-<p><a href="https://travis-ci.org/jpshanno/ingestr"><img src="https://travis-ci.org/jpshanno/ingestr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/jpshanno/ingestr"><img src="https://ci.appveyor.com/api/projects/status/github/jpshanno/ingestr?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/jpshanno/ingestr?branch=master"><img src="https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg" alt="Coverage Status"></a></p>
+<p><a href="https://travis-ci.org/jpshanno/ingestr"><img src="https://travis-ci.org/jpshanno/ingestr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/jpshanno/ingestr"><img src="https://ci.appveyor.com/api/projects/status/github/jpshanno/ingestr?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/jpshanno/ingestr?branch=master"><img src="https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg" alt="Coverage Status"></a> <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></p>
 <p>This is project was initiated at the inaugural <a href="https://github.com/IMCR-Hackathon/HackathonCentral">IMCR Hackathon</a> hosted by the <a href="https://environmentaldatainitiative.org/">Environmental Data Institute</a>. The end product of this effort will be an R package on CRAN. The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction.</p>
 <p>The guiding principles of ingestr are that</p>
 <ol style="list-style-type: decimal">
@@ -92,16 +92,18 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install ingestr from github with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"jpshanno/ingestr"</span>)
-
-<span class="co"># or from source</span>
-ingestr_source &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">".zip"</span>)
-<span class="kw">download.file</span>(<span class="st">"https://github.com/jpshanno/ingestr/archive/master.zip"</span>,
-              ingestr_source)
-<span class="kw">install.packages</span>(ingestr_source, 
-                 <span class="dt">repos =</span> <span class="ot">NULL</span>,
-                 <span class="dt">type =</span> <span class="st">"source"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jpshanno/ingestr"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># or from source</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">ingestr_source &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"ingestr-master.zip"</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">download.file</span>(<span class="st">"https://github.com/jpshanno/ingestr/archive/master.zip"</span>,</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">              ingestr_source)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">unzip</span>(ingestr_source,</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">      <span class="dt">exdir =</span> <span class="kw">dirname</span>(ingestr_source))</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">install.packages</span>(<span class="kw">sub</span>(<span class="st">".zip$"</span>, <span class="st">""</span>, ingestr_source), </a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">                 <span class="dt">repos =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">                 <span class="dt">type =</span> <span class="st">"source"</span>)</a></code></pre></div>
 </div>
 <div id="ingesting-data" class="section level2">
 <h2 class="hasAnchor">
@@ -113,71 +115,71 @@ All data and header data that are read in will have the data source appended to 
 <h3 class="hasAnchor">
 <a href="#sensor-and-instrument-data" class="anchor"></a>Sensor and Instrument Data</h3>
 <p>Many sensors provide their output as delimited files with header information contained above the recorded data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">campbell_file &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">system.file</span>(<span class="st">"example_data"</span>,
-              <span class="st">"campbell_scientific_tao5.dat"</span>,
-              <span class="dt">package =</span> <span class="st">"ingestr"</span>)
-
-campbell_data &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/ingest_campbell.html">ingest_campbell</a></span>(<span class="dt">input.source =</span> campbell_file,
-                  <span class="dt">export.header =</span> <span class="ot">TRUE</span>,
-                  <span class="dt">add.units =</span> <span class="ot">TRUE</span>,
-                  <span class="dt">add.measurements =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">str</span>(campbell_data)
-
-campbell_header &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/ingest_header.html">ingest_header</a></span>(<span class="dt">input.source =</span> campbell_file)
-
-<span class="kw">str</span>(campbell_header)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">campbell_file &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw">system.file</span>(<span class="st">"example_data"</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">              <span class="st">"campbell_scientific_tao5.dat"</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">              <span class="dt">package =</span> <span class="st">"ingestr"</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">campbell_data &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/ingest_campbell.html">ingest_campbell</a></span>(<span class="dt">input.source =</span> campbell_file,</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">                  <span class="dt">export.header =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">                  <span class="dt">add.units =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">                  <span class="dt">add.measurements =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">str</span>(campbell_data)</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">campbell_header &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="reference/ingest_header.html">ingest_header</a></span>(<span class="dt">input.source =</span> campbell_file)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="kw">str</span>(campbell_header)</a></code></pre></div>
 </div>
 <div id="formatted-non-sensor-data-sources" class="section level3">
 <h3 class="hasAnchor">
 <a href="#formatted-non-sensor-data-sources" class="anchor"></a>Formatted Non-Sensor Data Sources</h3>
 <p>Some environmental data is published online as html elements. This data can be difficult to read directly from the websites where they are hosted into R. To facilitate access, we have created functions that parse the html so that this data can be directly downloaded in R. To track the provenance of these data, the column input_source is populated by the URL location from which the data were downloaded.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-PDO_data &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/ingest_PDO.html">ingest_PDO</a></span>(<span class="dt">input.source =</span> <span class="st">"http://jisao.washington.edu/pdo/PDO.latest"</span>,  
-             <span class="dt">end.year =</span> <span class="ot">NULL</span>,
-             <span class="dt">export.header =</span> <span class="ot">TRUE</span>)
-<span class="co">#&gt; Header info for http://jisao.washington.edu/pdo/PDO.latest has been saved to a temporary file. Run ingest_header('http://jisao.washington.edu/pdo/PDO.latest') to load the header data.</span>
-
-<span class="kw">str</span>(PDO_data)
-<span class="co">#&gt; 'data.frame':    119 obs. of  14 variables:</span>
-<span class="co">#&gt;  $ YEAR        : chr  "1901" "1902" "1903" "1904" ...</span>
-<span class="co">#&gt;  $ JAN         : chr  "0.79" "0.82" "0.86" "0.63" ...</span>
-<span class="co">#&gt;  $ FEB         : chr  "-0.12" "1.58" "-0.24" "-0.91" ...</span>
-<span class="co">#&gt;  $ MAR         : chr  "0.35" "0.48" "-0.22" "-0.71" ...</span>
-<span class="co">#&gt;  $ APR         : chr  "0.61" "1.37" "-0.50" "-0.07" ...</span>
-<span class="co">#&gt;  $ MAY         : chr  "-0.42" "1.09" "0.43" "-0.22" ...</span>
-<span class="co">#&gt;  $ JUN         : num  -0.05 0.52 0.23 -1.53 0.69 1.24 0.57 0.41 -0.64 -0.28 ...</span>
-<span class="co">#&gt;  $ JUL         : num  -0.6 1.58 0.4 -1.58 0.85 0.09 0.63 0.6 -0.39 0.03 ...</span>
-<span class="co">#&gt;  $ AUG         : num  -1.2 1.57 1.01 -0.64 1.26 -0.53 -0.96 -1.04 -0.68 -0.06 ...</span>
-<span class="co">#&gt;  $ SEP         : num  -0.33 0.44 -0.24 0.06 -0.03 -0.31 -0.23 -0.16 -0.89 0.4 ...</span>
-<span class="co">#&gt;  $ OCT         : num  0.16 0.7 0.18 0.43 -0.15 0.08 0.84 -0.41 -0.02 -0.66 ...</span>
-<span class="co">#&gt;  $ NOV         : num  -0.6 0.16 0.08 1.45 1.11 1.69 0.66 0.47 -0.4 0.02 ...</span>
-<span class="co">#&gt;  $ DEC         : num  -0.14 -1.1 -0.03 0.06 -0.5 -0.54 0.72 1.16 -0.01 0.84 ...</span>
-<span class="co">#&gt;  $ input_source: chr  "http://jisao.washington.edu/pdo/PDO.latest" "http://jisao.washington.edu/pdo/PDO.latest" "http://jisao.washington.edu/pdo/PDO.latest" "http://jisao.washington.edu/pdo/PDO.latest" ...</span>
-
-PDO_header &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/ingest_header.html">ingest_header</a></span>(<span class="dt">input.source =</span> <span class="st">"http://jisao.washington.edu/pdo/PDO.latest"</span>)
-<span class="co">#&gt; Header data was loaded from cached results created when http://jisao.washington.edu/pdo/PDO.latest was ingested previously in this R session.</span>
-
-<span class="kw">str</span>(PDO_header)
-<span class="co">#&gt; 'data.frame':    1 obs. of  2 variables:</span>
-<span class="co">#&gt;  $ header_text : chr "PDO INDEX If the columns of the table appear without formatting on your browser, use http://research.jisao.wash"| __truncated__</span>
-<span class="co">#&gt;  $ input_source: chr "http://jisao.washington.edu/pdo/PDO.latest"</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">PDO_data &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/ingest_PDO.html">ingest_PDO</a></span>(<span class="dt">input.source =</span> <span class="st">"http://jisao.washington.edu/pdo/PDO.latest"</span>,  </a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">             <span class="dt">end.year =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">             <span class="dt">export.header =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Header info for http://jisao.washington.edu/pdo/PDO.latest has been saved to a temporary file. Run ingest_header('http://jisao.washington.edu/pdo/PDO.latest') to load the header data.</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">str</span>(PDO_data)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 'data.frame':    121 obs. of  14 variables:</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  $ YEAR        : chr  "1901" "1902" "1903" "1904" ...</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  $ JAN         : chr  "0.79" "0.82" "0.86" "0.63" ...</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  $ FEB         : chr  "-0.12" "1.58" "-0.24" "-0.91" ...</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  $ MAR         : chr  "0.35" "0.48" "-0.22" "-0.71" ...</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  $ APR         : chr  "0.61" "1.37" "-0.50" "-0.07" ...</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;  $ MAY         : chr  "-0.42" "1.09" "0.43" "-0.22" ...</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;  $ JUN         : chr  "-0.05" "0.52" "0.23" "-1.53" ...</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  $ JUL         : chr  "-0.60" "1.58" "0.40" "-1.58" ...</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;  $ AUG         : chr  "-1.20" "1.57" "1.01" "-0.64" ...</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  $ SEP         : chr  "-0.33" "0.44" "-0.24" "0.06" ...</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  $ OCT         : chr  "0.16" "0.70" "0.18" "0.43" ...</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;  $ NOV         : chr  "-0.60" "0.16" "0.08" "1.45" ...</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;  $ DEC         : chr  "-0.14" "-1.10" "-0.03" "0.06" ...</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  $ input_source: chr  "http://jisao.washington.edu/pdo/PDO.latest" "http://jisao.washington.edu/pdo/PDO.latest" "http://jisao.washington.edu/pdo/PDO.latest" "http://jisao.washington.edu/pdo/PDO.latest" ...</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">PDO_header &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="st">  </span><span class="kw"><a href="reference/ingest_header.html">ingest_header</a></span>(<span class="dt">input.source =</span> <span class="st">"http://jisao.washington.edu/pdo/PDO.latest"</span>)</a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; Header data was loaded from cached results created when http://jisao.washington.edu/pdo/PDO.latest was ingested previously in this R session.</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="kw">str</span>(PDO_header)</a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; 'data.frame':    1 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  $ header_text : chr "PDO INDEX If the columns of the table appear without formatting on your browser, use http://research.jisao.wash"| __truncated__</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt;  $ input_source: chr "http://jisao.washington.edu/pdo/PDO.latest"</span></a></code></pre></div>
 </div>
 <div id="batch-ingests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#batch-ingests" class="anchor"></a>Batch Ingests</h3>
 <p>Sensor data stored in folders is available for batch import using <code>ingest_</code> functions, or any other function that reads in data (i.e. <code>read.csv</code>, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv</a></code>. When a directory is read in file names are checked for duplicates, and imported data is checked for duplicate file contents. The user is warned and can choose to suppress the warning or remove the duplicates. Parallel bath processing is supported for large batch processing (requires the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature_data &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/ingest_directory.html">ingest_directory</a></span>(<span class="dt">directory =</span> <span class="st">"campbell_loggers"</span>,
-                   <span class="dt">ingest.function =</span> ingest_campbell,
-                   <span class="dt">pattern =</span> <span class="st">".dat"</span>)
-
-temperature_data</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">temperature_data &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/ingest_directory.html">ingest_directory</a></span>(<span class="dt">directory =</span> <span class="st">"campbell_loggers"</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                   <span class="dt">ingest.function =</span> ingest_campbell,</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">                   <span class="dt">pattern =</span> <span class="st">".dat"</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">temperature_data</a></code></pre></div>
 </div>
 <div id="incorporate-file-naming-conventions-as-data" class="section level3">
 <h3 class="hasAnchor">
