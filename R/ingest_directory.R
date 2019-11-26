@@ -82,10 +82,10 @@ ingest_directory <- function(directory = getwd(),
   file_count <- length(file_list)
   
   # Read in files
-  imported_list <-
-    lapply(file_list,
-           import_function,
-           ...)
+  suppressMessages(imported_list <-
+                     lapply(file_list,
+                            import_function,
+                            ...))
 
   imported_list <- 
     imported_list[which(vapply(imported_list,
@@ -104,9 +104,9 @@ ingest_directory <- function(directory = getwd(),
     any(grepl(function_as_string, getNamespaceExports("ingestr")))
   
   if(is_ingestr){
-    headers <- 
-      lapply(imported_list,
-             ingest_header)
+    suppressMessages(headers <- 
+                       lapply(names(imported_list),
+                              ingest_header))
     
     headers_df <- 
       do.call("rbind", args = list(headers))
@@ -146,8 +146,15 @@ ingest_directory <- function(directory = getwd(),
              envir = parent.frame(n = 1))
     }
   }
+  
+  if(!collapse){
+    lapply(seq_along(imported_list),
+           function(x){
+             assign(names(imported_list)[x], imported_list[[x]], pos = 1)
+           })
+  }
 
-  if(collapse){
+  if(collapse & successful_file_count > 1){
 
     column_names <-
       purrr::map(imported_list,
@@ -192,9 +199,6 @@ ingest_directory <- function(directory = getwd(),
 
     return(importedData)
   } else {
-    lapply(seq_along(imported_list),
-           function(x){
-             assign(names(imported_list)[x], imported_list[[x]], envir = parent.frame(n = 1))
-           })
+    imported_list[[1]]
   }
 }
