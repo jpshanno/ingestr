@@ -70,7 +70,7 @@ hash_filename <-
     filename <-
       ifelse(is_url,
              gsub("[^[:alnum:]]", "_", filename),
-             normalizePath(filename))
+             normalizePath(filename, mustWork = FALSE))
 
     hashed <-
       httr::sha1_hash('ingestr',
