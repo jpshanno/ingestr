@@ -14,6 +14,9 @@ Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travi
 Status](https://ci.appveyor.com/api/projects/status/github/jpshanno/ingestr?branch=master&svg=true)](https://ci.appveyor.com/project/jpshanno/ingestr)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
 This is project was initiated at the inaugural [IMCR
 Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by

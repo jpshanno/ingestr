@@ -27,7 +27,9 @@ If your commits will include R scripts, please run `devtools::check` to check fo
 
 README.md is created from README.Rmd. To make edits to the readme, first edit README.Rmd and then knit that into README.md.  For example, with README.Rmd open in RStudio, click the drop down arrow next to **Knit** and click **Knit to github_document**.  You can ignore the pandoc error at the end of the output in the R Markdown window.
 
-HTML documentation is built using pkgdown. If your commits affect documentation, please run `pkgdown::build_site()`.  See the wiki for information on pkgdown setup.
+HTML documentation is built using pkgdown. If your commits affect documentation,
+which includes changes to README or CONTRIBUTING, please run `pkgdown::build_site()`.  See the wiki for information on pkgdown
+setup.
 
 ## Pull Request Process
 
