@@ -4,10 +4,15 @@
 \alias{ingest_directory}
 \title{Ingest a directory of uniform files}
 \usage{
-ingest_directory(directory = getwd(),
-  ingest.function = utils::read.csv, pattern = "*", collapse = TRUE,
-  recursive = FALSE, use.parallel = FALSE, check.duplicates = "warn",
-  ...)
+ingest_directory(
+  directory = getwd(),
+  ingest.function = utils::read.csv,
+  pattern = "*",
+  collapse = TRUE,
+  recursive = FALSE,
+  check.duplicates = "warn",
+  ...
+)
 }
 \arguments{
 \item{directory}{A character vector with the name of the directory that
@@ -25,9 +30,6 @@ when false an object is returned for each file. Defaults to \code{TRUE}.}
 \item{recursive}{A logical argument, when true files are read recursively,
 defaults to \code{TRUE}. See \code{\link[base]{list.files}} for more
 information..}
-
-\item{use.parallel}{A logical argument indicating whether the package
-\code{\link[parallel]{parallel-package}} should be used.}
 
 \item{check.duplicates}{A character argument specifying the action that
 should be taken if files with duplicate contents are detected. One of
@@ -55,14 +57,4 @@ If \code{check.duplicates = "remove"} then only a single set of records will
 be retained when files have identical contents. This does not provide rowwise
 checking for duplicates. A separate data.frame is created specifying the removed
 input_source, the number of records removed, and the reason for removal.
-
-If using an \code{ingest_*} function and \code{header.info.name} must be set to
-NULL, a character vector of length 1 if \code{collapse = TRUE}, or a named character
-vector with length equal to the number of files to be ingested if
-\code{collapse = FALSE}. If \code{header.info.name} is set to NULL then
-header.info.name will be set to "header_base_directory_name" when
-\code{collapse = TRUE} or for each file the header information will be stored
-as "header_filename". If a named character vector is supplied the names
-should match the file names to be read in and the desired names are stored as
-the values.
 }

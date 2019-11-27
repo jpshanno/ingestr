@@ -134,10 +134,15 @@ column to track provenance and relate data and metadata read from files.
 Please check that you have unique file names.</strong></p>
     </div>
 
-    <pre class="usage"><span class='fu'>ingest_directory</span>(<span class='kw'>directory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>ingest.function</span> <span class='kw'>=</span> <span class='kw pkg'>utils</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"*"</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>use.parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>check.duplicates</span> <span class='kw'>=</span> <span class='st'>"warn"</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>ingest_directory</span>(
+  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>ingest.function</span> <span class='kw'>=</span> <span class='kw pkg'>utils</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>,
+  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
+  <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>check.duplicates</span> <span class='kw'>=</span> <span class='st'>"warn"</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,11 +174,6 @@ defaults to <code>TRUE</code>. See <code><a href='https://rdrr.io/r/base/list.fi
 information..</p></td>
     </tr>
     <tr>
-      <th>use.parallel</th>
-      <td><p>A logical argument indicating whether the package
-<code><a href='https://rdrr.io/r/parallel/parallel-package.html'>parallel-package</a></code> should be used.</p></td>
-    </tr>
-    <tr>
       <th>check.duplicates</th>
       <td><p>A character argument specifying the action that
 should be taken if files with duplicate contents are detected. One of
@@ -197,15 +197,6 @@ should be taken if files with duplicate contents are detected. One of
 be retained when files have identical contents. This does not provide rowwise
 checking for duplicates. A separate data.frame is created specifying the removed
 input_source, the number of records removed, and the reason for removal.</p>
-<p>If using an <code>ingest_*</code> function and <code>header.info.name</code> must be set to
-NULL, a character vector of length 1 if <code>collapse = TRUE</code>, or a named character
-vector with length equal to the number of files to be ingested if
-<code>collapse = FALSE</code>. If <code>header.info.name</code> is set to NULL then
-header.info.name will be set to "header_base_directory_name" when
-<code>collapse = TRUE</code> or for each file the header information will be stored
-as "header_filename". If a named character vector is supplied the names
-should match the file names to be read in and the desired names are stored as
-the values.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -4,8 +4,7 @@
 \alias{ingest_xle}
 \title{Ingest Solinst Levellogger data from *.xle files}
 \usage{
-ingest_xle(input.source, header.info = TRUE,
-  collapse.timestamp = FALSE)
+ingest_xle(input.source, header.info = TRUE, collapse.timestamp = FALSE)
 }
 \arguments{
 \item{input.source}{A string representing the file to ingest}
