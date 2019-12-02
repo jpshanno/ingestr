@@ -17,14 +17,14 @@ library(ingestr)
 
 # ingestr
 
-__An R package for reading environmental data from raw formats into data.frames.__
+__An R package for reading environmental data from raw formats into dataframes.__
 
 [![Travis-CI Build Status](https://travis-ci.org/jpshanno/ingestr.svg?branch=master)](https://travis-ci.org/jpshanno/ingestr)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jpshanno/ingestr?branch=master&svg=true)](https://ci.appveyor.com/project/jpshanno/ingestr)
 [![Coverage Status](https://img.shields.io/codecov/c/github/jpshanno/ingestr/master.svg)](https://codecov.io/github/jpshanno/ingestr?branch=master)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
-This is project was initiated at the inaugural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by the [Environmental Data Institute](https://environmentaldatainitiative.org/). The end product of this effort will be an R package on CRAN.  The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction. 
+This project was initiated at the inaugural [IMCR Hackathon](https://github.com/IMCR-Hackathon/HackathonCentral) hosted by the [Environmental Data Institute](https://environmentaldatainitiative.org/). The end product of this effort will be an R package on CRAN.  The package will primarily deal with reading data from files, though there will be some utilities for initial cleanup of files such as removing blank rows and columns at the end of a CSV file. Our work at the hackathon focused on package infrastructure, standardization, and template construction. 
 
 The guiding principles of ingestr are that
 
@@ -101,7 +101,7 @@ str(PDO_header)
 ```
 
 ### Batch Ingests
-Sensor data stored in folders is available for batch import using `ingest_` functions, or any other function that reads in data (i.e. `read.csv`, `readr::read_csv`. When a directory is read in file names are checked for duplicates, and imported data is checked for duplicate file contents. The user is warned and can choose to suppress the warning or remove the duplicates. Parallel bath processing is supported for large batch processing (requires the [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) package. 
+Sensor data stored in folders is available for batch import using `ingest_` functions, or any other function that reads in data (i.e. `read.csv`, `readr::read_csv`. When a directory is read in file names are checked for duplicates, and imported data is checked for duplicate file contents. The user is warned and can choose to suppress the warning or remove the duplicates.  
 
 ```{r eval = FALSE}
 temperature_data <- 
@@ -114,7 +114,7 @@ temperature_data
 
 ### Incorporate File Naming Conventions as Data
 
-Filenames generally include information about the data collected: site, sensor, measurement type, date collected, etc. We are working on a generalized approach (probably just a function or two) that would split the filename into data columns using a template would be very useful.  
+Filenames generally include information about the data collected: site, sensor, measurement type, date collected, etc. We are working on a generalized approach (probably just a function or two) that would split the filename into data columns using a template.  
 For example if a set of file names read as "site-variable-year" (152-soil_moisture-2017.csv, 152-soil_temperature-2017.csv, 140-soil_moisture_2017.csv, etc), then the function would take an argument supplying the template as column headers: "site-variable-year" with either delimiters or the length of each variable to enable splitting. These functions will likely build off of the great work done on `tidyr::separate()` and we suggest using that until we have incorporated a solution.
 
 ## Preliminary Clean-up Utilities
