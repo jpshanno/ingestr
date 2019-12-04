@@ -109,7 +109,7 @@ ingest_directory <- function(directory = getwd(),
                               ingest_header))
     
     headers_df <- 
-      do.call("rbind", args = list(headers))
+      do.call("rbind", args = headers)
     
     export_header(headers_df, directory)
   }
@@ -136,11 +136,18 @@ ingest_directory <- function(directory = getwd(),
       removed_data <-
         dplyr::bind_rows(lapply(seq_len(length(imported_list)),
                                 function(x){
-                                  data.frame(input_source = names(imported_list)[x],
-                                             data_removed = paste("All", nrow(x), "records from file."),
-                                             reason_for_removal = "duplicate file contents",
-                                             stringsAsFactors = FALSE)}))
-
+                                  
+                                  df <- 
+                                    data.frame(data_removed = paste("All", nrow(x), "records from file."),
+                                               reason_for_removal = "duplicate file contents",
+                                               stringsAsFactors = FALSE)
+                                  
+                                  if(!is_ingestr){
+                                    df$input_source <- names(imported_list)[x]
+                                  }
+                                  
+                                  df}))
+      
       assign(removed_data,
              paste0("removed_data_", basename(directory)),
              envir = parent.frame(n = 1))
@@ -183,9 +190,14 @@ ingest_directory <- function(directory = getwd(),
            FALSE and manually create a single data set from the returned objects.")
     }
 
-    importedData <-
-      dplyr::bind_rows(imported_list, .id = "input_source")
-
+    if(is_ingestr){
+      importedData <-
+        dplyr::bind_rows(imported_list) 
+    } else {
+      importedData <-
+        dplyr::bind_rows(imported_list, .id = "input_source")
+    }
+    
     lapply(names(importedData)[-1],
            function(x){
              attributes(importedData[[x]]) <<- template_attributes[[x]]
