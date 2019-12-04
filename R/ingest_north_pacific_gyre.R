@@ -14,8 +14,9 @@
 #'   the header data. See \code{\link{ingest_header}} for more information.
 #' @export
 #' @examples
+#' \dontrun{
 #' df_npgo <- ingest_NPGO()  # reads in all the data
-#'
+#' }
 
 
 ingest_NPGO <- function(input.source = "http://www.o3d.org/npgo/npgo.php",   # URL of data
