@@ -4,11 +4,9 @@
 \alias{ingest_ENSO}
 \title{Ingest Multivariate El Nino Southern Oscillation Index data}
 \usage{
-ingest_ENSO(
-  input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
-  end.year = NULL,
-  export.header = TRUE
-)
+
+  ingest_ENSO(input.source = "http://www.esrl.noaa.gov/psd/enso/mei/table.html",
+  end.year = NULL, export.header = TRUE)
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}

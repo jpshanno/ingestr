@@ -11,6 +11,6 @@ test_that("output is a dataframe", {
 
 # test that there are equal number of lines in header as the files that you read in
 test_that("number of lines equals number of files read",{
-  expect_equal(length(test_header)-1, test_length)
+  expect_equal(nrow(test_header), test_length)
 })
 
