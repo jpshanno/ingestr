@@ -8,7 +8,6 @@
 ^codecov\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
-^inst\img$
 ^appveyor\.yml$
 ^logo\.png$
 ^inst/Example_Ingest_File\.R$

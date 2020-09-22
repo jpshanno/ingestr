@@ -4,8 +4,10 @@
 \alias{ingest_NPGO}
 \title{Ingest North Pacific Gyre Oscillation data}
 \usage{
-ingest_NPGO(input.source = "http://www.o3d.org/npgo/npgo.php",
-  export.header = TRUE)
+ingest_NPGO(
+  input.source = "http://www.o3d.org/npgo/npgo.php",
+  export.header = TRUE
+)
 }
 \arguments{
 \item{input.source}{Character indicating the URI to the HTML representation of the data.}
