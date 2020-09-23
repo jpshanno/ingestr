@@ -99,8 +99,8 @@ ingest_xle <-
     
     channel_names <- 
       purrr::map_chr(channel_xpaths,
-                 ~paste(xml2::xml_text(xml2::xml_find_first(raw_xml, paste0(channel_xpaths[1], "/Identification"))),
-                        xml2::xml_text(xml2::xml_find_first(raw_xml, paste0(channel_xpaths[1], "/Unit"))),
+                 ~paste(xml2::xml_text(xml2::xml_find_first(raw_xml, paste0(.x, "/Identification"))),
+                        xml2::xml_text(xml2::xml_find_first(raw_xml, paste0(.x, "/Unit"))),
                         sep = "_") %>% 
                    tolower() %>% 
                    gsub(pattern = "[^A-z0-9]", 
