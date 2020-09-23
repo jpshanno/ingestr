@@ -67,47 +67,51 @@ ingest_xle <-
                   input.source,
                   " is apparently empty"))
     }
-
-    data <-
-      data.frame(sample_date = xml2::xml_text(xml2::xml_find_all(xml_data, "./Log/Date")),
-                 sample_time = xml2::xml_text(xml2::xml_find_all(xml_data, "./Log/Time")),
-                 sample_millisecond = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ms")),
-                 ch1 = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ch1")),
-                 ch2 = xml2::xml_double(xml2::xml_find_all(xml_data, "./Log/ch2")),
-                 stringsAsFactors = FALSE)
-
+    
+    # Get variable names for a single record
+    column_names <- 
+      xml2::xml_child(xml_data) %>% 
+      xml2::xml_children() %>% 
+      purrr::map_chr(xml2::xml_name)
+    
+    # Extract into a tibble
+    data <- 
+      column_names %>% 
+      purrr::map_dfc(~sub(pattern = "^", 
+                          replacement = "./Log/",
+                          x = .x) %>% 
+                       xml2::xml_find_all(x = xml_data, 
+                                          xpath = .) %>% 
+                       xml2::xml_text() %>% 
+                       tibble::tibble(.) %>% 
+                       setNames(.x)) %>% 
+      dplyr::mutate(dplyr::across(-(1:2), as.numeric))
+    
     # Get channel names
-    channel_1 <-
-      xml2::xml_find_first(raw_xml, "./Ch1_data_header")
-
-    channel_2 <-
-      xml2::xml_find_first(raw_xml, "./Ch2_data_header")
-
-    ch1_name <-
-      paste(tolower(xml2::xml_text(xml2::xml_child(channel_1, "./Identification"))),
-            tolower(xml2::xml_text(xml2::xml_child(channel_1, "./Unit"))),
-            sep = "_")
-
-    ch2_name <-
-      paste(tolower(xml2::xml_text(xml2::xml_child(channel_2, "./Identification"))),
-            tolower(xml2::xml_text(xml2::xml_child(channel_2, "./Unit"))),
-            sep = "_")
-
-    # Sanitize names
-    ch1_name <-
-      gsub("[^A-z0-9]", "_", ch1_name)
-
-    ch1_name <-
-      gsub("_{2,}", "_", ch1_name)
-
-    ch2_name <-
-      gsub("[^A-z0-9]", "_", ch2_name)
-
-    ch2_name <-
-      gsub("_{2,}", "_", ch2_name)
-
+    
+    channel_xpaths <- 
+      xml2::xml_children(raw_xml) %>% 
+      purrr::map_chr(xml2::xml_name) %>% 
+      grep(pattern = "Ch[0-9]{1}_data_header",
+           value = TRUE) %>% 
+      sub(pattern = "^", 
+          replacement = "./")
+    
+    channel_names <- 
+      purrr::map_chr(channel_xpaths,
+                 ~paste(xml2::xml_text(xml2::xml_find_first(raw_xml, paste0(channel_xpaths[1], "/Identification"))),
+                        xml2::xml_text(xml2::xml_find_first(raw_xml, paste0(channel_xpaths[1], "/Unit"))),
+                        sep = "_") %>% 
+                   tolower() %>% 
+                   gsub(pattern = "[^A-z0-9]", 
+                        replacement = "_") %>% 
+                   gsub(pattern = "_{2,}", 
+                        replacement = "_"))
+    
+    # Set Channel Names
+    
     names(data) <-
-      c("sample_date", "sample_time", "sample_millisecond", ch1_name, ch2_name)
+      c("sample_date", "sample_time", "sample_millisecond", channel_names)
 
     # Convert to timestamp if desired
     if(collapse.timestamp){
@@ -118,7 +122,7 @@ ingest_xle <-
         NULL
       data$sample_time <-
         NULL
-      data <- data[,c("sample_timestamp", "sample_millisecond", ch1_name, ch2_name)]
+      data <- data[,c("sample_timestamp", "sample_millisecond", channel_names)]
     }
 
     # Add source information to data
@@ -130,7 +134,8 @@ ingest_xle <-
 
         # Get relevant information for the header
         # These xml2 extractions should be turned into a function or family of
-        # functions
+        # functions. 
+        # This should be generalized using purrr like the channels were
         header_info <-
           data.frame(instrument_type = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Instrument_type")),
                      model_number = xml2::xml_text(xml2::xml_find_first(raw_xml, "//Model_number")),
@@ -165,55 +170,45 @@ ingest_xle <-
                         stringsAsFactors = FALSE)
 
         # Add channel 1 parameters to header info
-        ch1_parameter_values <-
-          lapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters"))),
-                 function(x){as.numeric(x[[1]])})
-
-        ch1_parameter_units <-
-          vapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters"))),
-                 function(x){gsub("[^A-z0-9]", "_", x[[2]])},
-                 character(1))
-
-        if(length(ch1_parameter_values) > 0){
-          ch1_parameter_names <-
-            paste(tolower(xml2::xml_name(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch1_data_header//Parameters")))),
-                  ch1_parameter_units,
-                  sep = "_")
-
-          ch1_parameters <-
-            as.data.frame(ch1_parameter_values,
-                          col.names = ch1_parameter_names,
-                          stringsAsFactors = FALSE)
-
-          header_info <-
-            cbind(header_info, ch1_parameters)
-        }
-
-        # Add channel 2 parameters to header info
-        ch2_parameter_values <-
-          lapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters"))),
-                 function(x){as.numeric(x[[1]])})
-
-        ch2_parameter_units <-
-          vapply(xml2::xml_attrs(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters"))),
-                 function(x){gsub("[^A-z0-9]", "_", x[[2]])},
-                 character(1))
-
-        if(length(ch2_parameter_values) > 0){
-          ch2_parameter_names <-
-            paste(tolower(xml2::xml_name(xml2::xml_children(xml2::xml_find_first(raw_xml, "//Ch2_data_header//Parameters")))),
-                  ch2_parameter_units,
-                  sep = "_")
-
-          ch2_parameters <-
-            as.data.frame(ch2_parameter_values,
-                          col.names = ch2_parameter_names,
-                          stringsAsFactors = FALSE)
-
-          header_info <-
-            cbind(header_info, ch2_parameters)
-
-        }
+        channel_metadata <- 
+          channel_xpaths %>% 
+          purrr::map(~xml2::xml_find_first(raw_xml, .x) %>% 
+                       xml2::xml_find_first("./Parameters") %>% 
+                       xml2::xml_children())
+        
+        channel_parameter_values <- 
+          purrr::map(channel_metadata,
+                     xml2::xml_attrs)
+          
+        channel_parameter_names <- 
+          purrr::map(channel_metadata,
+                     xml2::xml_name)
+        
+        # Remove channels that don't have additional metadata
+        has_parameters <- 
+          purrr::map_lgl(channel_parameter_names,
+                         ~length(.x) != 0)
+        
+        channel_header_info <- 
+          purrr::map2_dfc(channel_parameter_values[has_parameters],
+                          channel_parameter_names[has_parameters],
+                          ~{
+                            value <- .x[[1]][1]
+                            unit <- as.character(.x[[1]][2])
+                            name <- tolower(paste(.y, unit, sep = "_"))
+                            
+                            # Convert to numeric if value contains only number and decimals
+                            if(!any(grepl("[^0-9\\.]", value))){
+                              value <- as.numeric(value)
+                            }
+                            
+                            tibble::tibble(x = value) %>% 
+                              setNames(name)
+                            })
+        
+        header_info <- 
+          cbind(header_info,
+                channel_header_info)
 
         # Export header information to a temporary file
         export_header(header_info,
